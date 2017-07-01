@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/home"
+            android:title="HOME" />
+        <item
+            android:id="@+id/register"
+            android:title="REGISTER" />
+        <item
+            android:id="@+id/login"
+            android:title="LOGIN" />
+        <item
+            android:id="@+id/post"
+            android:title="POST" />
+
+        <item
+            android:id="@+id/logout"
+            android:title="LOG OUT" />
+    </group>
+
+    <item android:title="Communicate">
+        <menu>
+            <item
+                android:id="@+id/about_us"
+                android:title="ABOUT US" />
+            <item
+                android:id="@+id/contact_us"
+                android:title="CONTACT US" />
+        </menu>
+    </item>
+
+
+</menu>

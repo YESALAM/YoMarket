@@ -1,0 +1,34 @@
+<resources>
+    <string name="app_name">YoMarket</string>
+    <string name="title_activity_main">MainActivity</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="action_settings">Settings</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">You also need to know this if you are not a farmer.
+
+About us-Our aim is to bring the every person of a specified community into a one platform. In Yo Market you can post a photo of your work and person from all over the world can comment on your work.In this way your work will be famous in all over the world. Yo Market also provide a phonebook feature in which you can get the contact details of different person of a specified community from all over the world. Our team comprise of young,energetic and passionate person.they will help you in every other way. Our mission is to keep on adding a business community so that every business community will come in one platform.
+
+Farmers have a plethora of problems. And, who can understand these problems best? None other than a farmer. And, who can solve these problems best? None other than a farmer. And, who can give a solution based on technology? None other than a farmer. But, a farmer who strides agriculture sector just as comfortably as the technology sector is the only one who can give a solution.
+
+We have over 500 years of farming in their blood. They come from a very respectable farming family from the historical town of Belur in Hasan district of Karnataka, India. Growing up playing cricket in a land that seemed to have no end, among orchards of banana, mangoes, sapota, avocado and fields of millets, pulses and cereals, seeing the well-off tourists from across the globe set their minds thinking.</string>
+    <string name="title_activity_main_frag">main_frag</string>
+    <string name="title_activity_login">Sign in</string>
+
+    <!-- Strings related to login -->
+    <string name="prompt_email">Email</string>
+    <string name="prompt_password">Password (optional)</string>
+    <string name="action_sign_in">Sign in or register</string>
+    <string name="action_sign_in_short">Sign in</string>
+    <string name="error_invalid_email">This email address is invalid</string>
+    <string name="error_invalid_password">This password is too short</string>
+    <string name="error_incorrect_password">This password is incorrect</string>
+    <string name="error_field_required">This field is required</string>
+    <string name="permission_rationale">"Contacts permissions are needed for providing email
+        completions."
+    </string>
+    <string name="title_activity_posts_activity">Posts_activity</string>
+</resources>

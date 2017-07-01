@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "625088770846",
+    "firebase_url": "https://yomarket-599f1.firebaseio.com",
+    "project_id": "yomarket-599f1",
+    "storage_bucket": "yomarket-599f1.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:625088770846:android:c01aeb63ef1f1e38",
+        "android_client_info": {
+          "package_name": "nigam.yomarket"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "625088770846-1k9spff14muroi1qaqf7pt0vvutsnhcu.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "nigam.yomarket",
+            "certificate_hash": "8b432a9ec91f5cfbb183d2f3df678bb5549c4444"
+          }
+        },
+        {
+          "client_id": "625088770846-i8g6nm0cqdrvbku4op1fbo0roqvl2c46.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBtTnnSFOv80Ryxr8eua4rRKjrFyLV15mU"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "625088770846-i8g6nm0cqdrvbku4op1fbo0roqvl2c46.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

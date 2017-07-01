@@ -1,0 +1,89 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="nigam.yomarket.phonebook_frag">
+
+    <!-- TODO: Update blank fragment layout -->
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/phonebook_recycler"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/citytextInputLayout" />
+
+    <RadioGroup
+        android:id="@+id/radioGroup"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_margin="3dp"
+        android:layout_marginLeft="2dp"
+        android:layout_marginRight="2dp"
+        android:orientation="horizontal"
+        android:layout_marginTop="5dp">
+
+        <nigam.yomarket.utils.SegmentedControlButton
+            android:id="@+id/fruitvegitables"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:lineSpacingExtra="8sp"
+            android:text="Fruit/Vegetables"
+            android:textSize="14sp" />
+
+        <nigam.yomarket.utils.SegmentedControlButton
+            android:id="@+id/vegetables"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:lineSpacingExtra="8sp"
+            android:text="Vegetables"
+            android:textSize="14sp" />
+
+        <nigam.yomarket.utils.SegmentedControlButton
+            android:id="@+id/fruit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:lineSpacingExtra="8sp"
+            android:text="Fruit"
+            android:textSize="14sp" />
+
+        <nigam.yomarket.utils.SegmentedControlButton
+            android:id="@+id/transport"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:lineSpacingExtra="8sp"
+            android:text="Transport"
+            android:textSize="14sp" />
+
+    </RadioGroup>
+
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/citytextInputLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/radioGroup"
+        android:layout_centerHorizontal="true"
+        android:layout_margin="3dp"
+        android:background="@android:drawable/editbox_background_normal"
+        android:textColorHint="@android:color/background_dark">
+
+        <AutoCompleteTextView
+            android:id="@+id/city"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:hint="Select City"
+            android:textColor="@android:color/background_dark"
+            android:textColorHint="@android:color/background_dark" />
+    </android.support.design.widget.TextInputLayout>
+
+</RelativeLayout>

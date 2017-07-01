@@ -1,0 +1,61 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="5dp"
+    android:orientation="vertical"
+    tools:context="nigam.yomarket.contact_us_Activity">
+
+    <!-- TODO: Update blank fragment layout -->
+
+    <TextView
+        android:id="@+id/textView31"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.06"
+        android:text="Contact Us"
+        android:textAlignment="center"
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="22sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/textView36"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:drawableLeft="@android:drawable/ic_menu_mylocation"
+        android:text="Yo market Purani Galla Mandi, Mangalwara Bazar Pipariya, District: Hoshangabad(M.P)"
+        android:textColor="@android:color/background_dark"
+        android:textSize="20sp" />
+
+    <TextView
+        android:id="@+id/textView37"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_weight="1"
+        android:drawableLeft="@android:drawable/ic_menu_call"
+        android:text="8602344196(Honey Singh)Chabbra, 08109348743(Raj Sahu)"
+        android:textColor="@android:color/background_dark"
+        android:textSize="20sp" />
+
+    <TextView
+        android:id="@+id/textView38"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:layout_weight="0.06"
+        android:text="Timing :"
+        android:textColor="@android:color/background_dark"
+        android:textSize="20sp" />
+
+    <TextView
+        android:id="@+id/textView39"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.06"
+        android:text="Monday - Saturday : 10 AM to 6 PM"
+        android:textColor="@android:color/background_dark"
+        android:textSize="20sp" />
+</LinearLayout>
