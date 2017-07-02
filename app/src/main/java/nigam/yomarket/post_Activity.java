@@ -132,6 +132,10 @@ public class post_Activity extends AppCompatActivity {
             }
         });
 
+        image1 = "null" ;
+        image2 = "null" ;
+        image3 = "null" ;
+        image4 = "null" ;
 
 
         cityAdapter = new ArrayAdapter<String>
@@ -150,13 +154,13 @@ public class post_Activity extends AppCompatActivity {
         post.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                postdata();
+                validate();
             }
         });
 
 
     }
-    private void postdata()
+    private void validate()
     {
 
         String producta,professiona,citya,quantitya,pricea,disc;
@@ -167,19 +171,26 @@ public class post_Activity extends AppCompatActivity {
         pricea=price.getText().toString();
         disc=Discription.getText().toString();
 
-        if (citya.equalsIgnoreCase("")&&producta.equalsIgnoreCase("")&&professiona.equalsIgnoreCase("") && pricea.equalsIgnoreCase("") && quantitya.equalsIgnoreCase("")&& disc.equalsIgnoreCase("") )
+        if (citya.equalsIgnoreCase("") || producta.equalsIgnoreCase("") || professiona.equalsIgnoreCase("") || pricea.equalsIgnoreCase("") || quantitya.equalsIgnoreCase("") || disc.equalsIgnoreCase("") )
         {
             Toast.makeText(getApplicationContext(),"All Fielda are Mandatory",Toast.LENGTH_LONG).show();
+            return;
 
         }
         else
+            if(image1.equalsIgnoreCase("null")) {
+                Toast.makeText(this, "Please select an Image", Toast.LENGTH_SHORT).show();
+                return;
+            }
             if (Utilities.isInternetOn(getBaseContext()))
             postata();
             else
                 Toast.makeText(getBaseContext(),"No Internet Commection!!!",Toast.LENGTH_LONG).show();
+                return;
 
         //new postdata().execute();
     }
+
     private void getImage(ImageView image)
     {
         final CharSequence[] options = { "Take Photo", "Choose from Gallery","Cancel" };
@@ -340,7 +351,7 @@ public class post_Activity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.post_item:
-                postdata();
+                validate();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);

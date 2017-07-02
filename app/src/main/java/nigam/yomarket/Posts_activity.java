@@ -31,6 +31,8 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -64,6 +66,8 @@ public class Posts_activity extends AppCompatActivity {
     String date,time;
     RecyclerView rv;
     ImageView imagemain,image1,image2,image3,image4;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -140,11 +144,11 @@ public class Posts_activity extends AppCompatActivity {
         profession.setText(data.getPost_profession());
         Discription.setText(data.getPost_description());
         postedby.setText(data.getPosted_by_name());
-        String image_url =" http://simption.com/yomarket/cms/documents/image.php?path=post/"
+       /* String image_url =" http://simption.com/yomarket/cms/documents/image.php?path=post/"
                 + data.getPost_id()+"/"+replaceSpaceInString(data.getPost_image_1());
-        Log.e( "onCreate: ",image_url);
+        Log.e( "onCreate: ",image_url);*/
 
-        String image_url1 =apis.IMAGE_FOR_POSTS+data.getPost_id();
+       /* String image_url1 =apis.IMAGE_API+data.getPost_id();
         ImageLoader imgLoader = new ImageLoader(getBaseContext());
         int loader = R.drawable.logo_main;
 
@@ -153,7 +157,26 @@ public class Posts_activity extends AppCompatActivity {
         imgLoader.DisplayImage(image_url1+"/3.jpg", loader,image3);
         imgLoader.DisplayImage(image_url1+"/4.jpg", loader, image4);
 
-        imgLoader.DisplayImage(image_url1+"/1.jpg", loader, imagemain);
+        imgLoader.DisplayImage(image_url1+"/1.jpg", loader, imagemain);*/
+
+
+
+        Glide.with(this)
+                .load(apis.IMAGE_API+data.getPost_id()+"/1.jpg")
+                .placeholder(R.drawable.logo_main)
+                .into(imagemain);
+
+        Glide.with(this)
+                .load(apis.IMAGE_API+data.getPost_id()+"/1.jpg")
+                .placeholder(R.drawable.logo_main)
+                .into(image1);
+
+        int count = getIntent().getExtras().getInt("count");
+        final ArrayList<String> list = getIntent().getExtras().getStringArrayList("list");
+        showImages(count,list);
+
+
+
          //   new DownloadImageTask(imagemain).execute(image_url);
         if (Utilities.isInternetOn(getBaseContext()))
         new getcomment().execute();
@@ -172,8 +195,12 @@ public class Posts_activity extends AppCompatActivity {
                 ImageLoader imgLoader = new ImageLoader(getBaseContext());
                 ImageView img= (ImageView) builder.findViewById(R.id.fullimage);
 
-                String image_url1 =apis.IMAGE_FOR_POSTS+data.getPost_id();
-                imgLoader.DisplayImage(image_url1+"/1.jpg", R.drawable.logo_main, img);
+                /*String image_url1 =apis.IMAGE_API+data.getPost_id();
+                imgLoader.DisplayImage(image_url1+"/1.jpg", R.drawable.logo_main, img);*/
+                Glide.with(getBaseContext())
+                        .load(apis.IMAGE_API+data.getPost_id()+"/1.jpg")
+                        .placeholder(R.drawable.logo_main)
+                        .into(img);
 
                 builder.show();
 
@@ -188,8 +215,12 @@ public class Posts_activity extends AppCompatActivity {
                 ImageLoader imgLoader = new ImageLoader(getBaseContext());
                 ImageView img= (ImageView) builder.findViewById(R.id.fullimage);
 
-                String image_url1 =apis.IMAGE_FOR_POSTS+data.getPost_id();
-                imgLoader.DisplayImage(image_url1+"/2.jpg", R.drawable.logo_main, img);
+               /* String image_url1 =apis.IMAGE_API+data.getPost_id();
+                imgLoader.DisplayImage(image_url1+"/2.jpg", R.drawable.logo_main, img);*/
+                Glide.with(getBaseContext())
+                        .load(apis.IMAGE_API+data.getPost_id()+"/"+list.get(1)+".jpg")
+                        .placeholder(R.drawable.logo_main)
+                        .into(img);
 
                 builder.show();
             }
@@ -203,8 +234,12 @@ public class Posts_activity extends AppCompatActivity {
                 ImageLoader imgLoader = new ImageLoader(getBaseContext());
                 ImageView img= (ImageView) builder.findViewById(R.id.fullimage);
 
-                String image_url1 =apis.IMAGE_FOR_POSTS+data.getPost_id();
-                imgLoader.DisplayImage(image_url1+"/3.jpg", R.drawable.logo_main, img);
+               /* String image_url1 =apis.IMAGE_API+data.getPost_id();
+                imgLoader.DisplayImage(image_url1+"/3.jpg", R.drawable.logo_main, img);*/
+                Glide.with(getBaseContext())
+                        .load(apis.IMAGE_API+data.getPost_id()+"/"+list.get(2)+".jpg")
+                        .placeholder(R.drawable.logo_main)
+                        .into(img);
 
                 builder.show();
             }
@@ -219,8 +254,12 @@ public class Posts_activity extends AppCompatActivity {
                 ImageLoader imgLoader = new ImageLoader(getBaseContext());
                 ImageView img= (ImageView) builder.findViewById(R.id.fullimage);
 
-                String image_url1 =apis.IMAGE_FOR_POSTS+data.getPost_id();
-                imgLoader.DisplayImage(image_url1+"/4.jpg", R.drawable.logo_main, img);
+               /* String image_url1 =apis.IMAGE_API+data.getPost_id();
+                imgLoader.DisplayImage(image_url1+"/4.jpg", R.drawable.logo_main, img);*/
+                Glide.with(getBaseContext())
+                        .load(apis.IMAGE_API+data.getPost_id()+"/"+list.get(3)+".jpg")
+                        .placeholder(R.drawable.logo_main)
+                        .into(img);
 
                 builder.show();
             }
@@ -429,5 +468,53 @@ public class Posts_activity extends AppCompatActivity {
             totalcomments.setText("Total Comments: "+arraycomment.size());
 
         }
+    }
+
+    private void showImages(int count,ArrayList<String> list){
+        switch (count){
+            case 4:
+                Glide.with(this)
+                        .load(apis.IMAGE_API+data.getPost_id()+"/"+list.get(1)+".jpg")
+                        .placeholder(R.drawable.logo_main)
+                        .into(image2);
+
+                Glide.with(this)
+                        .load(apis.IMAGE_API+data.getPost_id()+"/"+list.get(2)+".jpg")
+                        .placeholder(R.drawable.logo_main)
+                        .into(image3);
+
+                Glide.with(this)
+                        .load(apis.IMAGE_API+data.getPost_id()+"/"+list.get(3)+".jpg")
+                        .placeholder(R.drawable.logo_main)
+                        .into(image4);
+                break;
+            case 3:
+                Glide.with(this)
+                        .load(apis.IMAGE_API+data.getPost_id()+"/"+list.get(1)+".jpg")
+                        .placeholder(R.drawable.logo_main)
+                        .into(image2);
+
+                Glide.with(this)
+                        .load(apis.IMAGE_API+data.getPost_id()+"/"+list.get(2)+".jpg")
+                        .placeholder(R.drawable.logo_main)
+                        .into(image3);
+                image4.setVisibility(View.INVISIBLE);
+                break;
+            case 2:
+                Glide.with(this)
+                        .load(apis.IMAGE_API+data.getPost_id()+"/"+list.get(1)+".jpg")
+                        .placeholder(R.drawable.logo_main)
+                        .into(image2);
+                image3.setVisibility(View.INVISIBLE);
+                image4.setVisibility(View.INVISIBLE);
+                break;
+            case 1:
+                image2.setVisibility(View.INVISIBLE);
+                image3.setVisibility(View.INVISIBLE);
+                image4.setVisibility(View.INVISIBLE);
+                break;
+        }
+
+
     }
 }

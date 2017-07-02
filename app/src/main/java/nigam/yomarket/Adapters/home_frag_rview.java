@@ -61,7 +61,7 @@ public class home_frag_rview extends RecyclerView.Adapter<home_frag_rview.ViewHo
         int loader = R.drawable.logo_main;
 
         String image_url ="http://simption.com/images/Simption%20Logo.png";
-        String image_url1 =apis.IMAGE_FOR_POSTS+hl.getPost_id();
+        String image_url1 =apis.IMAGE_API+hl.getPost_id();
 
         Log.e("", "onBindViewHolder: "+image_url);
         Log.e("", "onBindViewHolder: "+image_url1);

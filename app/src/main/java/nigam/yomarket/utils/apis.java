@@ -6,8 +6,12 @@ package nigam.yomarket.utils;
 ///findyourcampus.com/pulkit/cms/documents/phonebook/101
 public class apis {
     //public static String BASE_API = "http://findyourcampus.com/pulkit/cms/api/";
-    public static String BASE_API = "http://simption.com/yomarket/cms/api/";
-    public static String IMAGE_API = "documents/post/";
+    public static String BASE_API = "http://192.168.42.240/api/";
+    public static String IMAGES = BASE_API+"documents/";
+    public static String IMAGE_API = IMAGES+"post/";
+    public static String IMAGE_PHONEBOOK = IMAGES+"phonebook/";
+
+
     public static String posts_API = "posts.php";
     public static String PHONEBOOK_API = "phonebook_get.php";
     public static String LOGIN_API = "login.php";

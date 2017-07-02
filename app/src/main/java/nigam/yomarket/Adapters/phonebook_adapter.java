@@ -54,7 +54,7 @@ public class phonebook_adapter extends RecyclerView.Adapter<phonebook_adapter.Vi
         holder.city.setText(ph.getCity());
         holder.profession.setText(ph.getProfession());
         holder.firmname.setText(ph.getFirm_name());
-        String image_url1 = apis.IMAGE_FOR_POSTS+ph.getRegisterid()+"/"+ph.getPic();
+        String image_url1 = apis.IMAGE_PHONEBOOK+ph.getRegisterid()+"/"+ph.getPic();
 
          imgLoader = new ImageLoader(activity);
          image_url ="http://simption.com/images/Simption%20Logo.png";
