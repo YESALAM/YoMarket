@@ -6,7 +6,7 @@ package nigam.yomarket.utils;
 ///findyourcampus.com/pulkit/cms/documents/phonebook/101
 public class apis {
     //public static String BASE_API = "http://findyourcampus.com/pulkit/cms/api/";
-    public static String BASE_API = "http://192.168.42.240/api/";
+    public static String BASE_API = "http://simption.com/yomarket/cms/api2/";
     public static String IMAGES = BASE_API+"documents/";
     public static String IMAGE_API = IMAGES+"post/";
     public static String IMAGE_PHONEBOOK = IMAGES+"phonebook/";
