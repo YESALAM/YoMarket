@@ -51,18 +51,18 @@ RecyclerView rv;
         // Inflate the layout for this fragment
         View v= inflater.inflate(R.layout.fragment_home_frag, container, false);
 
-        setHasOptionsMenu(true);
+        setHasOptionsMenu(false);
 
         rv= (RecyclerView) v.findViewById(R.id.rvself);
-        TextView nameph = (TextView) v.findViewById(R.id.dialog_phonebook_name);
+        /*TextView nameph = (TextView) v.findViewById(R.id.dialog_phonebook_name);
         TextView contactph = (TextView) v.findViewById(R.id.dialog_phonebook_contact);
         TextView city = (TextView) v.findViewById(R.id.dialog_phonebook_city);
         TextView profession = (TextView) v.findViewById(R.id.dialog_phonebook_profession);
         TextView product = (TextView) v.findViewById(R.id.dialog_phonebook_product);
         TextView firm = (TextView) v.findViewById(R.id.dialog_phonebook_firmname);
-        ImageView image= (ImageView) v.findViewById(R.id.dialog_phonebook_image);
+        ImageView image= (ImageView) v.findViewById(R.id.dialog_phonebook_image);*/
 
-        if (Statics.isLogin==false)
+       /* if (Statics.isLogin==false)
         {
             nameph.setText("guest");
             contactph.setText("guest");
@@ -91,7 +91,12 @@ RecyclerView rv;
             new data().execute();
             else
                 Toast.makeText(getActivity(),"No Internet Commection!!!",Toast.LENGTH_LONG).show();
-        }
+        }*/
+
+        if (Utilities.isInternetOn(getActivity()))
+            new data().execute();
+        else
+            Toast.makeText(getActivity(),"No Internet Commection!!!",Toast.LENGTH_LONG).show();
 
         return v;
     }
