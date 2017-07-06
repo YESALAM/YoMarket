@@ -52,7 +52,7 @@
                     android:id="@+id/registeremail"
                     android:layout_width="match_parent"
                     android:layout_height="40dp"
-                    android:hint="Email Address"
+                    android:hint="Userid (Mobileno/Email)"
                     android:inputType="textEmailAddress"
                     android:textColor="@android:color/black" />
             </android.support.design.widget.TextInputLayout>
