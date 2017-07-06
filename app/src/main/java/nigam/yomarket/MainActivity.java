@@ -23,6 +23,7 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -240,12 +241,12 @@ public class MainActivity extends AppCompatActivity
                 Statics.product=obj.getString("register_product");
                 Statics.firmname=obj.getString("register_firm_name");
                 String imgname=obj.getString("pic_name");
-                String image_url1 =apis.IMAGE_FOR_PHONEBOOK+Statics.id+"/"+Statics.id;
+                String image_url1 =apis.IMAGE_PHONEBOOK+Statics.id+"/"+imgname;
                 Log.i(TAG, "onPostExecute: "+imgname);
-                ImageLoader imgLoader = new ImageLoader(getBaseContext());
+                //ImageLoader imgLoader = new ImageLoader(getBaseContext());
 
-
-                imgLoader.DisplayImage(image_url1+".jpg", R.drawable.logo_main, iv);
+                Glide.with(MainActivity.this).load(image_url1).error(R.drawable.logo_main).fitCenter().into(iv);
+                //imgLoader.DisplayImage(image_url1+".jpg", R.drawable.logo_main, iv);
 
 
                 Log.i( "onPostExecute: ", "ID =" + Statics.id);
