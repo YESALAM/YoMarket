@@ -54,6 +54,16 @@ public class MainActivity extends AppCompatActivity
         setSupportActionBar(toolbar);
         csprogress=new ProgressDialog(MainActivity.this);
 
+        SharedPreferences sharedPreferences = getPreferences(Context.MODE_PRIVATE);
+        boolean firstrun = sharedPreferences.getBoolean("firstrun",true);
+        if(firstrun){
+            SharedPreferences.Editor editor = sharedPreferences.edit();
+            editor.putBoolean("firstrun",false);
+            editor.commit();
+        }
+
+
+
 
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
