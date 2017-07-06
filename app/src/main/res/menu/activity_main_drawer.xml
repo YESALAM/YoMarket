@@ -15,6 +15,9 @@
         <item
             android:id="@+id/post"
             android:title="POST" />
+        <item
+            android:id="@+id/profile"
+            android:title="PROFILE" />
 
         <item
             android:id="@+id/logout"

@@ -15,6 +15,7 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
+import com.bumptech.glide.Glide;
 import nigam.yomarket.R;
 import nigam.yomarket.getset.HomeListGetSet;
 import nigam.yomarket.getset.phonebook;
@@ -56,10 +57,14 @@ public class phonebook_adapter extends RecyclerView.Adapter<phonebook_adapter.Vi
         holder.firmname.setText(ph.getFirm_name());
         String image_url1 = apis.IMAGE_PHONEBOOK+ph.getRegisterid()+"/"+ph.getPic();
 
-         imgLoader = new ImageLoader(activity);
-         image_url ="http://simption.com/images/Simption%20Logo.png";
+        Log.e("PhonebookAdapter",image_url1);
+         //imgLoader = new ImageLoader(activity);
+        Glide.with(activity).load(image_url1).error(R.drawable.logo_main).fitCenter().into(holder.pic);
+
+
+         /*image_url ="http://simption.com/images/Simption%20Logo.png";
        // imgLoader.DisplayImage(image_url,  R.drawable.logo_main, holder.pic);
-        imgLoader.DisplayImage(image_url1, R.drawable.logo_main, holder.pic);
+        imgLoader.DisplayImage(image_url1, R.drawable.logo_main, holder.pic);*/
 
     }
 

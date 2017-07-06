@@ -20,7 +20,6 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -30,7 +29,6 @@ import org.json.JSONObject;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 import nigam.yomarket.Adapters.main_tab_adapter;
-import nigam.yomarket.getset.HomeListGetSet;
 import nigam.yomarket.imagehelper.ImageLoader;
 import nigam.yomarket.utils.Statics;
 import nigam.yomarket.utils.Utilities;
@@ -67,8 +65,10 @@ public class MainActivity extends AppCompatActivity
         navigationView.getMenu().getItem(0).setChecked(true);
         navigationView.setNavigationItemSelectedListener(this);
         nav=navigationView.getMenu();
-        if(!Statics.isLogin)
+        if(!Statics.isLogin){
             nav.findItem(R.id.logout).setVisible(false);
+            nav.findItem(R.id.profile).setVisible(false);
+        }
         if(Statics.isLogin)
         {
             csprogress.setMessage("Loading...");
@@ -90,6 +90,7 @@ public class MainActivity extends AppCompatActivity
 
                 }
             }, 1000);
+
         }
         // Create the adapter that will return a fragment for each of the three
         // primary sections of the activity.
@@ -157,7 +158,12 @@ public class MainActivity extends AppCompatActivity
             else
                 Snackbar.make(findViewById(R.id.relativelay_for_frags),"Login First To Post",Snackbar.LENGTH_LONG).show();
 
-        }else if (id == R.id.about_us) {
+        } else if (id == R.id.profile) {
+            Intent intent = new Intent(this,EditProfileActivity.class);
+            //intent.putExtra("editmode",true);
+            startActivity(intent);
+
+        } else if (id == R.id.about_us) {
             startActivity(new Intent(MainActivity.this,about_us_Activity.class));
 
         }else if (id == R.id.contact_us) {

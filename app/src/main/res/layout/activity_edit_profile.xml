@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="nigam.yomarket.Register_Activity">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="2dp"
+            android:orientation="vertical">
+
+
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginTop="4dp"
+                android:textColorHint="@android:color/background_dark">
+
+                <EditText
+                    android:id="@+id/registername"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:hint="Full Name"
+                    android:inputType="text"
+                    android:textColor="@android:color/black" />
+            </android.support.design.widget.TextInputLayout>
+
+
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginTop="4dp"
+                android:textColorHint="@android:color/background_dark">
+
+                <EditText
+                    android:id="@+id/registerpassword"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:hint="Password"
+                    android:textColor="@android:color/black" />
+            </android.support.design.widget.TextInputLayout>
+
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginTop="4dp"
+                android:textColorHint="@android:color/background_dark">
+
+                <EditText
+                    android:id="@+id/registermobile"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:hint="Mobile No."
+                    android:textColor="@android:color/black" />
+            </android.support.design.widget.TextInputLayout>
+
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginBottom="10dp"
+                android:layout_marginTop="4dp"
+                android:textColorHint="@android:color/background_dark">
+
+                <EditText
+                    android:id="@+id/registerfirmname"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:layout_marginBottom="10dp"
+                    android:hint="Firm Name"
+                    android:textColor="@android:color/black" />
+            </android.support.design.widget.TextInputLayout>
+
+
+            <Spinner
+                android:id="@+id/registertype"
+                android:layout_width="match_parent"
+                android:layout_height="35dp"
+                android:layout_marginLeft="2dp"
+                android:layout_marginRight="2dp"
+                android:layout_marginTop="4dp" />
+
+            <Spinner
+                android:id="@+id/registerproduct"
+                android:layout_width="match_parent"
+                android:layout_height="35dp"
+                android:layout_marginLeft="2dp"
+                android:layout_marginRight="2dp"
+                android:layout_marginTop="7dp" />
+
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginTop="4dp"
+                android:textColorHint="@android:color/background_dark">
+
+                <AutoCompleteTextView
+                    android:id="@+id/registercountry"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:hint="Country"
+                    android:textColor="@android:color/black" />
+            </android.support.design.widget.TextInputLayout>
+
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginTop="4dp"
+                android:textColorHint="@android:color/background_dark">
+
+                <AutoCompleteTextView
+                    android:id="@+id/registerstate"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:hint="State"
+                    android:textColor="@android:color/black" />
+            </android.support.design.widget.TextInputLayout>
+
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginTop="4dp"
+                android:textColorHint="@android:color/background_dark">
+
+                <AutoCompleteTextView
+                    android:id="@+id/registercity"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:hint="City"
+                    android:textColor="@android:color/black" />
+            </android.support.design.widget.TextInputLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:id="@+id/imageregister"
+                    android:layout_width="match_parent"
+                    android:layout_height="70dp"
+                    app:srcCompat="@drawable/logo_main" />
+
+                <TextView
+                    android:id="@+id/registeruploadimage"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:layout_weight="1"
+                    android:text="Update Pic/Visiting Card"
+                    android:textAlignment="center"
+                    android:textColor="@android:color/black"
+                    android:textSize="20sp" />
+            </LinearLayout>
+
+            <android.support.v7.widget.AppCompatButton
+                android:id="@+id/registerbtn"
+                style="@style/Widget.AppCompat.Button.Colored"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true"
+                android:layout_margin="10dp"
+                android:layout_marginTop="20dp"
+                android:background="@android:color/holo_blue_dark"
+                android:drawableLeft="@android:drawable/ic_secure"
+                android:elevation="21dp"
+                android:padding="12dp"
+                android:text="Update"
+                android:textAlignment="center"
+                android:textSize="18sp"
+                android:theme="@style/AppTheme.NoActionBar" />
+
+
+        </LinearLayout>
+    </ScrollView>
+
+</RelativeLayout>
