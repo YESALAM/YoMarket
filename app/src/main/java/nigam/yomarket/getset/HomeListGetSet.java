@@ -12,7 +12,15 @@ public class HomeListGetSet  implements Serializable{
 // "post_image_2":"1407134463MasteringOpenCV.gif",
 // "post_image_3":"1366x768 (1).jpg","post_image_4":"1366x768 (1).jpg","post_id":"104"}
     private String s_no,post_product,post_city,post_profession,post_quantity,post_price,post_description,post_image_1,post_image_2,
-        post_image_3,post_image_4,post_id,posted_by_id,posted_by_name,posted_by_phone;
+        post_image_3,post_image_4,post_id,posted_by_id,posted_by_name,posted_by_phone,mobile_no;
+
+    public String getMobile_no(){
+        return mobile_no;
+    }
+
+    public void setMobile_no(String mobile_no){
+        this.mobile_no = mobile_no;
+    }
 
     public void setPosted_by_id(String posted_by_id) {
         this.posted_by_id = posted_by_id;

@@ -56,12 +56,14 @@ public class main_frag_rview extends RecyclerView.Adapter<main_frag_rview.ViewHo
     public void onBindViewHolder(final ViewHolder holder, final int position) {
 
 
-         hl =list.get(position);
+        final int size = list.size();
+         hl =list.get(size-position-1);
 
         holder.postedby.setText(hl.getPosted_by_name());
         holder.price.setText(hl.getPost_price());
-        holder.product.setText(hl.getPost_product());
+        holder.product.setText(hl.getPost_description());
         holder.city.setText(hl.getPost_city());
+        holder.mobileno.setText(hl.getMobile_no());
         Log.i("", "onBindViewHolder: "+hl.getPost_quantity()+hl.getPost_price());
 ///documents/post/post_image_1
         final ArrayList<String> image_list = new ArrayList<>();
@@ -112,7 +114,7 @@ public class main_frag_rview extends RecyclerView.Adapter<main_frag_rview.ViewHo
                 Intent i = new Intent(activity,Posts_activity.class);
                 Context c=v.getContext();
                 Bundle bundle = new Bundle();
-                bundle.putSerializable("DATA",list.get(position));
+                bundle.putSerializable("DATA",list.get(size-position-1));
                 bundle.putInt("count",finalcount);
                 bundle.putStringArrayList("list",image_list);
                 i.putExtras(bundle);
@@ -130,13 +132,14 @@ public class main_frag_rview extends RecyclerView.Adapter<main_frag_rview.ViewHo
         LinearLayout image_holder;
         LinearLayout card;
         //ImageView pimage,image2,image3,image4;
-        TextView postedby,city,product,price;
+        TextView postedby,city,product,price,mobileno;
         public ViewHolder(final View rView) {
             super(rView);
             postedby= (TextView) rView.findViewById(R.id.posts_posted_by);
             city= (TextView) rView.findViewById(R.id.posts_city_home);
             product= (TextView) rView.findViewById(R.id.posts_product_home);
             price= (TextView) rView.findViewById(R.id.posts_price_home);
+            mobileno = (TextView) rView.findViewById(R.id.posts_mobileno_home);
             //image_holder = (LinearLayout) rView.findViewById(R.id.image_holder);
             card = (LinearLayout) rView.findViewById(R.id.card_home);
 

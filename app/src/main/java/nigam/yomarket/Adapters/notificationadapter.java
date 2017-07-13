@@ -46,7 +46,8 @@ public class notificationadapter extends RecyclerView.Adapter<notificationadapte
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        HomeListGetSet h = list.get(position);
+        int size = list.size();
+        HomeListGetSet h = list.get(size-position-1);
         Log.i("doInBackground:response","aaaasasaaasadaada"+h.getPost_price());
 
 

@@ -15,6 +15,7 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
+import com.bumptech.glide.Glide;
 import nigam.yomarket.Posts_activity;
 import nigam.yomarket.R;
 import nigam.yomarket.getset.HomeListGetSet;
@@ -48,8 +49,8 @@ public class home_frag_rview extends RecyclerView.Adapter<home_frag_rview.ViewHo
     @Override
     public void onBindViewHolder(final ViewHolder holder, final int position) {
 
-
-         hl =list.get(position);
+        final int size = list.size();
+         hl =list.get(size-1-position);
 
         holder.postedby.setText(hl.getPosted_by_name());
         holder.price.setText(hl.getPost_price());
@@ -60,17 +61,42 @@ public class home_frag_rview extends RecyclerView.Adapter<home_frag_rview.ViewHo
 
         int loader = R.drawable.logo_main;
 
-        String image_url ="http://simption.com/images/Simption%20Logo.png";
         String image_url1 =apis.IMAGE_API+hl.getPost_id();
 
-        Log.e("", "onBindViewHolder: "+image_url);
-        Log.e("", "onBindViewHolder: "+image_url1);
+
+        Log.e("home frag", "onBindViewHolder: "+image_url1);
        // http://findyourcampus.com/pulkit/cms/documents/image.php?path=post/102/aa.jpg
-        ImageLoader imgLoader = new ImageLoader(activity);
+        //ImageLoader imgLoader = new ImageLoader(activity);
 
 
-        imgLoader.DisplayImage(image_url1+"/1.jpg", loader, holder.pimage);
+       // imgLoader.DisplayImage(image_url1+"/1.jpg", loader, holder.pimage);
+        Glide.with(holder.pimage.getContext())
+                .load(image_url1+"/1.jpg")
+                .error(loader)
+                .centerCrop()
+                .into(holder.pimage);
 //        notifyDataSetChanged();
+
+        final ArrayList<String> image_list = new ArrayList<>();
+        int count = 0 ;
+        if(!hl.getPost_image_1().equalsIgnoreCase("null")){
+            count++;
+            image_list.add(hl.getPost_image_1());
+        }
+        if(!hl.getPost_image_2().equalsIgnoreCase("null")){
+            count++;
+            image_list.add(hl.getPost_image_2());
+        }
+        if(!hl.getPost_image_3().equalsIgnoreCase("null")){
+            count++;
+            image_list.add(hl.getPost_image_3());
+        }
+        if(!hl.getPost_image_4().equalsIgnoreCase("null")){
+            count++;
+            image_list.add(hl.getPost_image_4());
+        }
+
+        final int finalcount=count;
 
 
 //    Product,Post_ID_City,Profession,Quantity,Price,Description,Image_1,Image_2,Image_3,Image_4	;
@@ -81,7 +107,9 @@ public class home_frag_rview extends RecyclerView.Adapter<home_frag_rview.ViewHo
                 Intent i = new Intent(activity,Posts_activity.class);
                 Context c=v.getContext();
                 Bundle bundle = new Bundle();
-                bundle.putSerializable("DATA",list.get(position));
+                bundle.putSerializable("DATA",list.get(size-position-1));
+                bundle.putInt("count",finalcount);
+                bundle.putStringArrayList("list",image_list);
                 i.putExtras(bundle);
                 c.startActivity(i);
             }

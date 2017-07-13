@@ -48,8 +48,8 @@ LinearLayout ll;
     FloatingActionButton addpost;
     main_frag_rview adapter;
 RecyclerView rv;
-    String Professionlist[] = {"All","Wholeseller", "Farmer", "Retailer", "Exporter", "Importer", "Commision Agent", "Transporter"};
-    String productlist[] = {"All","Fruit", "Vegetables","transport" ,"fruits and vegetables"};
+    String productlist[]={"Fruit","Vegetables","fruits and vegetables","transport"};
+    String Professionlist[]={"Wholeseller","Farmer","Retailer","Exporter","Importer","Commision Agent","Transporter"};
     ArrayList<HomeListGetSet> list =new ArrayList();
     public Post_Frag() {
         // Required empty public constructor
@@ -180,14 +180,7 @@ RecyclerView rv;
             @Override
             public void onClick(View view) {
                 String productfilter,professionfilter;
-                if (product.getSelectedItem().equals("All"))
-                    productfilter="is NOT NULL";
-                else
                     productfilter=product.getSelectedItem().toString();
-
-                if (profession.getSelectedItem().equals("All"))
-                    professionfilter="is NOT NULL";
-                else
                     professionfilter=profession.getSelectedItem().toString();
                 if (Utilities.isInternetOn(getActivity()))
                 new datafilter(professionfilter,productfilter).execute();
@@ -231,7 +224,8 @@ RecyclerView rv;
                 String baseURL = apis.BASE_API+apis.FILTER_POST+"?profession="+profession+"&product="+product ;
                 Log.i("", "doInBackgroundtesting:  "+baseURL);
 
-                String jsonString = Utilities.readJson(getActivity(), "POST", baseURL);
+                String jsonString = Utilities.readJson(getActivity(), "GET", baseURL);
+                Log.e(TAG, "doInBackground: "+jsonString );
                 JSONObject reader = new JSONObject(jsonString);
 
                 JSONArray data = reader.getJSONArray("server response");
@@ -242,7 +236,7 @@ RecyclerView rv;
                     HomeListGetSet ps=new HomeListGetSet();
                     JSONObject obj = data.getJSONObject(i);
 
-                    ps.setS_no(obj.getString("s_no"));
+                    //ps.setS_no(obj.getString("s_no"));
                     ps.setPost_product(obj.getString("post_product"));
                     ps.setPost_city(obj.getString("post_city"));
                     ps.setPost_profession(obj.getString("post_profession"));
@@ -256,6 +250,7 @@ RecyclerView rv;
                     ps.setPost_image_4(obj.getString("post_image_4"));
                     ps.setPosted_by_name(obj.getString("post_posted_by"));
                     ps.setposted_by_id(obj.getString("post_posted_by_id"));
+                    //ps.setMobile_no(obj.getString("register_mobile_no"));
                     list.add(ps);
 //                    adapter.notifyDataSetChanged();
                 }
@@ -313,6 +308,7 @@ RecyclerView rv;
                     ps.setPost_image_4(obj.getString("post_image_4"));
                     ps.setposted_by_id(obj.getString("post_posted_by_id"));
                     ps.setPosted_by_name(obj.getString("post_posted_by"));
+                    ps.setMobile_no(obj.getString("register_mobile_no"));
                     list.add(ps);
 
                 }

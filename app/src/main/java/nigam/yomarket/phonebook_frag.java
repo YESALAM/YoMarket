@@ -36,6 +36,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 import nigam.yomarket.Adapters.main_frag_rview;
 import nigam.yomarket.Adapters.phonebook_adapter;
@@ -56,6 +57,12 @@ public class phonebook_frag extends Fragment {
     phonebook_adapter adapter;
     RecyclerView rv;
     ArrayList<phonebook> list =new ArrayList();
+    String productlist[]={"All","Fruit","Vegetables","fruits and vegetables","transport"};
+    String Professionlist[]={"Wholeseller","Farmer","Retailer","Exporter","Importer","Commision Agent","Transporter"};
+    boolean cityselected = false ;
+    AutoCompleteTextView cityactv;
+    ArrayAdapter<String> as;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -68,7 +75,7 @@ public class phonebook_frag extends Fragment {
         final RadioButton transport= (RadioButton) v.findViewById(R.id.transport);
         RadioGroup group = (RadioGroup) v.findViewById(R.id.radioGroup);
         final TextInputLayout layout= (TextInputLayout) v.findViewById(R.id.citytextInputLayout);
-        AutoCompleteTextView city= (AutoCompleteTextView) v.findViewById(R.id.city);
+        cityactv = (AutoCompleteTextView) v.findViewById(R.id.city);
 
         if (Utilities.isInternetOn(getActivity()))
         new data().execute();
@@ -77,35 +84,42 @@ public class phonebook_frag extends Fragment {
 
 
         layout.setVisibility(View.GONE);
-        ArrayAdapter<String> as=new ArrayAdapter<String>(getContext(),android.R.layout.simple_dropdown_item_1line, Statics.citylist);
+        new city().execute();
+        as=new ArrayAdapter<String>(getContext(),android.R.layout.simple_dropdown_item_1line, Arrays.asList(Statics.citylist));
         as.setDropDownViewResource(R.layout.registerspinner);
-        city.setAdapter(as);
-        city.setThreshold(1);
+        cityactv.setAdapter(as);
+        cityactv.setThreshold(1);
         group.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup radioGroup, @IdRes int i) {
                 if (fruit.isChecked())
                 {
-                 productselected="Fruit";
+                 productselected=productlist[1];
                 }
                  if (fruitvegetables.isChecked())
                 {
-                    productselected="Fruits and Vegetables";
+                    productselected=productlist[3];
                 }
                  if (vegetables.isChecked())
                 {
-                    productselected="Vegetables";
+                    productselected=productlist[2];
                 }
                 if(transport.isChecked())
                 {
-                    productselected="transport";
+                    productselected=productlist[4];
                 }
                 layout.setVisibility(View.VISIBLE);
+                String cityselected = String.valueOf(cityactv.getText());
+                if (Utilities.isInternetOn(getActivity()))
+                    new datafilter(productselected,cityselected).execute();
+                else
+                    Toast.makeText(getActivity(),"No Internet Commection!!!",Toast.LENGTH_SHORT).show();
             }
         });
-        city.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        cityactv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                cityselected = true ;
                 String cityselected=adapterView.getItemAtPosition(i).toString();
                 if (Utilities.isInternetOn(getActivity()))
                 new datafilter(productselected,cityselected).execute();
@@ -125,7 +139,7 @@ public class phonebook_frag extends Fragment {
 //        inflater.inflate(R.menu.frag_home, menu);
 //        return;
 //    }
-    String productlist[] = {"All","Fruit", "Vegetables", "fruits and vegetables"};
+    //String productlist[] = {"All","Fruit", "Vegetables", "fruits and vegetables"};
 
     private void filter()
     {
@@ -258,10 +272,12 @@ public class phonebook_frag extends Fragment {
         protected Object doInBackground(Object[] params) {
             list.clear();
             try {
+                if (!cityselected) city = "All" ;
                 String baseURL = apis.BASE_API + apis.FILTER_PHONEBOOK+"?city="+city+"&product="+product;
-                Log.i("", "doInBackgroundtesting:  "+baseURL);
+                Log.i(this.getClass().getSimpleName(), "doInBackgroundtesting:  "+baseURL);
 
-                String jsonString = Utilities.readJson(getActivity(), "POST", baseURL);
+                String jsonString = Utilities.readJson(getActivity(), "GET", baseURL);
+                Log.e(this.getClass().getSimpleName(),jsonString);
                 JSONObject reader = new JSONObject(jsonString);
 
 
@@ -304,6 +320,48 @@ public class phonebook_frag extends Fragment {
             //rv.addItemDecoration(new DividerItemDecoration(getActivity()));
             rv.setItemAnimator(new DefaultItemAnimator());
             rv.setAdapter(adapter);
+        }
+    }
+
+    class city extends AsyncTask{
+        ArrayList<String> citylist = new ArrayList<>();
+
+        @Override
+        protected Object doInBackground(Object[] params) {
+            try {
+                String baseURL = apis.BASE_API + apis.PHONEBOOKCITY ;
+                Log.i(this.getClass().getSimpleName(), "doInBackgroundtesting:  "+baseURL);
+
+                String jsonString = Utilities.readJson(getActivity(), "GET", baseURL);
+                Log.e(this.getClass().getSimpleName(),jsonString);
+                JSONObject reader = new JSONObject(jsonString);
+
+                JSONArray data = reader.getJSONArray("server response");
+
+
+                for (int i = 0; i < data.length(); i++)                {
+
+                    JSONObject obj = data.getJSONObject(i);
+                    String city = obj.getString("phonebook_city");
+                    Log.i(this.getClass().getSimpleName(),city);
+                    citylist.add(city);
+                }
+            }
+            catch (JSONException e)
+            {
+                e.printStackTrace();
+
+            }
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Object o) {
+            super.onPostExecute(o);
+            as=new ArrayAdapter<String>(getContext(),android.R.layout.simple_dropdown_item_1line, citylist);
+            as.setDropDownViewResource(R.layout.registerspinner);
+            Log.i("", "doInBackgroundtesting: post ");
+            cityactv.setAdapter(as);
         }
     }
 

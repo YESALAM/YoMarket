@@ -24,6 +24,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.google.firebase.iid.FirebaseInstanceId;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -203,6 +204,7 @@ public class MainActivity extends AppCompatActivity
         return true;
 
     }
+
     class datafetch extends AsyncTask
     {JSONObject obj;
         JSONArray data;
@@ -257,6 +259,10 @@ public class MainActivity extends AppCompatActivity
 
                 Glide.with(MainActivity.this).load(image_url1).error(R.drawable.logo_main).fitCenter().into(iv);
                 //imgLoader.DisplayImage(image_url1+".jpg", R.drawable.logo_main, iv);
+                String token = FirebaseInstanceId.getInstance().getToken();
+                if(token!=null){
+                   new notify(token).execute();
+                }
 
 
                 Log.i( "onPostExecute: ", "ID =" + Statics.id);
@@ -265,6 +271,32 @@ public class MainActivity extends AppCompatActivity
             } catch (JSONException e) {
                 e.printStackTrace();
             }
+        }
+    }
+
+
+    class notify extends AsyncTask
+    {
+        String token;
+        public notify(String token){
+            this.token = token ;
+        }
+
+
+        @Override
+        protected Object doInBackground(Object[] params) {
+            try {
+                if(Statics.id == null) return null ;
+                String baseURL = apis.BASE_API+apis.TOKEN_UPDATE+"?r_id="+ Statics.id+"&d_id="+token;//+Statics.notificationcounterid;
+                Log.i(this.getClass().getSimpleName(),"updating token --> "+Statics.id+"  --  "+token);
+
+                Utilities.readJson(getBaseContext(), "POST", baseURL);
+
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            return null;
         }
     }
 }

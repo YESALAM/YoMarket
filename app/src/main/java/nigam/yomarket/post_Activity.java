@@ -54,6 +54,7 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -87,7 +88,7 @@ public class post_Activity extends AppCompatActivity {
         pg=new ProgressDialog(this);
         pg.setMessage("Posting!!!");
         pg.setCancelable(false);
-        String productlist[]={"Fruit","Vegitables","fruits and vegetables","transport"};
+        String productlist[]={"Fruit","Vegetables","fruits and vegetables","transport"};
         String Professionlist[]={"Wholeseller","Farmer","Retailer","Exporter","Importer","Commision Agent","Transporter"};
 
         Quantity = (EditText) findViewById(R.id.post_quantity);
@@ -138,17 +139,24 @@ public class post_Activity extends AppCompatActivity {
         image4 = "null" ;
 
 
+        city.clearFocus();
         cityAdapter = new ArrayAdapter<String>
                 (this,android.R.layout.simple_list_item_1,Statics.citylist);
         city.setAdapter(cityAdapter);
         city.setThreshold(1);
+        city.setText(Statics.city);
 
         productadapter = new ArrayAdapter<String>
                 (this,android.R.layout.simple_list_item_1,productlist);
         product.setAdapter(productadapter);
+        int posti = Arrays.asList(productlist).indexOf(Statics.product);
+        product.setSelection(posti);
+
         professionadapter = new ArrayAdapter<String>
                 (this,android.R.layout.simple_list_item_1,Professionlist);
+        int position = Arrays.asList(Professionlist).indexOf(Statics.profession);
         profession.setAdapter(professionadapter);
+        profession.setSelection(position);
 
         post = (Button) findViewById(R.id.post_button);
         post.setOnClickListener(new View.OnClickListener() {

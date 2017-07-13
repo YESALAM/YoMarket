@@ -574,4 +574,19 @@ public static class GridSpacingItemDecoration extends RecyclerView.ItemDecoratio
 					+ "[a-zA-Z0-9][a-zA-Z0-9-]{0,25}" + ")+");
 
 
+	public static void updateToken(Context context,String id,String token){
+		try {
+			if(id == null) return ;
+			String baseURL = apis.BASE_API+apis.TOKEN_UPDATE+"?r_id="+ id+"&d_id="+token;//+Statics.notificationcounterid;
+			Log.i("Token Updateion","updating token --> "+Statics.id+"  --  "+token);
+
+			Utilities.readJson(context, "GET", baseURL);
+
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return ;
+	}
 }
+

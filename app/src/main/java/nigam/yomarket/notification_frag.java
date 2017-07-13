@@ -63,10 +63,10 @@ RecyclerView rv;
 
 
         }
-        String id = sharedPreferences.getString("nid","0");
+
 
         if (Utilities.isInternetOn(getActivity()))
-            new notify(id).execute();
+            new notify().execute();
         else
             Toast.makeText(getActivity(),"No Internet Commection!!!",Toast.LENGTH_LONG).show();
 
@@ -81,16 +81,13 @@ RecyclerView rv;
                 response;
         ArrayList<HomeListGetSet> list =new ArrayList();
 
-        String id ;
-        public notify(String id) {
-            this.id = id;
-        }
+
 
         @Override
         protected Object doInBackground(Object[] params) {
 
             try {
-                String baseURL = apis.BASE_API+apis.Notificatiom_API+"?id="+id;//+Statics.notificationcounterid;
+                String baseURL = apis.BASE_API+apis.Notificatiom_API+"?id="+0;//+Statics.notificationcounterid;
                 Log.i("doInBackground:response","aaaaaaada"+baseURL);
 
                 jsonString = Utilities.readJson(getActivity(), "POST", baseURL);
@@ -146,37 +143,48 @@ RecyclerView rv;
             rv.setItemAnimator(new DefaultItemAnimator());
             rv.setAdapter(adapter);
 
-            if(list.size()>0){
-                int index = list.size()-1 ;
-                String id = list.get(index).getPost_id();
-                SharedPreferences sharedPref = getActivity().getPreferences(Context.MODE_PRIVATE);
-                SharedPreferences.Editor editor = sharedPref.edit();
-                editor.putString("nid", id);
-                editor.commit();
+            Log.e("notification",list.size()+"");
+            int size = list.size();
+            if(size>0){
+                int index = size-1;
+                Log.e("notification","inside the if");
+                SharedPreferences sharedPreferences = getActivity().getPreferences(Context.MODE_PRIVATE);
+                String id = sharedPreferences.getString("nid","0");
+                String postid = list.get(index).getPost_id();
+                int sid = Integer.parseInt(id);
+                int pid = Integer.parseInt(postid);
+                Log.e("notification",sid+"   "+pid);
+                if(pid>sid) {
+                    SharedPreferences sharedPref = getActivity().getPreferences(Context.MODE_PRIVATE);
+                    SharedPreferences.Editor editor = sharedPref.edit();
+                    editor.putString("nid", postid);
+                    editor.commit();
 
-                // First let's define the intent to trigger when notification is selected
-// Start out by creating a normal intent (in this case to open an activity)
-                Intent intent = new Intent(getActivity(), MainActivity.class);
-// Next, let's turn this into a PendingIntent using
-//   public static PendingIntent getActivity(Context context, int requestCode,
-//       Intent intent, int flags)
-                int requestID = (int) System.currentTimeMillis(); //unique requestID to differentiate between various notification with same NotifId
-                int flags = PendingIntent.FLAG_CANCEL_CURRENT; // cancel old intent and create new one
-                PendingIntent pIntent = PendingIntent.getActivity(getContext(), requestID, intent, flags);
-// Now we can attach the pendingIntent to a new notification using setContentIntent
-                Notification noti = new NotificationCompat.Builder(getContext())
-                        .setSmallIcon(R.drawable.logo_main)
-                        .setContentTitle("Post added")
-                        .setContentText("New items are posted in market")
-                        .setContentIntent(pIntent)
-                        .setAutoCancel(true) // Hides the notification after its been selected
-                        .build();
-// Get the notification manager system service
-                NotificationManager mNotificationManager =
-                        (NotificationManager) getContext().getSystemService(Context.NOTIFICATION_SERVICE);
-// mId allows you to update the notification later on.
-                mNotificationManager.notify(0, noti);
 
+                    // First let's define the intent to trigger when notification is selected
+                    // Start out by creating a normal intent (in this case to open an activity)
+                    Intent intent = new Intent(getActivity(), MainActivity.class);
+                    // Next, let's turn this into a PendingIntent using
+                    //   public static PendingIntent getActivity(Context context, int requestCode,
+                    //       Intent intent, int flags)
+                    int requestID = (int) System
+                            .currentTimeMillis(); //unique requestID to differentiate between various notification with same NotifId
+                    int flags = PendingIntent.FLAG_CANCEL_CURRENT; // cancel old intent and create new one
+                    PendingIntent pIntent = PendingIntent.getActivity(getContext(), requestID, intent, flags);
+                    // Now we can attach the pendingIntent to a new notification using setContentIntent
+                    Notification noti = new NotificationCompat.Builder(getContext())
+                            .setSmallIcon(R.drawable.logo_main)
+                            .setContentTitle("Post added")
+                            .setContentText("New items are posted in market")
+                            .setContentIntent(pIntent)
+                            .setAutoCancel(true) // Hides the notification after its been selected
+                            .build();
+                    // Get the notification manager system service
+                    NotificationManager mNotificationManager =
+                            (NotificationManager) getContext().getSystemService(Context.NOTIFICATION_SERVICE);
+                    // mId allows you to update the notification later on.
+                    mNotificationManager.notify(0, noti);
+                }
 
             }
 
@@ -191,11 +199,9 @@ RecyclerView rv;
     @Override
     public void onResume() {
         super.onResume();
-        SharedPreferences sharedPreferences = getActivity().getPreferences(Context.MODE_PRIVATE);
-        String id = sharedPreferences.getString("nid","0");
 
         if (Utilities.isInternetOn(getActivity()))
-            new notify(id).execute();
+            new notify().execute();
         else
             Toast.makeText(getActivity(),"No Internet Commection!!!",Toast.LENGTH_LONG).show();
 

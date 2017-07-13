@@ -92,7 +92,7 @@
                     android:layout_height="wrap_content"
                     android:layout_margin="1dp"
                     android:layout_weight="1"
-                    android:text="Product"
+                    android:text="Description"
                     android:textColor="@android:color/background_dark"
                     android:textSize="18sp" />
 
@@ -103,6 +103,15 @@
                     android:layout_margin="1dp"
                     android:layout_weight="1"
                     android:text="Price"
+                    android:textColor="@android:color/background_dark"
+                    android:textSize="18sp" />
+                <TextView
+                    android:id="@+id/Mobileno"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="1dp"
+                    android:layout_weight="1"
+                    android:text="Mobile no"
                     android:textColor="@android:color/background_dark"
                     android:textSize="18sp" />
 
@@ -149,6 +158,17 @@
 
                 <TextView
                     android:id="@+id/posts_price_home"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="1dp"
+                    android:layout_weight=".5"
+                    android:text="TextView"
+                    android:textAlignment="viewEnd"
+                    android:textColor="@android:color/background_dark"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:id="@+id/posts_mobileno_home"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="1dp"

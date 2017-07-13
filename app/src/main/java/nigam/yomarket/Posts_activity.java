@@ -218,7 +218,7 @@ public class Posts_activity extends AppCompatActivity {
                /* String image_url1 =apis.IMAGE_API+data.getPost_id();
                 imgLoader.DisplayImage(image_url1+"/2.jpg", R.drawable.logo_main, img);*/
                 Glide.with(getBaseContext())
-                        .load(apis.IMAGE_API+data.getPost_id()+"/"+list.get(1)+".jpg")
+                        .load(apis.IMAGE_API+data.getPost_id()+"/"+2+".jpg")
                         .placeholder(R.drawable.logo_main)
                         .into(img);
 
@@ -237,7 +237,7 @@ public class Posts_activity extends AppCompatActivity {
                /* String image_url1 =apis.IMAGE_API+data.getPost_id();
                 imgLoader.DisplayImage(image_url1+"/3.jpg", R.drawable.logo_main, img);*/
                 Glide.with(getBaseContext())
-                        .load(apis.IMAGE_API+data.getPost_id()+"/"+list.get(2)+".jpg")
+                        .load(apis.IMAGE_API+data.getPost_id()+"/"+3+".jpg")
                         .placeholder(R.drawable.logo_main)
                         .into(img);
 
@@ -257,7 +257,7 @@ public class Posts_activity extends AppCompatActivity {
                /* String image_url1 =apis.IMAGE_API+data.getPost_id();
                 imgLoader.DisplayImage(image_url1+"/4.jpg", R.drawable.logo_main, img);*/
                 Glide.with(getBaseContext())
-                        .load(apis.IMAGE_API+data.getPost_id()+"/"+list.get(3)+".jpg")
+                        .load(apis.IMAGE_API+data.getPost_id()+"/"+4+".jpg")
                         .placeholder(R.drawable.logo_main)
                         .into(img);
 
@@ -317,7 +317,7 @@ public class Posts_activity extends AppCompatActivity {
     }
     private  String gettime()
     {
-        SimpleDateFormat dateFormat = new SimpleDateFormat(" hh-mm-aa");
+        SimpleDateFormat dateFormat = new SimpleDateFormat("hh-mm-aa");
         String formattedDate = dateFormat.format(new Date()).toString();
         Log.i( "gettime: ",formattedDate);
         return formattedDate;
@@ -376,7 +376,8 @@ public class Posts_activity extends AppCompatActivity {
                         "&phone="+Utilities.replaceSpaceInString(phone)+"&date="+Utilities.replaceSpaceInString(date)+"&time="+Utilities.replaceSpaceInString(time)+"&city="+Utilities.replaceSpaceInString(city)+"&profession="+Utilities.replaceSpaceInString(profession)
                         +"&comment="+comment+"&post_id="+postid;
                 Log.i("doInBackground:response",baseURL);
-                jsonString = Utilities.readJson(getBaseContext(), "POST", baseURL);
+                jsonString = Utilities.readJson(getBaseContext(), "GET", baseURL);
+                Log.e(this.getClass().getSimpleName(),jsonString);
 
                 JSONObject head = new JSONObject(jsonString);
 
