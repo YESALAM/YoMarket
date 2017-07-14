@@ -108,6 +108,12 @@ EditText email,password;
 
 
     }
+
+    public void register(View view) {
+        Intent intent = new Intent(this,Register_Activity.class);
+        startActivity(intent);
+    }
+
     class back extends AsyncTask
     {
         String jsonString,response;
