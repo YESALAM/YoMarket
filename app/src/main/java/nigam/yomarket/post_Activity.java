@@ -186,10 +186,10 @@ public class post_Activity extends AppCompatActivity {
 
         }
         else
-            if(image1.equalsIgnoreCase("null")) {
+            /*if(image1.equalsIgnoreCase("null")) {
                 Toast.makeText(this, "Please select an Image", Toast.LENGTH_SHORT).show();
                 return;
-            }
+            }*/
             if (Utilities.isInternetOn(getBaseContext()))
             postata();
             else

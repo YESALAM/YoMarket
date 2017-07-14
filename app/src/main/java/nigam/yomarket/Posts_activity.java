@@ -16,6 +16,7 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -66,6 +67,7 @@ public class Posts_activity extends AppCompatActivity {
     String date,time;
     RecyclerView rv;
     ImageView imagemain,image1,image2,image3,image4;
+    CardView images ;
 
 
     @Override
@@ -84,6 +86,7 @@ public class Posts_activity extends AppCompatActivity {
         image2= (ImageView) findViewById(R.id.image2);
         image3= (ImageView) findViewById(R.id.image3);
         image4= (ImageView) findViewById(R.id.image4);
+        images = (CardView) findViewById(R.id.images_cardview);
 
         data = (HomeListGetSet)getIntent().getExtras().getSerializable("DATA");
         rv= (RecyclerView) findViewById(R.id.recent_comments);
@@ -160,20 +163,23 @@ public class Posts_activity extends AppCompatActivity {
         imgLoader.DisplayImage(image_url1+"/1.jpg", loader, imagemain);*/
 
 
-
-        Glide.with(this)
-                .load(apis.IMAGE_API+data.getPost_id()+"/1.jpg")
-                .placeholder(R.drawable.logo_main)
-                .into(imagemain);
-
-        Glide.with(this)
-                .load(apis.IMAGE_API+data.getPost_id()+"/1.jpg")
-                .placeholder(R.drawable.logo_main)
-                .into(image1);
-
         int count = getIntent().getExtras().getInt("count");
         final ArrayList<String> list = getIntent().getExtras().getStringArrayList("list");
         showImages(count,list);
+
+        Log.e(this.getClass().getSimpleName(),count+" -->  "+list.size()) ;
+
+        if (count == 0) {
+            Glide.with(this)
+                    .load(R.drawable.logo_main)
+                    .placeholder(R.drawable.logo_main)
+                    .into(imagemain);
+        } else {
+            Glide.with(this)
+                    .load(apis.IMAGE_API + data.getPost_id() + "/1.jpg")
+                    //.placeholder(R.drawable.logo_main)
+                    .into(imagemain);
+        }
 
 
 
@@ -199,7 +205,7 @@ public class Posts_activity extends AppCompatActivity {
                 imgLoader.DisplayImage(image_url1+"/1.jpg", R.drawable.logo_main, img);*/
                 Glide.with(getBaseContext())
                         .load(apis.IMAGE_API+data.getPost_id()+"/1.jpg")
-                        .placeholder(R.drawable.logo_main)
+                        //.placeholder(R.drawable.logo_main)
                         .into(img);
 
                 builder.show();
@@ -219,7 +225,7 @@ public class Posts_activity extends AppCompatActivity {
                 imgLoader.DisplayImage(image_url1+"/2.jpg", R.drawable.logo_main, img);*/
                 Glide.with(getBaseContext())
                         .load(apis.IMAGE_API+data.getPost_id()+"/"+2+".jpg")
-                        .placeholder(R.drawable.logo_main)
+                        //.placeholder(R.drawable.logo_main)
                         .into(img);
 
                 builder.show();
@@ -238,7 +244,7 @@ public class Posts_activity extends AppCompatActivity {
                 imgLoader.DisplayImage(image_url1+"/3.jpg", R.drawable.logo_main, img);*/
                 Glide.with(getBaseContext())
                         .load(apis.IMAGE_API+data.getPost_id()+"/"+3+".jpg")
-                        .placeholder(R.drawable.logo_main)
+                        //.placeholder(R.drawable.logo_main)
                         .into(img);
 
                 builder.show();
@@ -258,7 +264,7 @@ public class Posts_activity extends AppCompatActivity {
                 imgLoader.DisplayImage(image_url1+"/4.jpg", R.drawable.logo_main, img);*/
                 Glide.with(getBaseContext())
                         .load(apis.IMAGE_API+data.getPost_id()+"/"+4+".jpg")
-                        .placeholder(R.drawable.logo_main)
+                        //.placeholder(R.drawable.logo_main)
                         .into(img);
 
                 builder.show();
@@ -475,45 +481,68 @@ public class Posts_activity extends AppCompatActivity {
         switch (count){
             case 4:
                 Glide.with(this)
+                        .load(apis.IMAGE_API + data.getPost_id() + "/"+list.get(0)+".jpg")
+                        //.placeholder(R.drawable.logo_main)
+                        .into(image1);
+                Glide.with(this)
                         .load(apis.IMAGE_API+data.getPost_id()+"/"+list.get(1)+".jpg")
-                        .placeholder(R.drawable.logo_main)
+                        //.placeholder(R.drawable.logo_main)
                         .into(image2);
 
                 Glide.with(this)
                         .load(apis.IMAGE_API+data.getPost_id()+"/"+list.get(2)+".jpg")
-                        .placeholder(R.drawable.logo_main)
+                        //.placeholder(R.drawable.logo_main)
                         .into(image3);
 
                 Glide.with(this)
                         .load(apis.IMAGE_API+data.getPost_id()+"/"+list.get(3)+".jpg")
-                        .placeholder(R.drawable.logo_main)
+                        //.placeholder(R.drawable.logo_main)
                         .into(image4);
                 break;
             case 3:
                 Glide.with(this)
+                        .load(apis.IMAGE_API + data.getPost_id() + "/"+list.get(0)+".jpg")
+                        //.placeholder(R.drawable.logo_main)
+                        .into(image1);
+                Glide.with(this)
                         .load(apis.IMAGE_API+data.getPost_id()+"/"+list.get(1)+".jpg")
-                        .placeholder(R.drawable.logo_main)
+                        //.placeholder(R.drawable.logo_main)
                         .into(image2);
 
                 Glide.with(this)
                         .load(apis.IMAGE_API+data.getPost_id()+"/"+list.get(2)+".jpg")
-                        .placeholder(R.drawable.logo_main)
+                        //.placeholder(R.drawable.logo_main)
                         .into(image3);
                 image4.setVisibility(View.INVISIBLE);
                 break;
             case 2:
                 Glide.with(this)
+                        .load(apis.IMAGE_API + data.getPost_id() + "/"+list.get(0)+".jpg")
+                        //.placeholder(R.drawable.logo_main)
+                        .into(image1);
+                Glide.with(this)
                         .load(apis.IMAGE_API+data.getPost_id()+"/"+list.get(1)+".jpg")
-                        .placeholder(R.drawable.logo_main)
+                        //.placeholder(R.drawable.logo_main)
                         .into(image2);
                 image3.setVisibility(View.INVISIBLE);
                 image4.setVisibility(View.INVISIBLE);
                 break;
             case 1:
+                Glide.with(this)
+                        .load(apis.IMAGE_API + data.getPost_id() + "/1.jpg")
+                        //.placeholder(R.drawable.logo_main)
+                        .into(image1);
+
                 image2.setVisibility(View.INVISIBLE);
                 image3.setVisibility(View.INVISIBLE);
                 image4.setVisibility(View.INVISIBLE);
                 break;
+            case 0:
+                images.setVisibility(View.GONE);
+                image1.setVisibility(View.INVISIBLE);
+                image2.setVisibility(View.INVISIBLE);
+                image3.setVisibility(View.INVISIBLE);
+                image4.setVisibility(View.INVISIBLE);
         }
 
 

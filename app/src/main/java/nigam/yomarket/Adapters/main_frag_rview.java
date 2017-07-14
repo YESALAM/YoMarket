@@ -64,7 +64,7 @@ public class main_frag_rview extends RecyclerView.Adapter<main_frag_rview.ViewHo
         holder.product.setText(hl.getPost_description());
         holder.city.setText(hl.getPost_city());
         holder.mobileno.setText(hl.getMobile_no());
-        Log.i("", "onBindViewHolder: "+hl.getPost_quantity()+hl.getPost_price());
+        Log.i(this.getClass().getSimpleName(), "onBindViewHolder: "+hl.getPost_quantity()+hl.getPost_price());
 ///documents/post/post_image_1
         final ArrayList<String> image_list = new ArrayList<>();
         int count = 0 ;
@@ -165,6 +165,15 @@ public class main_frag_rview extends RecyclerView.Adapter<main_frag_rview.ViewHo
         View hol = null ;
 
         switch (count){
+            case 0:
+                hol = LayoutInflater.from(parent.getContext()).inflate(R.layout.single_image,parent,false);
+                imageView1 = (ImageView) hol.findViewById(R.id.posts_pic_home);
+                Glide.with(activity)
+                        .load(R.drawable.logo_main)
+                        .error(R.drawable.logo_main)
+                        .centerCrop()
+                        .into(imageView1);
+                break;
 
             case 1:
                 hol = LayoutInflater.from(parent.getContext()).inflate(R.layout.single_image,parent,false);
