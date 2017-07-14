@@ -6,8 +6,8 @@ package nigam.yomarket.utils;
 ///findyourcampus.com/pulkit/cms/documents/phonebook/101
 public class apis {
     //public static String BASE_API = "http://findyourcampus.com/pulkit/cms/api/";
-    //public static String BASE_API = "http://192.168.42.240/yomarket/cms/api2/" ;
-    public static String BASE_API = "http://simption.com/yomarket/cms/api2/";
+    public static String BASE_API = "http://192.168.42.240/yomarket/cms/api2/" ;
+    //public static String BASE_API = "http://simption.com/yomarket/cms/api2/";
     public static String IMAGES = BASE_API+"documents/";
     public static String IMAGE_API = IMAGES+"post/";
     public static String IMAGE_PHONEBOOK = IMAGES+"phonebook/";
@@ -17,6 +17,7 @@ public class apis {
 
     public static String PHONEBOOKCITY = "phonebookcity.php" ;
     public static String TOKEN_UPDATE = "updatefirebaseid.php" ;
+    public static String COMMENT_NOTIFICATION = "commentnotification.php" ;
 
 
     public static String posts_API = "posts.php";
