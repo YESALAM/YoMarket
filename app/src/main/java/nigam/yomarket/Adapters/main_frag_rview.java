@@ -64,6 +64,7 @@ public class main_frag_rview extends RecyclerView.Adapter<main_frag_rview.ViewHo
         holder.product.setText(hl.getPost_description());
         holder.city.setText(hl.getPost_city());
         holder.mobileno.setText(hl.getMobile_no());
+        holder.profession.setText(hl.getPost_profession());
         Log.i(this.getClass().getSimpleName(), "onBindViewHolder: "+hl.getPost_quantity()+hl.getPost_price());
 ///documents/post/post_image_1
         final ArrayList<String> image_list = new ArrayList<>();
@@ -132,7 +133,7 @@ public class main_frag_rview extends RecyclerView.Adapter<main_frag_rview.ViewHo
         LinearLayout image_holder;
         LinearLayout card;
         //ImageView pimage,image2,image3,image4;
-        TextView postedby,city,product,price,mobileno;
+        TextView postedby,city,product,price,mobileno,profession;
         public ViewHolder(final View rView) {
             super(rView);
             postedby= (TextView) rView.findViewById(R.id.posts_posted_by);
@@ -140,6 +141,7 @@ public class main_frag_rview extends RecyclerView.Adapter<main_frag_rview.ViewHo
             product= (TextView) rView.findViewById(R.id.posts_product_home);
             price= (TextView) rView.findViewById(R.id.posts_price_home);
             mobileno = (TextView) rView.findViewById(R.id.posts_mobileno_home);
+            profession = (TextView) rView.findViewById(R.id.posts_profession_home);
             //image_holder = (LinearLayout) rView.findViewById(R.id.image_holder);
             card = (LinearLayout) rView.findViewById(R.id.card_home);
 
