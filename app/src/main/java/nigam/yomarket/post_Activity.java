@@ -413,7 +413,7 @@ public class post_Activity extends AppCompatActivity {
             @Override
             public void onErrorResponse(VolleyError error) {
                 pg.dismiss();
-                Toast.makeText(getApplicationContext(),"Image Too large!!! try again",Toast.LENGTH_LONG).show();
+                //Toast.makeText(getApplicationContext(),"Image Too large!!! try again",Toast.LENGTH_LONG).show();
             }
         }){
 
