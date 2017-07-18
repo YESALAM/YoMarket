@@ -70,11 +70,7 @@ public class home_frag_rview extends RecyclerView.Adapter<home_frag_rview.ViewHo
 
 
        // imgLoader.DisplayImage(image_url1+"/1.jpg", loader, holder.pimage);
-        Glide.with(holder.pimage.getContext())
-                .load(image_url1+"/1.jpg")
-                .error(loader)
-                .centerCrop()
-                .into(holder.pimage);
+
 //        notifyDataSetChanged();
 
         final ArrayList<String> image_list = new ArrayList<>();
@@ -98,6 +94,20 @@ public class home_frag_rview extends RecyclerView.Adapter<home_frag_rview.ViewHo
 
         final int finalcount=count;
 
+        if(count>0){
+            Glide.with(holder.pimage.getContext())
+                    .load(image_url1+"/"+image_list.get(0)+".jpg")
+                    .error(loader)
+                    .centerCrop()
+                    .into(holder.pimage);
+        }else{
+            Glide.with(holder.pimage.getContext())
+                    .load(loader)
+                    .error(loader)
+                    .centerCrop()
+                    .into(holder.pimage);
+        }
+
 
 //    Product,Post_ID_City,Profession,Quantity,Price,Description,Image_1,Image_2,Image_3,Image_4	;
 
@@ -114,6 +124,8 @@ public class home_frag_rview extends RecyclerView.Adapter<home_frag_rview.ViewHo
                 c.startActivity(i);
             }
         });
+
+
     }
 
 
