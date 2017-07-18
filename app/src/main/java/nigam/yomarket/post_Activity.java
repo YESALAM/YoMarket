@@ -91,7 +91,7 @@ public class post_Activity extends AppCompatActivity {
         String productlist[]={"Fruit","Vegetables","fruits and vegetables","transport"};
         String Professionlist[]={"Wholeseller","Farmer","Retailer","Exporter","Importer","Commision Agent","Transporter"};
 
-        Quantity = (EditText) findViewById(R.id.post_quantity);
+        //Quantity = (EditText) findViewById(R.id.post_quantity);
         price = (EditText)findViewById(R.id.post_price);
         Discription=(EditText)findViewById(R.id.post_discription);
 
@@ -175,11 +175,11 @@ public class post_Activity extends AppCompatActivity {
         producta = product.getSelectedItem().toString();
         professiona = profession.getSelectedItem().toString();
         citya=city.getText().toString();
-        quantitya=Quantity.getText().toString();
+        //quantitya=Quantity.getText().toString();
         pricea=price.getText().toString();
         disc=Discription.getText().toString();
 
-        if (citya.equalsIgnoreCase("") || producta.equalsIgnoreCase("") || professiona.equalsIgnoreCase("") || pricea.equalsIgnoreCase("") || quantitya.equalsIgnoreCase("") || disc.equalsIgnoreCase("") )
+        if (citya.equalsIgnoreCase("") || producta.equalsIgnoreCase("") || professiona.equalsIgnoreCase("") || pricea.equalsIgnoreCase("")  || disc.equalsIgnoreCase("") )
         {
             Toast.makeText(getApplicationContext(),"All Fielda are Mandatory",Toast.LENGTH_LONG).show();
             return;
@@ -374,7 +374,7 @@ public class post_Activity extends AppCompatActivity {
         producta = product.getSelectedItem().toString();
         professiona = profession.getSelectedItem().toString();
         citya=city.getText().toString();
-        quantitya=Quantity.getText().toString();
+        quantitya="";//Quantity.getText().toString();
         pricea=price.getText().toString();
         disc=Discription.getText().toString();
         RequestQueue requestQueue = Volley.newRequestQueue(this);
