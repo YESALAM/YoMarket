@@ -47,6 +47,7 @@ public class MainActivity extends AppCompatActivity
 
     ProgressDialog csprogress;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -116,21 +117,30 @@ public class MainActivity extends AppCompatActivity
         tabLayout.setupWithViewPager(mViewPager);
 
 
+
         tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
-                mViewPager.setCurrentItem(tab.getPosition());
+               // mViewPager.setCurrentItem(tab.getPosition());
+                Log.e("MainActivity","onTabSelected");
 
             }
 
             @Override
             public void onTabUnselected(TabLayout.Tab tab) {
+                Log.e("MainActivity","onTabUnSelected");
 
             }
 
             @Override
             public void onTabReselected(TabLayout.Tab tab) {
-
+                Log.e("MainActivity","onTabReSelected");
+                switch (tab.getPosition()){
+                    case 0:
+                        Post_Frag post_frag = (Post_Frag) getSupportFragmentManager().findFragmentByTag("android:switcher:"+R.id.container+":"+0);
+                        post_frag.refresh();
+                        break;
+                }
             }
         });
 

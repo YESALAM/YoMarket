@@ -2,6 +2,7 @@ package nigam.yomarket.Adapters;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.app.FragmentStatePagerAdapter;
 
 import nigam.yomarket.Home_frag;
@@ -13,7 +14,7 @@ import nigam.yomarket.phonebook_frag;
  * Created by alokit nigam on 5/7/2017.
  */
 
-public class main_tab_adapter extends FragmentStatePagerAdapter {
+public class main_tab_adapter extends FragmentPagerAdapter {
     int mNumOfTabs;
     public main_tab_adapter(FragmentManager fm, int NumOfTabs) {
         super(fm);

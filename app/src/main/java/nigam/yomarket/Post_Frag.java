@@ -47,7 +47,7 @@ public class Post_Frag extends Fragment implements ViewSwitcher.ViewFactory {
 LinearLayout ll;
     FloatingActionButton addpost;
     main_frag_rview adapter;
-RecyclerView rv;
+    RecyclerView rv;
     String productlist[]={"Fruit","Vegetables","fruits and vegetables","transport"};
     String Professionlist[]={"Wholeseller","Farmer","Retailer","Exporter","Importer","Commision Agent","Transporter"};
     ArrayList<HomeListGetSet> list =new ArrayList();
@@ -144,6 +144,14 @@ RecyclerView rv;
         }
         return onOptionsItemSelected(item);
     }
+
+    public void refresh(){
+        LinearLayoutManager layoutManager = (LinearLayoutManager) rv.getLayoutManager();
+        layoutManager.scrollToPositionWithOffset(0, 0);
+    }
+
+
+
     private void filter()
     {
         final Dialog builder = new Dialog(getActivity());
