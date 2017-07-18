@@ -187,9 +187,39 @@ RecyclerView rv;
                     editor.commit();
 
 
+                    HomeListGetSet h = list.get(index);
+
+                    final ArrayList<String> image_list = new ArrayList<>();
+                    int count = 0 ;
+                    if(!h.getPost_image_1().equalsIgnoreCase("null")){
+                        count++;
+                        image_list.add(h.getPost_image_1());
+                    }
+                    if(!h.getPost_image_2().equalsIgnoreCase("null")){
+                        count++;
+                        image_list.add(h.getPost_image_2());
+                    }
+                    if(!h.getPost_image_3().equalsIgnoreCase("null")){
+                        count++;
+                        image_list.add(h.getPost_image_3());
+                    }
+                    if(!h.getPost_image_4().equalsIgnoreCase("null")){
+                        count++;
+                        image_list.add(h.getPost_image_4());
+                    }
+
+
+                    Bundle bundle = new Bundle();
+                    bundle.putSerializable("DATA",h);
+                    bundle.putInt("count",count);
+                    bundle.putStringArrayList("list",image_list);
+                    //i.putExtras(bundle);
+
+
                     // First let's define the intent to trigger when notification is selected
                     // Start out by creating a normal intent (in this case to open an activity)
                     Intent intent = new Intent(getActivity(), MainActivity.class);
+                    intent.putExtras(bundle);
                     // Next, let's turn this into a PendingIntent using
                     //   public static PendingIntent getActivity(Context context, int requestCode,
                     //       Intent intent, int flags)
