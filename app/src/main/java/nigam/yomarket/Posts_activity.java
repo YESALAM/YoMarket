@@ -90,7 +90,8 @@ public class Posts_activity extends AppCompatActivity {
 
         data = (HomeListGetSet)getIntent().getExtras().getSerializable("DATA");
         rv= (RecyclerView) findViewById(R.id.recent_comments);
-        quantity= (TextView) findViewById(R.id.posts_quantity);
+
+        /*quantity= (TextView) findViewById(R.id.posts_quantity);
         city = (TextView) findViewById(R.id.posts_city);
         product= (TextView) findViewById(R.id.posts_product);
         price= (TextView) findViewById(R.id.posts_price);
@@ -98,8 +99,11 @@ public class Posts_activity extends AppCompatActivity {
         profession= (TextView) findViewById(R.id.posts_Profrssion);
         Discription= (TextView) findViewById(R.id.posts_Discription);
         commenthere= (TextView) findViewById(R.id.posts_comment);
+        postedby= (TextView) findViewById(R.id.post_posted_by);*/
+
+
         comment= (Button) findViewById(R.id.post_comment_button);
-        postedby= (TextView) findViewById(R.id.post_posted_by);
+
         comment.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -139,14 +143,17 @@ public class Posts_activity extends AppCompatActivity {
 
 
 
-        quantity.setText(data.getPost_quantity());
+        /*quantity.setText(data.getPost_quantity());
         city.setText(data.getPost_city());
         product.setText(data.getPost_product());
         price.setText(data.getPost_price());
         post_id.setText(data.getPost_id());
         profession.setText(data.getPost_profession());
         Discription.setText(data.getPost_description());
-        postedby.setText(data.getPosted_by_name());
+        postedby.setText(data.getPosted_by_name());*/
+
+
+
        /* String image_url =" http://simption.com/yomarket/cms/documents/image.php?path=post/"
                 + data.getPost_id()+"/"+replaceSpaceInString(data.getPost_image_1());
         Log.e( "onCreate: ",image_url);*/
