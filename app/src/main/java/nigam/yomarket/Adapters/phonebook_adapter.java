@@ -49,7 +49,8 @@ public class phonebook_adapter extends RecyclerView.Adapter<phonebook_adapter.Vi
     @Override
     public void onBindViewHolder(final ViewHolder holder, final int position) {
 
-        ph = list.get(position);
+        int size = list.size() ;
+        ph = list.get(size-position-1);
         Log.e( " PUL onBindViewHolder: ","name="+ph.getName()+"  contact :"+ph.getContact() );
         holder.name.setText(ph.getName());
         holder.contact.setText(ph.getContact());
