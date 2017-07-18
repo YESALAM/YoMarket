@@ -16,6 +16,7 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 import com.bumptech.glide.Glide;
+import nigam.yomarket.Posts_activity;
 import nigam.yomarket.R;
 import nigam.yomarket.getset.HomeListGetSet;
 import nigam.yomarket.getset.phonebook;
@@ -55,7 +56,7 @@ public class phonebook_adapter extends RecyclerView.Adapter<phonebook_adapter.Vi
         holder.city.setText(ph.getCity());
         holder.profession.setText(ph.getProfession());
         holder.firmname.setText(ph.getFirm_name());
-        String image_url1 = apis.IMAGE_PHONEBOOK+ph.getRegisterid()+"/"+ph.getPic();
+        final String image_url1 = apis.IMAGE_PHONEBOOK+ph.getRegisterid()+"/"+ph.getPic();
 
         Log.e("PhonebookAdapter",image_url1);
          //imgLoader = new ImageLoader(activity);
@@ -65,6 +66,25 @@ public class phonebook_adapter extends RecyclerView.Adapter<phonebook_adapter.Vi
          /*image_url ="http://simption.com/images/Simption%20Logo.png";
        // imgLoader.DisplayImage(image_url,  R.drawable.logo_main, holder.pic);
         imgLoader.DisplayImage(image_url1, R.drawable.logo_main, holder.pic);*/
+        holder.pic.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                final Dialog builder = new Dialog(view.getContext());
+                builder.setContentView(R.layout.fullimageview);
+                builder.setTitle("Filter");
+                ImageView img= (ImageView) builder.findViewById(R.id.fullimage);
+
+               /* String image_url1 =apis.IMAGE_API+data.getPost_id();
+                imgLoader.DisplayImage(image_url1+"/3.jpg", R.drawable.logo_main, img);*/
+                Glide.with(view.getContext())
+                        .load(image_url1)
+                        //.placeholder(R.drawable.logo_main)
+                        .into(img);
+
+                builder.show();
+            }
+        });
+
 
     }
 
