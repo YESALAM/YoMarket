@@ -183,7 +183,7 @@ public class Posts_activity extends AppCompatActivity {
                     .into(imagemain);
         } else {
             Glide.with(this)
-                    .load(apis.IMAGE_API + data.getPost_id() + "/1.jpg")
+                    .load(apis.IMAGE_API + data.getPost_id() +"/"+list.get(0)+".jpg")
                     //.placeholder(R.drawable.logo_main)
                     .into(imagemain);
         }
@@ -211,7 +211,7 @@ public class Posts_activity extends AppCompatActivity {
                 /*String image_url1 =apis.IMAGE_API+data.getPost_id();
                 imgLoader.DisplayImage(image_url1+"/1.jpg", R.drawable.logo_main, img);*/
                 Glide.with(getBaseContext())
-                        .load(apis.IMAGE_API+data.getPost_id()+"/1.jpg")
+                        .load(apis.IMAGE_API+data.getPost_id()+ "/"+list.get(0)+".jpg")
                         //.placeholder(R.drawable.logo_main)
                         .into(img);
 
@@ -231,7 +231,7 @@ public class Posts_activity extends AppCompatActivity {
                /* String image_url1 =apis.IMAGE_API+data.getPost_id();
                 imgLoader.DisplayImage(image_url1+"/2.jpg", R.drawable.logo_main, img);*/
                 Glide.with(getBaseContext())
-                        .load(apis.IMAGE_API+data.getPost_id()+"/"+2+".jpg")
+                        .load(apis.IMAGE_API+data.getPost_id()+ "/"+list.get(1)+".jpg")
                         //.placeholder(R.drawable.logo_main)
                         .into(img);
 
@@ -250,7 +250,7 @@ public class Posts_activity extends AppCompatActivity {
                /* String image_url1 =apis.IMAGE_API+data.getPost_id();
                 imgLoader.DisplayImage(image_url1+"/3.jpg", R.drawable.logo_main, img);*/
                 Glide.with(getBaseContext())
-                        .load(apis.IMAGE_API+data.getPost_id()+"/"+3+".jpg")
+                        .load(apis.IMAGE_API+data.getPost_id()+ "/"+list.get(2)+".jpg")
                         //.placeholder(R.drawable.logo_main)
                         .into(img);
 
@@ -270,7 +270,7 @@ public class Posts_activity extends AppCompatActivity {
                /* String image_url1 =apis.IMAGE_API+data.getPost_id();
                 imgLoader.DisplayImage(image_url1+"/4.jpg", R.drawable.logo_main, img);*/
                 Glide.with(getBaseContext())
-                        .load(apis.IMAGE_API+data.getPost_id()+"/"+4+".jpg")
+                        .load(apis.IMAGE_API+data.getPost_id()+ "/"+list.get(3)+".jpg")
                         //.placeholder(R.drawable.logo_main)
                         .into(img);
 
@@ -536,7 +536,7 @@ public class Posts_activity extends AppCompatActivity {
                 break;
             case 1:
                 Glide.with(this)
-                        .load(apis.IMAGE_API + data.getPost_id() + "/1.jpg")
+                        .load(apis.IMAGE_API + data.getPost_id() + "/"+list.get(0)+".jpg")
                         //.placeholder(R.drawable.logo_main)
                         .into(image1);
 
