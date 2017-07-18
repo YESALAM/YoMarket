@@ -179,11 +179,11 @@ public class post_Activity extends AppCompatActivity {
         pricea=price.getText().toString();
         disc=Discription.getText().toString();
 
-        if (citya.equalsIgnoreCase("") || producta.equalsIgnoreCase("") || professiona.equalsIgnoreCase("") || pricea.equalsIgnoreCase("")  || disc.equalsIgnoreCase("") )
+        //if (citya.equalsIgnoreCase("") || producta.equalsIgnoreCase("") || professiona.equalsIgnoreCase("") || pricea.equalsIgnoreCase("")  || disc.equalsIgnoreCase("") )
+        if (citya.equalsIgnoreCase("") || producta.equalsIgnoreCase("") || professiona.equalsIgnoreCase("") )
         {
             Toast.makeText(getApplicationContext(),"All Fielda are Mandatory",Toast.LENGTH_LONG).show();
             return;
-
         }
         else
             /*if(image1.equalsIgnoreCase("null")) {

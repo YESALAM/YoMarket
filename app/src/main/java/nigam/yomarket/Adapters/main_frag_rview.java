@@ -60,11 +60,33 @@ public class main_frag_rview extends RecyclerView.Adapter<main_frag_rview.ViewHo
          hl =list.get(size-position-1);
 
         holder.postedby.setText(hl.getPosted_by_name());
-        holder.price.setText(hl.getPost_price());
-        holder.product.setText(hl.getPost_description());
         holder.city.setText(hl.getPost_city());
         holder.mobileno.setText(hl.getMobile_no());
         holder.profession.setText(hl.getPost_profession());
+
+        String price = hl.getPost_price().trim();
+        if (price.equalsIgnoreCase("")) {
+            holder.price.setVisibility(View.GONE);
+            holder.price_tt.setVisibility(View.GONE);
+        } else {
+            holder.price.setText(hl.getPost_price());
+        }
+
+
+        String desc = hl.getPost_description().trim();
+        if (desc.equalsIgnoreCase("")) {
+            holder.description.setVisibility(View.GONE);
+            holder.desc_tt.setVisibility(View.GONE);
+        } else {
+            holder.description.setText(hl.getPost_description());
+        }
+
+
+
+
+
+
+
         Log.i(this.getClass().getSimpleName(), "onBindViewHolder: "+hl.getPost_quantity()+hl.getPost_price());
 ///documents/post/post_image_1
         final ArrayList<String> image_list = new ArrayList<>();
@@ -133,15 +155,19 @@ public class main_frag_rview extends RecyclerView.Adapter<main_frag_rview.ViewHo
         LinearLayout image_holder;
         LinearLayout card;
         //ImageView pimage,image2,image3,image4;
-        TextView postedby,city,product,price,mobileno,profession;
+        TextView postedby, city, description, price, mobileno, profession;
+        TextView desc_tt,price_tt;
         public ViewHolder(final View rView) {
             super(rView);
             postedby= (TextView) rView.findViewById(R.id.posts_posted_by);
             city= (TextView) rView.findViewById(R.id.posts_city_home);
-            product= (TextView) rView.findViewById(R.id.posts_product_home);
+            description = (TextView) rView.findViewById(R.id.posts_product_home);
             price= (TextView) rView.findViewById(R.id.posts_price_home);
             mobileno = (TextView) rView.findViewById(R.id.posts_mobileno_home);
             profession = (TextView) rView.findViewById(R.id.posts_profession_home);
+
+            desc_tt = (TextView) rView.findViewById(R.id.desc);
+            price_tt = (TextView) rView.findViewById(R.id.price);
             //image_holder = (LinearLayout) rView.findViewById(R.id.image_holder);
             card = (LinearLayout) rView.findViewById(R.id.card_home);
 

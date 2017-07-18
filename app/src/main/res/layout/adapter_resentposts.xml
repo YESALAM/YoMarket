@@ -87,7 +87,7 @@
                     android:textSize="18sp" />
 
                 <TextView
-                    android:id="@+id/textView4"
+                    android:id="@+id/desc"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="1dp"
@@ -97,7 +97,7 @@
                     android:textSize="18sp" />
 
                 <TextView
-                    android:id="@+id/Price"
+                    android:id="@+id/price"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="1dp"

@@ -40,7 +40,9 @@
         <activity android:name=".Register_Activity" />
         <activity android:name=".about_us_Activity" />
         <activity android:name=".contact_us_Activity" />
-        <activity android:name=".post_Activity" />
+        <activity android:name=".post_Activity"
+            android:windowSoftInputMode="stateHidden"
+            />
         <activity
             android:name=".Posts_activity"
             android:label="@string/title_activity_posts_activity"
