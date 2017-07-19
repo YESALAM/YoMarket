@@ -93,10 +93,15 @@ RecyclerView rv;
                 Toast.makeText(getActivity(),"No Internet Commection!!!",Toast.LENGTH_LONG).show();
         }*/
 
-        if (Utilities.isInternetOn(getActivity()))
-            new data().execute();
-        else
-            Toast.makeText(getActivity(),"No Internet Commection!!!",Toast.LENGTH_LONG).show();
+        if(Statics.isLogin){
+            if (Utilities.isInternetOn(getActivity()))
+                new data().execute();
+            else
+                Toast.makeText(getActivity(),"No Internet Commection!!!",Toast.LENGTH_LONG).show();
+        }else {
+            TextView textView = (TextView) v.findViewById(R.id.textView30);
+            textView.setText("Log In to see your Post");
+        }
 
         return v;
     }
