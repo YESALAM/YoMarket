@@ -324,7 +324,7 @@ public class Posts_activity extends AppCompatActivity {
     public String getdate()
     {
         Calendar calendar = Calendar.getInstance();
-        SimpleDateFormat mdformat = new SimpleDateFormat("dd-mm-yyyy");
+        SimpleDateFormat mdformat = new SimpleDateFormat("dd-MM-yyyy");
         String strDate =  mdformat.format(calendar.getTime());
         return strDate;
     }

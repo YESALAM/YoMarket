@@ -53,8 +53,10 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.lang.reflect.Array;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -437,6 +439,8 @@ public class post_Activity extends AppCompatActivity {
                 params.put("image3",image3);
                 params.put("image4", image4);
                 params.put("name",Statics.name);
+                params.put("date",getdate());
+                params.put("time",gettime());
 
                 return params;
             }
@@ -444,6 +448,21 @@ public class post_Activity extends AppCompatActivity {
 
         requestQueue.add(req);
 
+    }
+
+    public String getdate()
+    {
+        Calendar calendar = Calendar.getInstance();
+        SimpleDateFormat mdformat = new SimpleDateFormat("dd-MM-yyyy");
+        String strDate =  mdformat.format(calendar.getTime());
+        return strDate;
+    }
+    private  String gettime()
+    {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("hh-mm-aa");
+        String formattedDate = dateFormat.format(new Date());
+        Log.i( "gettime: ",formattedDate);
+        return formattedDate;
     }
 
 }

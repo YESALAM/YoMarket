@@ -201,34 +201,38 @@
 
         </LinearLayout>
 
-        <LinearLayout
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="horizontal">
+            android:layout_height="wrap_content"
+            >
 
-            <Space
-                android:layout_width="match_parent"
+            <TextView
+                android:id="@+id/post_date_time"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight=".8" />
+                android:padding="10dp"
+                android:text="dd-MM-yyyy hh-mm-aa"
+                android:textAlignment="center"
+                android:layout_weight=".1"
+                />
 
             <LinearLayout
-                android:layout_width="match_parent"
+                android:layout_alignParentRight="true"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
+                android:padding="10dp"
                 android:background="@android:drawable/dialog_holo_light_frame"
                 android:elevation="24dp">
 
                 <TextView
                     android:id="@+id/textView24"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-
                     android:elevation="15dp"
                     android:gravity="end"
                     android:paddingBottom="5dp"
-                    android:paddingLeft="20dp"
                     android:paddingRight="15dp"
+                    android:paddingLeft="20dp"
                     android:paddingTop="4dp"
                     android:text="Comment here"
                     android:textAlignment="center"
@@ -236,7 +240,7 @@
                     android:textStyle="bold" />
             </LinearLayout>
 
-        </LinearLayout>
+        </RelativeLayout>
 
     </LinearLayout>
 

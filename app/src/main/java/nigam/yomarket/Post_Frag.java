@@ -258,6 +258,9 @@ LinearLayout ll;
                     ps.setPost_image_4(obj.getString("post_image_4"));
                     ps.setPosted_by_name(obj.getString("post_posted_by"));
                     ps.setposted_by_id(obj.getString("post_posted_by_id"));
+
+                    ps.setDate(obj.getString("date"));
+                    ps.setTime(obj.getString("time"));
                     //ps.setMobile_no(obj.getString("register_mobile_no"));
                     list.add(ps);
 //                    adapter.notifyDataSetChanged();
@@ -317,6 +320,11 @@ LinearLayout ll;
                     ps.setposted_by_id(obj.getString("post_posted_by_id"));
                     ps.setPosted_by_name(obj.getString("post_posted_by"));
                     ps.setMobile_no(obj.getString("register_mobile_no"));
+
+                    ps.setDate(obj.getString("date"));
+                    ps.setTime(obj.getString("time"));
+
+
                     list.add(ps);
 
                 }

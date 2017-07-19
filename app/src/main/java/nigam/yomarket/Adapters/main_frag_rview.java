@@ -63,6 +63,9 @@ public class main_frag_rview extends RecyclerView.Adapter<main_frag_rview.ViewHo
         holder.city.setText(hl.getPost_city());
         holder.mobileno.setText(hl.getMobile_no());
         holder.profession.setText(hl.getPost_profession());
+        holder.date_time.setText(hl.getDate()+" "+hl.getTime()+"   ");
+
+
 
         String price = hl.getPost_price().trim();
         if (price.equalsIgnoreCase("")) {
@@ -156,7 +159,7 @@ public class main_frag_rview extends RecyclerView.Adapter<main_frag_rview.ViewHo
         LinearLayout card;
         //ImageView pimage,image2,image3,image4;
         TextView postedby, city, description, price, mobileno, profession;
-        TextView desc_tt,price_tt;
+        TextView desc_tt,price_tt,date_time;
         public ViewHolder(final View rView) {
             super(rView);
             postedby= (TextView) rView.findViewById(R.id.posts_posted_by);
@@ -168,6 +171,8 @@ public class main_frag_rview extends RecyclerView.Adapter<main_frag_rview.ViewHo
 
             desc_tt = (TextView) rView.findViewById(R.id.desc);
             price_tt = (TextView) rView.findViewById(R.id.price);
+
+            date_time = (TextView) rView.findViewById(R.id.post_date_time);
             //image_holder = (LinearLayout) rView.findViewById(R.id.image_holder);
             card = (LinearLayout) rView.findViewById(R.id.card_home);
 
