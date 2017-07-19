@@ -18,6 +18,8 @@ public class apis {
     public static String PHONEBOOKCITY = "phonebookcity.php" ;
     public static String TOKEN_UPDATE = "updatefirebaseid.php" ;
     public static String COMMENT_NOTIFICATION = "commentnotification.php" ;
+    public static String API = "AIzaSyAJP9EH1TnS5pYo-xEpQPEvBpbLXed8ets" ;
+    public static String PLACE_API = "https://maps.googleapis.com/maps/api/place/autocomplete/json?types=(cities)&sensor=false&key="+apis.API+"&input=";
 
 
     public static String posts_API = "posts.php";

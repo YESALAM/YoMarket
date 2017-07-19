@@ -20,12 +20,16 @@ import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Base64;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
@@ -70,6 +74,9 @@ import nigam.yomarket.utils.apis;
  * A simple {@link Fragment} subclass.
  */
 public class post_Activity extends AppCompatActivity {
+
+    String TAG = "post_Activity" ;
+
     String imageviewselected;
     ImageView pic1,pic2,pic3,pic4;
     EditText Quantity,price,Discription;
@@ -147,6 +154,24 @@ public class post_Activity extends AppCompatActivity {
         city.setAdapter(cityAdapter);
         city.setThreshold(1);
         city.setText(Statics.city);
+        city.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                new googlecity(s).execute();
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+
+
 
         productadapter = new ArrayAdapter<String>
                 (this,android.R.layout.simple_list_item_1,productlist);
@@ -463,6 +488,70 @@ public class post_Activity extends AppCompatActivity {
         String formattedDate = dateFormat.format(new Date());
         Log.i( "gettime: ",formattedDate);
         return formattedDate;
+    }
+
+    class googlecity extends AsyncTask
+    {
+
+        CharSequence id;
+        ArrayList<String> citylist=new ArrayList<>();
+        public googlecity(CharSequence id) {
+            super();
+            this.id=id;
+        }
+
+        @Override
+        protected Object doInBackground(Object[] objects) {
+            try {
+                //String url = "https://maps.googleapis.com/maps/api/place/autocomplete/json?types=(cities)&sensor=false&key="+apis.API+"&input=";
+                String baseURL = apis.PLACE_API+id ;
+                //String baseURL = apis.BASE_API+apis.CITIES+"?stateid="+id ;
+                Log.i(TAG, "doInBackgroundstate: "+baseURL);
+
+                String jsonString = Utilities.readJson(getBaseContext(), "GET", baseURL);
+                JSONObject reader = new JSONObject(jsonString);
+                String status = reader.getString("status");
+                if(status.equalsIgnoreCase("OK")) {
+
+                    JSONArray data = reader.getJSONArray("predictions");
+                    for (int i = 0; i < data.length(); i++) {
+
+                        JSONObject obj = data.getJSONObject(i);
+
+                        String city_desc = obj.getString("description");
+                        Log.i(TAG, "doInBackgroundstate: " + city_desc);
+                        citylist.add(city_desc);
+                    }
+                }
+
+            }
+            catch (JSONException e)
+            {
+                e.printStackTrace();
+            }
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Object o) {
+            super.onPostExecute(o);
+            ArrayAdapter<String> adapter = new ArrayAdapter(getBaseContext(), R.layout.registerspinner1,  citylist);
+            //Getting the instance of AutoCompleteTextView
+            city.setOnItemClickListener(new OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                    String prediction = citylist.get(position);
+                    String main = prediction.substring(0,prediction.indexOf(','));
+                    city.setText(main);
+                }
+            });
+            city.setThreshold(1);//will start working from first character
+            //setting the adapter data into the AutoCompleteTextView
+            // Log.e(TAG, "pul: setShopAdapter: list:"+shopNameList.toString() );
+
+            city.setAdapter(adapter);
+            adapter.notifyDataSetChanged();
+        }
     }
 
 }
