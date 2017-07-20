@@ -8,6 +8,7 @@ import android.content.pm.PackageManager;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.CountDownTimer;
+import android.support.annotation.NonNull;
 import android.support.transition.AutoTransition;
 import android.support.transition.Fade;
 import android.support.transition.Transition;
@@ -56,12 +57,29 @@ String email,pwd;
 
         }
 
+        checkForPermissions();
 
-        new CountDownTimer(3000, 1000) {
+
+        /*new CountDownTimer(3000, 1000) {
             public void onTick(long millisUntilFinished) {
             }
             public void onFinish() {
-                checkForPermissions();
+
+                Intent i = new Intent(Splash.this, MainActivity.class);
+                startActivity(i);
+                Splash.this.finish();
+
+
+            }
+        }.start();*/
+    }
+
+    void startMain(){
+        new CountDownTimer(2000, 1000) {
+            public void onTick(long millisUntilFinished) {
+            }
+            public void onFinish() {
+
                 Intent i = new Intent(Splash.this, MainActivity.class);
                 startActivity(i);
                 Splash.this.finish();
@@ -70,6 +88,8 @@ String email,pwd;
             }
         }.start();
     }
+
+
     void checkForPermissions() {
         ArrayList<String> permissionsList = new ArrayList<>();
         if (Build.VERSION.SDK_INT >= 23) {
@@ -89,12 +109,22 @@ String email,pwd;
                     String[] mPermissions = new String[permissionsList.size()];
                     mPermissions = permissionsList.toArray(mPermissions);
                     ActivityCompat.requestPermissions(Splash.this, mPermissions, 100);
+                    return;
                 }
             } catch (Exception e) {
                 e.printStackTrace();
             }
         }
 
+        startMain();
+
     }
 
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions,
+            @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        startMain();
+
+    }
 }
