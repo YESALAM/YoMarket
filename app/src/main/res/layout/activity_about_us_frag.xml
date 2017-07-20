@@ -34,32 +34,12 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:layout_weight="1"
-                android:text="You also need to know this if you are not a farmer."
-                android:textColor="@android:color/background_dark" />
+                android:fontFamily="serif"
+                android:text="@string/about_us"
+                android:textSize="24sp"
+                />
 
-            <TextView
-                android:id="@+id/textView33"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="About us-Our aim is to bring the every person of a specified community into a one platform. In Yo Market you can post a photo of your work and person from all over the world can comment on your work.In this way your work will be famous in all over the world. Yo Market also provide a phonebook feature in which you can get the contact details of different person of a specified community from all over the world. Our team comprise of young,energetic and passionate person.they will help you in every other way. Our mission is to keep on adding a business community so that every business community will come in one platform."
-                android:textColor="@android:color/background_dark" />
 
-            <TextView
-                android:id="@+id/textView34"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="Farmers have a plethora of problems. And, who can understand these problems best? None other than a farmer. And, who can solve these problems best? None other than a farmer. And, who can give a solution based on technology? None other than a farmer. But, a farmer who strides agriculture sector just as comfortably as the technology sector is the only one who can give a solution."
-                android:textColor="@android:color/background_dark" />
-
-            <TextView
-                android:id="@+id/textView35"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="We have over 500 years of farming in their blood. They come from a very respectable farming family from the historical town of Belur in Hasan district of Karnataka, India. Growing up playing cricket in a land that seemed to have no end, among orchards of banana, mangoes, sapota, avocado and fields of millets, pulses and cereals, seeing the well-off tourists from across the globe set their minds thinking."
-                android:textColor="@android:color/background_dark" />
         </LinearLayout>
     </ScrollView>
 

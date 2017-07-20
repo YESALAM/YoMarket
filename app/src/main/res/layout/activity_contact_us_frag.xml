@@ -30,6 +30,18 @@
         android:textSize="20sp" />
 
     <TextView
+        android:id="@+id/email"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_weight="1"
+        android:drawableLeft="@android:drawable/sym_action_email"
+        android:text="  yomarkets@gmail.com"
+        android:textColor="@android:color/background_dark"
+        android:autoLink="email"
+        android:textSize="20sp" />
+
+   <!-- <TextView
         android:id="@+id/textView37"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -37,6 +49,28 @@
         android:layout_weight="1"
         android:drawableLeft="@android:drawable/ic_menu_call"
         android:text="8602344196(Honey Singh)Chabbra, 08109348743(Raj Sahu)"
+        android:textColor="@android:color/background_dark"
+        android:textSize="20sp" />-->
+    <TextView
+        android:id="@+id/contact1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_weight="1"
+        android:drawableLeft="@android:drawable/ic_menu_call"
+        android:text="  8602344196"
+        android:textColor="@android:color/background_dark"
+        android:autoLink="phone"
+        android:textSize="20sp" />
+    <TextView
+        android:id="@+id/contact2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_weight="1"
+        android:drawableLeft="@android:drawable/ic_menu_call"
+        android:text="  8109348743"
+        android:autoLink="phone"
         android:textColor="@android:color/background_dark"
         android:textSize="20sp" />
 
