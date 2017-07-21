@@ -413,7 +413,7 @@ public class post_Activity extends AppCompatActivity {
                 try {
                     JSONObject head = new JSONObject(response);
                     resp[0] =head.getString("server response");
-                } catch (JSONException e) {
+                } catch (Exception e) {
                     e.printStackTrace();
                 }
 
@@ -525,7 +525,7 @@ public class post_Activity extends AppCompatActivity {
                 }
 
             }
-            catch (JSONException e)
+            catch (Exception e)
             {
                 e.printStackTrace();
             }

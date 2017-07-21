@@ -306,7 +306,7 @@ ImageView imageregister;
                 try {
                     JSONObject head = new JSONObject(response);
                     resp[0] =head.getString("server response");
-                } catch (JSONException e) {
+                } catch (Exception e) {
                     e.printStackTrace();
                 }
 
@@ -408,7 +408,7 @@ ImageView imageregister;
                 response=head.getString("server response");
                 Log.i("doInBackground:response",baseURL);
 
-            } catch (JSONException e) {
+            } catch (Exception e) {
                 e.printStackTrace();
             }
 
@@ -547,7 +547,7 @@ ArrayList<countrypojo> countrylist;
                 }
 
             }
-            catch (JSONException e)
+            catch (Exception e)
             {
                 e.printStackTrace();
             }
@@ -603,7 +603,7 @@ ArrayList<countrypojo> countrylist;
                 }
 
             }
-            catch (JSONException e)
+            catch (Exception e)
             {
                 e.printStackTrace();
             }
@@ -655,7 +655,7 @@ ArrayList<countrypojo> countrylist;
                 }
 
             }
-            catch (JSONException e)
+            catch (Exception e)
             {
                 e.printStackTrace();
             }
@@ -712,7 +712,7 @@ ArrayList<countrypojo> countrylist;
                 }
 
             }
-            catch (JSONException e)
+            catch (Exception e)
             {
                 e.printStackTrace();
             }

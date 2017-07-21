@@ -164,7 +164,7 @@ RecyclerView rv;
 //                    adapter.notifyDataSetChanged();
                 }
 
-            } catch (JSONException e) {
+            } catch (Exception e) {
                 e.printStackTrace();
             }
 

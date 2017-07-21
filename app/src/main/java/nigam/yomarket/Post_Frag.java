@@ -266,7 +266,7 @@ LinearLayout ll;
 //                    adapter.notifyDataSetChanged();
                 }
 
-            } catch (JSONException e) {
+            } catch (Exception e) {
                 e.printStackTrace();
             }
 
@@ -329,7 +329,7 @@ LinearLayout ll;
 
                 }
 
-            } catch (JSONException e) {
+            } catch (Exception e) {
                 e.printStackTrace();
             }
 

@@ -153,7 +153,7 @@ EditText email,password;
                 startActivity(new Intent(Login_Activity.this,MainActivity.class));
                 Login_Activity.this.finish();
             }
-            } catch (JSONException e) {
+            } catch (Exception e) {
                 e.printStackTrace();
             }
             return null;

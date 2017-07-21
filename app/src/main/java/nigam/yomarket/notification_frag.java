@@ -148,7 +148,7 @@ RecyclerView rv;
                     list.add(ps);
                 }
 
-            } catch (JSONException e) {
+            } catch (Exception e) {
                 e.printStackTrace();
             }
             return null;
@@ -303,7 +303,7 @@ RecyclerView rv;
                     list.add(ps);
                 }
 
-            } catch (JSONException e) {
+            } catch (Exception e) {
                 e.printStackTrace();
             }
             return null;

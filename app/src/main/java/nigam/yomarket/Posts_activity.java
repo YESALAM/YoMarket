@@ -398,7 +398,7 @@ public class Posts_activity extends AppCompatActivity {
                 response=head.getString("server response");
 
 
-            } catch (JSONException e) {
+            } catch (Exception e) {
                 e.printStackTrace();
             }
 
@@ -461,7 +461,7 @@ public class Posts_activity extends AppCompatActivity {
                 }
 
 
-            } catch (JSONException e) {
+            } catch (Exception e) {
                 e.printStackTrace();
             }
 

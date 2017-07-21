@@ -239,7 +239,7 @@ public class phonebook_frag extends Fragment {
 //                    adapter.notifyDataSetChanged();
                 }
             }
-            catch (JSONException e)
+            catch (Exception e)
             {
                 e.printStackTrace();
 
@@ -300,7 +300,7 @@ public class phonebook_frag extends Fragment {
 //                    adapter.notifyDataSetChanged();
                 }
             }
-            catch (JSONException e)
+            catch (Exception e)
             {
                 e.printStackTrace();
 
@@ -346,8 +346,7 @@ public class phonebook_frag extends Fragment {
                     Log.i(this.getClass().getSimpleName(),city);
                     citylist.add(city);
                 }
-            }
-            catch (JSONException e)
+            }catch (Exception e)
             {
                 e.printStackTrace();
 

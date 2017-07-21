@@ -217,7 +217,7 @@ public class MainActivity extends AppCompatActivity
     }
 
     class datafetch extends AsyncTask
-    {JSONObject obj;
+    {   JSONObject obj;
         JSONArray data;
         @Override
         protected Object doInBackground(Object[] params) {
@@ -238,7 +238,7 @@ public class MainActivity extends AppCompatActivity
 
 
 
-            } catch (JSONException e) {
+            } catch (Exception e) {
                 e.printStackTrace();
             }
 
@@ -279,9 +279,7 @@ public class MainActivity extends AppCompatActivity
                 Log.i( "onPostExecute: ", "ID =" + Statics.id);
                 name.setText("Welcome: "+obj.getString("register_name"));
 
-            } catch (JSONException e) {
-                e.printStackTrace();
-            } catch (NullPointerException e){
+            } catch (Exception e) {
                 e.printStackTrace();
             }
         }
