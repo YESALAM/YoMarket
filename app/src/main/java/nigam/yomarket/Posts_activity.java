@@ -26,6 +26,7 @@ import android.view.ContextThemeWrapper;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
@@ -98,9 +99,9 @@ public class Posts_activity extends AppCompatActivity {
         post_id= (TextView) findViewById(R.id.posts_ID);
         profession= (TextView) findViewById(R.id.posts_Profrssion);
         Discription= (TextView) findViewById(R.id.posts_Discription);
-        commenthere= (TextView) findViewById(R.id.posts_comment);
         postedby= (TextView) findViewById(R.id.post_posted_by);*/
 
+        commenthere= (TextView) findViewById(R.id.posts_comment);
 
         comment= (Button) findViewById(R.id.post_comment_button);
 
