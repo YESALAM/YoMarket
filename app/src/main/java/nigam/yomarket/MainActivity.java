@@ -24,6 +24,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.google.firebase.iid.FirebaseInstanceId;
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -267,7 +268,7 @@ public class MainActivity extends AppCompatActivity
                 Log.i(TAG, "onPostExecute: "+imgname);
                 //ImageLoader imgLoader = new ImageLoader(getBaseContext());
 
-                Glide.with(MainActivity.this).load(image_url1).error(R.drawable.logo_main).fitCenter().into(iv);
+                Glide.with(MainActivity.this).load(image_url1).skipMemoryCache(true).diskCacheStrategy(DiskCacheStrategy.NONE).error(R.drawable.logo_main).fitCenter().into(iv);
                 //imgLoader.DisplayImage(image_url1+".jpg", R.drawable.logo_main, iv);
                 String token = FirebaseInstanceId.getInstance().getToken();
                 if(token!=null){

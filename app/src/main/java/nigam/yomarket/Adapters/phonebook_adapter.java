@@ -16,6 +16,7 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import nigam.yomarket.Posts_activity;
 import nigam.yomarket.R;
 import nigam.yomarket.getset.HomeListGetSet;
@@ -61,7 +62,8 @@ public class phonebook_adapter extends RecyclerView.Adapter<phonebook_adapter.Vi
 
         Log.e("PhonebookAdapter",image_url1);
          //imgLoader = new ImageLoader(activity);
-        Glide.with(activity).load(image_url1).error(R.drawable.logo_main).fitCenter().into(holder.pic);
+        Glide.with(activity).load(image_url1).diskCacheStrategy(DiskCacheStrategy.NONE)
+                .skipMemoryCache(true).error(R.drawable.logo_main).fitCenter().into(holder.pic);
 
 
          /*image_url ="http://simption.com/images/Simption%20Logo.png";
@@ -79,6 +81,8 @@ public class phonebook_adapter extends RecyclerView.Adapter<phonebook_adapter.Vi
                 imgLoader.DisplayImage(image_url1+"/3.jpg", R.drawable.logo_main, img);*/
                 Glide.with(view.getContext())
                         .load(image_url1)
+                        .diskCacheStrategy(DiskCacheStrategy.NONE)
+                        .skipMemoryCache(true)
                         //.placeholder(R.drawable.logo_main)
                         .into(img);
 
