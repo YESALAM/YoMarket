@@ -50,7 +50,6 @@
         <activity
             android:name=".Login_Activity"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".Editprofile" />
         <activity android:name=".EditProfileActivity">
         </activity>
 
