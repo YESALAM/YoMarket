@@ -14,12 +14,8 @@
         android:id="@+id/imageView"
         android:layout_width="395dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="155dp"
-        app:srcCompat="@drawable/splash_screen"
-        tools:layout_editor_absoluteX="8dp"
-        tools:layout_editor_absoluteY="94dp"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true" />
+        android:scaleType="centerCrop"
+        app:srcCompat="@drawable/splash_screen" />
 
    <!-- <TextView
         android:id="@+id/textView"
