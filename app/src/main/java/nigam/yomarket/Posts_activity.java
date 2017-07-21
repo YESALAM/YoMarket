@@ -366,6 +366,7 @@ public class Posts_activity extends AppCompatActivity {
         String jsonString,response;
         String postid;
         String name,city,phone,profession,comment,id;
+        boolean successful  = false ;
         @Override
         protected void onPreExecute() {
 
@@ -397,6 +398,11 @@ public class Posts_activity extends AppCompatActivity {
 
                 response=head.getString("server response");
 
+                if(response.toString().equalsIgnoreCase("comment sucessfull"))
+                {
+                    successful = true ;
+                }
+
 
             } catch (Exception e) {
                 e.printStackTrace();
@@ -408,7 +414,7 @@ public class Posts_activity extends AppCompatActivity {
         @Override
         protected void onPostExecute(Object o) {
             super.onPostExecute(o);
-            if(response.toString().equalsIgnoreCase("comment sucessfull"))
+            if(successful)
             {
                 Toast.makeText(getApplicationContext(),"comment sucessfull!!!",Toast.LENGTH_LONG).show();
                 commenthere.setText("");
@@ -416,8 +422,6 @@ public class Posts_activity extends AppCompatActivity {
                 new getcomment().execute();
                 else
                     Toast.makeText(getBaseContext(),"No Internet Commection!!!",Toast.LENGTH_LONG).show();
-
-
             }
             else {
                 Toast.makeText(getApplicationContext(),"Server Error",Toast.LENGTH_LONG).show();
