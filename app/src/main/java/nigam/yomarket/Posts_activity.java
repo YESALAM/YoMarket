@@ -182,10 +182,12 @@ public class Posts_activity extends AppCompatActivity {
             Glide.with(this)
                     .load(R.drawable.logo_main)
                     .placeholder(R.drawable.logo_main)
+                    .fitCenter()
                     .into(imagemain);
         } else {
             Glide.with(this)
                     .load(apis.IMAGE_API + data.getPost_id() +"/"+list.get(0)+".jpg")
+                    .centerCrop()
                     //.placeholder(R.drawable.logo_main)
                     .into(imagemain);
         }
