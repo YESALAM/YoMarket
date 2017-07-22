@@ -15,6 +15,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -23,6 +25,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
@@ -93,6 +96,7 @@ public class phonebook_frag extends Fragment {
         group.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup radioGroup, @IdRes int i) {
+
                 if (fruit.isChecked())
                 {
                  productselected=productlist[1];
@@ -109,10 +113,20 @@ public class phonebook_frag extends Fragment {
                 {
                     productselected=productlist[4];
                 }
+
+                Log.e("phonebook","product selected");
+
+               try{
+                   String text = String.valueOf(cityactv.getText());
+                   if(text.equalsIgnoreCase("")) cityselected = false ;
+               }catch (Exception e){}
+
+
+
                 layout.setVisibility(View.VISIBLE);
-                String cityselected = String.valueOf(cityactv.getText());
+                String city_selected = String.valueOf(cityactv.getText());
                 if (Utilities.isInternetOn(getActivity()))
-                    new datafilter(productselected,cityselected).execute();
+                    new datafilter(productselected,city_selected).execute();
                 else
                     Toast.makeText(getActivity(),"No Internet Commection!!!",Toast.LENGTH_SHORT).show();
             }
@@ -121,12 +135,40 @@ public class phonebook_frag extends Fragment {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 cityselected = true ;
-                String cityselected=adapterView.getItemAtPosition(i).toString();
+                String prediction = adapterView.getItemAtPosition(i).toString();
+                int comma_index = prediction.indexOf(',');
+                String main = prediction ;
+                if (comma_index > 0) {
+                    main = prediction.substring(0, comma_index);
+                    cityactv.setText(main);
+                }
+
+
+                String cityselected = main;  //adapterView.getItemAtPosition(i).toString();
                 if (Utilities.isInternetOn(getActivity()))
                 new datafilter(productselected,cityselected).execute();
                 else
                     Toast.makeText(getActivity(),"No Internet Commection!!!",Toast.LENGTH_LONG).show();
 
+
+            }
+        });
+
+
+
+        cityactv.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                new googlecity(s).execute();
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
 
             }
         });
@@ -275,7 +317,7 @@ public class phonebook_frag extends Fragment {
         protected Object doInBackground(Object[] params) {
             list.clear();
             try {
-                if (!cityselected) city = "All" ;
+                if (!cityselected ) city = "All" ;
                 String baseURL = apis.BASE_API + apis.FILTER_PHONEBOOK+"?city="+city+"&product="+product;
 
 
@@ -364,6 +406,69 @@ public class phonebook_frag extends Fragment {
             as.setDropDownViewResource(R.layout.registerspinner);
             //Log.i("", "doInBackgroundtesting: post ");
             cityactv.setAdapter(as);
+        }
+    }
+
+    class googlecity extends AsyncTask {
+
+        String TAG = "phonebook_googlecity";
+        CharSequence id;
+        ArrayList<String> citylist = new ArrayList<>();
+
+        public googlecity(CharSequence id) {
+            super();
+            this.id = id;
+        }
+
+        @Override
+        protected Object doInBackground(Object[] objects) {
+            try {
+                //String url = "https://maps.googleapis.com/maps/api/place/autocomplete/json?types=(cities)&sensor=false&key="+apis.API+"&input=";
+                String baseURL = apis.PLACE_API + id;
+                //String baseURL = apis.BASE_API+apis.CITIES+"?stateid="+id ;
+                Log.i(TAG, "doInBackgroundstate: " + baseURL);
+
+                String jsonString = Utilities.readJson(getActivity(), "GET", baseURL);
+                JSONObject reader = new JSONObject(jsonString);
+                String status = reader.getString("status");
+                if (status.equalsIgnoreCase("OK")) {
+
+                    JSONArray data = reader.getJSONArray("predictions");
+                    for (int i = 0; i < data.length(); i++) {
+
+                        JSONObject obj = data.getJSONObject(i);
+
+                        String city_desc = obj.getString("description");
+                        Log.i(TAG, "doInBackgroundstate: " + city_desc);
+                        citylist.add(city_desc);
+                    }
+                }
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Object o) {
+            super.onPostExecute(o);
+            ArrayAdapter<String> adapter = new ArrayAdapter(getActivity(), R.layout.registerspinner1, citylist);
+            //Getting the instance of AutoCompleteTextView
+            /*cityactv.setOnItemClickListener(new OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                    String prediction = citylist.get(position);
+                    String main = prediction.substring(0, prediction.indexOf(','));
+                    cityactv.setText(main);
+                }
+            });*/
+            cityactv.setThreshold(1);//will start working from first character
+            //setting the adapter data into the AutoCompleteTextView
+            // Log.e(TAG, "pul: setShopAdapter: list:"+shopNameList.toString() );
+
+            cityactv.setAdapter(adapter);
+            adapter.notifyDataSetChanged();
         }
     }
 
