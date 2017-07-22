@@ -204,7 +204,7 @@ public class main_frag_rview extends RecyclerView.Adapter<main_frag_rview.ViewHo
                 Glide.with(activity)
                         .load(R.drawable.logo_main)
                         .error(R.drawable.logo_main)
-                        .centerCrop()
+                        .fitCenter()
                         .into(imageView1);
                 break;
 
