@@ -360,7 +360,7 @@ public class phonebook_frag extends Fragment {
         @Override
         protected void onPostExecute(Object o) {
             super.onPostExecute(o);
-            as=new ArrayAdapter<String>(getContext(),android.R.layout.simple_dropdown_item_1line, citylist);
+            as=new ArrayAdapter<String>(getActivity(),android.R.layout.simple_dropdown_item_1line, citylist);
             as.setDropDownViewResource(R.layout.registerspinner);
             //Log.i("", "doInBackgroundtesting: post ");
             cityactv.setAdapter(as);
