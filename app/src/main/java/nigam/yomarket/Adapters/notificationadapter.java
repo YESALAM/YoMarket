@@ -40,8 +40,6 @@ public class notificationadapter extends RecyclerView.Adapter<notificationadapte
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
 
-        Log.i("doInBackground:response","aaaasasaaasadaada creare");
-
         rootView = LayoutInflater.from(parent.getContext()).inflate(R.layout.androidnotificton, null);
         ViewHolder holder = new ViewHolder(rootView);
 
@@ -53,7 +51,6 @@ public class notificationadapter extends RecyclerView.Adapter<notificationadapte
     public void onBindViewHolder(ViewHolder holder, final int position) {
         final int size = list.size();
         HomeListGetSet h = list.get(size-position-1);
-        Log.i("doInBackground:response","aaaasasaaasadaada"+h.getPost_price());
 
             if(h.getComment() == null){
                 holder.notify.setText(h.getPost_product()+" Worth Rs. "+h.getPost_price());
@@ -83,6 +80,7 @@ public class notificationadapter extends RecyclerView.Adapter<notificationadapte
         }
 
         final int finalcount=count;
+        //Log.i("NotificationAdapter","onViewHolder");
 
 
 //    Product,Post_ID_City,Profession,Quantity,Price,Description,Image_1,Image_2,Image_3,Image_4	;
@@ -115,7 +113,6 @@ public class notificationadapter extends RecyclerView.Adapter<notificationadapte
         LinearLayout card;
         public ViewHolder(final View rView) {
             super(rView);
-            Log.i("doInBackground:response","aaaasasaaasadaada view holdar");
             card = (LinearLayout) rView.findViewById(R.id.notification_card);
             notify = (TextView) rView.findViewById(R.id.notification);
             text= (TextView) rView.findViewById(R.id.textView15);

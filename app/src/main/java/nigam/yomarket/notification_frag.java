@@ -26,6 +26,7 @@ import android.widget.RadioGroup;
 import android.widget.RadioGroup.OnCheckedChangeListener;
 import android.widget.Toast;
 
+import nigam.yomarket.Adapters.WrapLinearLayoutManager;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -119,8 +120,9 @@ RecyclerView rv;
                 Log.i(this.getClass().getSimpleName(),jsonString);
                 JSONObject head = new JSONObject(jsonString);
 
+                Log.i("Notifi_commentFrag",head.toString());
                 JSONArray data=head.getJSONArray("server response");
-                Log.i(this.getClass().getSimpleName(),data.toString());
+
 
                 for (int i = 0; i < data.length(); i++)
                 {
@@ -158,28 +160,28 @@ RecyclerView rv;
         protected void onPostExecute(Object o) {
             super.onPostExecute(o);
 
-            Log.i("doInBackground:response","aaaaaaaaaaaa list size"+list.size());
+           // Log.i("doInBackground:response","aaaaaaaaaaaa list size"+list.size());
 
 
             adapter=new notificationadapter((AppCompatActivity) getActivity(),list);
-            RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getContext());
+            RecyclerView.LayoutManager mLayoutManager = new WrapLinearLayoutManager(getContext());
             rv.setHasFixedSize(true);
             rv.setLayoutManager(mLayoutManager);
             //rv.addItemDecoration(new DividerItemDecoration(getActivity()));
             rv.setItemAnimator(new DefaultItemAnimator());
             rv.setAdapter(adapter);
 
-            Log.e("notification",list.size()+"");
+            Log.e("NotifiFrag_comment",list.size()+"");
             int size = list.size();
             if(size>0){
                 int index = size-1;
-                Log.e("notification","inside the if");
+                //Log.e("notification","inside the if");
                 SharedPreferences sharedPreferences = getActivity().getPreferences(Context.MODE_PRIVATE);
                 String id = sharedPreferences.getString("nid","0");
                 String postid = list.get(index).getPost_id();
                 int sid = Integer.parseInt(id);
                 int pid = Integer.parseInt(postid);
-                Log.e("notification",sid+"   "+pid);
+                //Log.e("notification",sid+"   "+pid);
                 if(pid>sid) {
                     SharedPreferences sharedPref = getActivity().getPreferences(Context.MODE_PRIVATE);
                     SharedPreferences.Editor editor = sharedPref.edit();
@@ -258,8 +260,7 @@ RecyclerView rv;
     class notify extends AsyncTask
     {
         notificationadapter adapter;
-        String jsonString,
-                response;
+
         ArrayList<HomeListGetSet> list =new ArrayList();
 
 
@@ -269,15 +270,15 @@ RecyclerView rv;
 
             try {
                 String baseURL = apis.BASE_API+apis.Notificatiom_API+"?id="+0;//+Statics.notificationcounterid;
-                Log.i("doInBackground:response","aaaaaaada"+baseURL);
+                //Log.i("doInBackground:response","aaaaaaada"+baseURL);
 
-                jsonString = Utilities.readJson(getActivity(), "POST", baseURL);
+                String jsonString = Utilities.readJson(getActivity(), "POST", baseURL);
 
-                Log.i("doInBackground:response","aaaaaasadaada"+jsonString);
+                //Log.i("doInBackground:response","aaaaaasadaada"+jsonString);
                 JSONObject head = new JSONObject(jsonString);
 
                 JSONArray data=head.getJSONArray("server response");
-                Log.i("doInBackground:response","aaaaaaaaadsfsdfsdaaa"+data.toString());
+                Log.i("NotificationFrag_notify","From "+baseURL+"  "+data.toString());
 
                 for (int i = 0; i < data.length(); i++)
                 {
@@ -317,24 +318,24 @@ RecyclerView rv;
 
 
             adapter=new notificationadapter((AppCompatActivity) getActivity(),list);
-            RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getContext());
-            rv.setHasFixedSize(true);
+            RecyclerView.LayoutManager mLayoutManager = new WrapLinearLayoutManager(getContext());
+            //rv.setHasFixedSize(true);
             rv.setLayoutManager(mLayoutManager);
             //rv.addItemDecoration(new DividerItemDecoration(getActivity()));
-            rv.setItemAnimator(new DefaultItemAnimator());
+            //rv.setItemAnimator(new DefaultItemAnimator());
             rv.setAdapter(adapter);
 
-            Log.e("notification",list.size()+"");
+            Log.e("NotificationFrag_notify",list.size()+"");
             int size = list.size();
             if(size>0){
                 int index = size-1;
-                Log.e("notification","inside the if");
+                //Log.e("notification","inside the if");
                 SharedPreferences sharedPreferences = getActivity().getPreferences(Context.MODE_PRIVATE);
                 String id = sharedPreferences.getString("nid","0");
                 String postid = list.get(index).getPost_id();
                 int sid = Integer.parseInt(id);
                 int pid = Integer.parseInt(postid);
-                Log.e("notification",sid+"   "+pid);
+                //Log.e("notification",sid+"   "+pid);
                 if(pid>sid) {
                     SharedPreferences sharedPref = getActivity().getPreferences(Context.MODE_PRIVATE);
                     SharedPreferences.Editor editor = sharedPref.edit();

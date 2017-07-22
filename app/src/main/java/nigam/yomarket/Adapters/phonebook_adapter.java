@@ -52,7 +52,7 @@ public class phonebook_adapter extends RecyclerView.Adapter<phonebook_adapter.Vi
 
         int size = list.size() ;
         ph = list.get(size-position-1);
-        Log.e( " PUL onBindViewHolder: ","name="+ph.getName()+"  contact :"+ph.getContact() );
+        //Log.e( " PUL onBindViewHolder: ","name="+ph.getName()+"  contact :"+ph.getContact() );
         holder.name.setText(ph.getName());
         holder.contact.setText(ph.getContact());
         holder.city.setText(ph.getCity());
@@ -60,7 +60,7 @@ public class phonebook_adapter extends RecyclerView.Adapter<phonebook_adapter.Vi
         holder.firmname.setText(ph.getFirm_name());
         final String image_url1 = apis.IMAGE_PHONEBOOK+ph.getRegisterid()+"/"+ph.getPic();
 
-        Log.e("PhonebookAdapter",image_url1);
+        Log.i("PhonebookAdapter",image_url1);
          //imgLoader = new ImageLoader(activity);
         Glide.with(activity).load(image_url1).diskCacheStrategy(DiskCacheStrategy.NONE)
                 .skipMemoryCache(true).error(R.drawable.logo_main).fitCenter().into(holder.pic);

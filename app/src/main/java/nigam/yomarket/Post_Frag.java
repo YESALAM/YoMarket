@@ -27,6 +27,7 @@ import android.widget.Spinner;
 import android.widget.Toast;
 import android.widget.ViewSwitcher;
 
+import nigam.yomarket.Adapters.WrapLinearLayoutManager;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -90,7 +91,7 @@ LinearLayout ll;
         });
 
         adapter=new main_frag_rview((AppCompatActivity) getActivity(),list);
-        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getContext());
+        RecyclerView.LayoutManager mLayoutManager = new WrapLinearLayoutManager(getContext());
         rv.setHasFixedSize(true);
         rv.setLayoutManager(mLayoutManager);
         rv.setItemAnimator(new DefaultItemAnimator());
@@ -216,6 +217,7 @@ LinearLayout ll;
     }
     class datafilter extends AsyncTask
     {
+        ArrayList<HomeListGetSet> list =new ArrayList();
         String profession,product;
         public datafilter(String profession,String product) {
             super();
@@ -227,17 +229,17 @@ LinearLayout ll;
 
         @Override
         protected Object doInBackground(Object[] params) {
-            list.clear();
+            //list.clear();
             try {
                 String baseURL = apis.BASE_API+apis.FILTER_POST+"?profession="+profession+"&product="+product ;
-                Log.i("", "doInBackgroundtesting:  "+baseURL);
+
 
                 String jsonString = Utilities.readJson(getActivity(), "GET", baseURL);
-                Log.e(TAG, "doInBackground: "+jsonString );
+                Log.i("PostFrag_datafilter", "From "+baseURL+" "+jsonString);
                 JSONObject reader = new JSONObject(jsonString);
 
                 JSONArray data = reader.getJSONArray("server response");
-                Log.e(TAG, "doInBackground: "+reader );
+                //Log.e(TAG, "doInBackground: "+reader );
 
                 for (int i = 0; i < data.length(); i++)
                 {
@@ -278,28 +280,29 @@ LinearLayout ll;
         protected void onPostExecute(Object o) {
             super.onPostExecute(o);
             adapter=new main_frag_rview((AppCompatActivity) getActivity(),list);
-            RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getContext());
-            rv.setHasFixedSize(true);
+            RecyclerView.LayoutManager mLayoutManager = new WrapLinearLayoutManager(getContext());
+            //rv.setHasFixedSize(true);
             rv.setLayoutManager(mLayoutManager);
-            rv.setItemAnimator(new DefaultItemAnimator());
+            //rv.setItemAnimator(new DefaultItemAnimator());
             rv.setAdapter(adapter);
         }
     }
     class data extends AsyncTask
     {
 
+        ArrayList<HomeListGetSet> list =new ArrayList();
         private  final String TAG = Post_Frag.class.getSimpleName();
 
         @Override
         protected Object doInBackground(Object[] params) {
-        list.clear();
+        //list.clear();
             try {
                 String baseURL = apis.BASE_API+apis.posts_API ;
                 String jsonString = Utilities.readJson(getActivity(), "POST", baseURL);
                 JSONObject reader = new JSONObject(jsonString);
 
                 JSONArray data = reader.getJSONArray("server response");
-                Log.e(TAG, "doInBackground: "+jsonString );
+                Log.i("PostFrag_data", "From "+baseURL+" "+data);
 
                 for (int i = 0; i < data.length(); i++)
                 {
@@ -340,8 +343,12 @@ LinearLayout ll;
         @Override
         protected void onPostExecute(Object o) {
             super.onPostExecute(o);
-            rv.getRecycledViewPool().clear();
-            adapter.notifyDataSetChanged();
+            adapter=new main_frag_rview((AppCompatActivity) getActivity(),list);
+            RecyclerView.LayoutManager mLayoutManager = new WrapLinearLayoutManager(getContext());
+            //rv.setHasFixedSize(true);
+            rv.setLayoutManager(mLayoutManager);
+            //rv.setItemAnimator(new DefaultItemAnimator());
+            rv.setAdapter(adapter);
         }
     }
 

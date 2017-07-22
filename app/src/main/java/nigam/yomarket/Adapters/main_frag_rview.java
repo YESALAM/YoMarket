@@ -90,7 +90,7 @@ public class main_frag_rview extends RecyclerView.Adapter<main_frag_rview.ViewHo
 
 
 
-        Log.i(this.getClass().getSimpleName(), "onBindViewHolder: "+hl.getPost_quantity()+hl.getPost_price());
+        //Log.i(this.getClass().getSimpleName(), "onBindViewHolder: "+hl.getPost_quantity()+hl.getPost_price());
 ///documents/post/post_image_1
         final ArrayList<String> image_list = new ArrayList<>();
         int count = 0 ;
@@ -182,7 +182,7 @@ public class main_frag_rview extends RecyclerView.Adapter<main_frag_rview.ViewHo
 
 
     private void showImage(int count,ArrayList<String> list,String postid,ViewHolder viewHolder){
-        Log.e("main",count+" "+postid);
+        Log.i("MainFrag_adapter",count+" "+postid);
         ViewGroup parent = viewHolder.card ;
         View view = parent.findViewById(R.id.image_holder);
         if(view !=null) parent.removeView(view);

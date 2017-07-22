@@ -35,6 +35,7 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 
+import nigam.yomarket.Adapters.WrapLinearLayoutManager;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -477,7 +478,7 @@ public class Posts_activity extends AppCompatActivity {
             super.onPostExecute(o);
             Collections.reverse(arraycomment);
             adapter=new commentsAdapter((AppCompatActivity) Posts_activity.this,arraycomment);
-            RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
+            RecyclerView.LayoutManager mLayoutManager = new WrapLinearLayoutManager(getApplicationContext());
             rv.setHasFixedSize(true);
             rv.setLayoutManager(mLayoutManager);
             //rv.addItemDecoration(new DividerItemDecoration(getActivity()));

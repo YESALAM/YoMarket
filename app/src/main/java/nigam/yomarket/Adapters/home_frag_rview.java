@@ -56,7 +56,7 @@ public class home_frag_rview extends RecyclerView.Adapter<home_frag_rview.ViewHo
         holder.price.setText(hl.getPost_price());
         holder.product.setText(hl.getPost_product());
         holder.city.setText(hl.getPost_city());
-        Log.i("", "onBindViewHolder: "+hl.getPost_quantity()+hl.getPost_price());
+        //Log.i("", "onBindViewHolder: "+hl.getPost_quantity()+hl.getPost_price());
 ///documents/post/post_image_1
 
         int loader = R.drawable.logo_main;
@@ -64,7 +64,7 @@ public class home_frag_rview extends RecyclerView.Adapter<home_frag_rview.ViewHo
         String image_url1 =apis.IMAGE_API+hl.getPost_id();
 
 
-        Log.e("home frag", "onBindViewHolder: "+image_url1);
+
        // http://findyourcampus.com/pulkit/cms/documents/image.php?path=post/102/aa.jpg
         //ImageLoader imgLoader = new ImageLoader(activity);
 
@@ -94,7 +94,11 @@ public class home_frag_rview extends RecyclerView.Adapter<home_frag_rview.ViewHo
 
         final int finalcount=count;
 
+
+
         if(count>0){
+            Log.i("homeFrag_adapter", image_url1+"/"+image_list.get(0)+".jpg");
+
             Glide.with(holder.pimage.getContext())
                     .load(image_url1+"/"+image_list.get(0)+".jpg")
                     .error(loader)

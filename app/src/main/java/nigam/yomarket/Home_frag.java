@@ -21,6 +21,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import nigam.yomarket.Adapters.WrapLinearLayoutManager;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -43,7 +44,7 @@ public class Home_frag extends Fragment {
     }
 
 RecyclerView rv;
-    ArrayList<HomeListGetSet> list =new ArrayList();
+
     home_frag_rview adapter;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -127,19 +128,18 @@ RecyclerView rv;
 
     class data extends AsyncTask
     {
-
-        private  final String TAG = Post_Frag.class.getSimpleName();
+        ArrayList<HomeListGetSet> list =new ArrayList();
+        private  final String TAG = "HomeFrag_data" ;
 
         @Override
         protected Object doInBackground(Object[] params) {
-            list.clear();
             try {
                 String baseURL = apis.BASE_API+"getpostbyid.php?id="+Statics.id ;
                 String jsonString = Utilities.readJson(getActivity(), "POST", baseURL);
                 JSONObject reader = new JSONObject(jsonString);
 
                 JSONArray data = reader.getJSONArray("server response");
-                Log.e(TAG, "doInBackground: "+reader );
+                //Log.e(TAG, "Received from "+baseURL+"  "+reader.toString());
 
                 for (int i = 0; i < data.length(); i++)
                 {
@@ -176,10 +176,10 @@ RecyclerView rv;
         protected void onPostExecute(Object o) {
             super.onPostExecute(o);
             adapter=new home_frag_rview((AppCompatActivity) getActivity(),list);
-            RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getContext());
-            rv.setHasFixedSize(true);
+            RecyclerView.LayoutManager mLayoutManager = new WrapLinearLayoutManager(getContext());
+            //rv.setHasFixedSize(true);
             rv.setLayoutManager(mLayoutManager);
-            rv.setItemAnimator(new DefaultItemAnimator());
+            //rv.setItemAnimator(new DefaultItemAnimator());
             rv.setAdapter(adapter);
         }
     }

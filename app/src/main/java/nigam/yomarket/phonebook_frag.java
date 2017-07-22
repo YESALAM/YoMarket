@@ -31,6 +31,7 @@ import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import nigam.yomarket.Adapters.WrapLinearLayoutManager;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -210,6 +211,7 @@ public class phonebook_frag extends Fragment {
 
     class data extends AsyncTask
     {
+        ArrayList<phonebook> list =new ArrayList();
 
         @Override
         protected Object doInBackground(Object[] params) {
@@ -218,7 +220,7 @@ public class phonebook_frag extends Fragment {
                 String baseURL = apis.BASE_API + apis.PHONEBOOK_API;
                 String jsonString = Utilities.readJson(getActivity(), "POST", baseURL);
                 JSONObject reader = new JSONObject(jsonString);
-
+                Log.i("PhonebookFrag_data",reader.toString());
                 JSONArray data = reader.getJSONArray("server response");
                 for (int i = 0; i < data.length(); i++)
                 {
@@ -234,7 +236,7 @@ public class phonebook_frag extends Fragment {
                     ps.setRegisterid(obj.getString("phonebook_main_id"));
                     ps.setFirm_name(obj.getString("phonebook_firm_name"));
 
-                    Log.i( "doInBackground: ",""+obj.getString("phonebook_main_id")+"  "+obj.getString("phonebook_name"));
+                    //Log.i( "doInBackground: ",""+obj.getString("phonebook_main_id")+"  "+obj.getString("phonebook_name"));
                     list.add(ps);
 //                    adapter.notifyDataSetChanged();
                 }
@@ -251,16 +253,17 @@ public class phonebook_frag extends Fragment {
         protected void onPostExecute(Object o) {
             super.onPostExecute(o);
             adapter=new phonebook_adapter((AppCompatActivity) getActivity(),list);
-            RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getContext());
-            rv.setHasFixedSize(true);
+            RecyclerView.LayoutManager mLayoutManager = new WrapLinearLayoutManager(getContext());
+            //rv.setHasFixedSize(true);
             rv.setLayoutManager(mLayoutManager);
             //rv.addItemDecoration(new DividerItemDecoration(getActivity()));
-            rv.setItemAnimator(new DefaultItemAnimator());
+            //rv.setItemAnimator(new DefaultItemAnimator());
             rv.setAdapter(adapter);
         }
     }
     class datafilter extends AsyncTask
     {
+        ArrayList<phonebook> list =new ArrayList();
         String product;String city;
         public datafilter(String product,String city) {
             super();
@@ -274,10 +277,10 @@ public class phonebook_frag extends Fragment {
             try {
                 if (!cityselected) city = "All" ;
                 String baseURL = apis.BASE_API + apis.FILTER_PHONEBOOK+"?city="+city+"&product="+product;
-                Log.i(this.getClass().getSimpleName(), "doInBackgroundtesting:  "+baseURL);
+
 
                 String jsonString = Utilities.readJson(getActivity(), "GET", baseURL);
-                Log.e(this.getClass().getSimpleName(),jsonString);
+                Log.i("Phonebook_Frag_filter", "From "+baseURL+" "+jsonString.toString());
                 JSONObject reader = new JSONObject(jsonString);
 
 
@@ -295,7 +298,7 @@ public class phonebook_frag extends Fragment {
                     ps.setPic(obj.getString("phonebook_pic"));
                     ps.setFirm_name(obj.getString("phonebook_firm_name"));
                     ps.setRegisterid(obj.getString("phonebook_main_id"));
-                    Log.i( "doInBackground: ",""+obj.getString("phonebook_main_id")+"  "+obj.getString("phonebook_name"));
+                    //Log.i( "doInBackground: ",""+obj.getString("phonebook_main_id")+"  "+obj.getString("phonebook_name"));
                     list.add(ps);
 //                    adapter.notifyDataSetChanged();
                 }
@@ -312,13 +315,13 @@ public class phonebook_frag extends Fragment {
         protected void onPostExecute(Object o) {
             super.onPostExecute(o);
             adapter=new phonebook_adapter((AppCompatActivity) getActivity(),list);
-            Log.i("", "doInBackgroundtesting: post ");
+            //Log.i("", "doInBackgroundtesting: post ");
 
-            RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getContext());
-            rv.setHasFixedSize(true);
+            RecyclerView.LayoutManager mLayoutManager = new WrapLinearLayoutManager(getContext());
+            //rv.setHasFixedSize(true);
             rv.setLayoutManager(mLayoutManager);
             //rv.addItemDecoration(new DividerItemDecoration(getActivity()));
-            rv.setItemAnimator(new DefaultItemAnimator());
+            //rv.setItemAnimator(new DefaultItemAnimator());
             rv.setAdapter(adapter);
         }
     }
@@ -330,10 +333,10 @@ public class phonebook_frag extends Fragment {
         protected Object doInBackground(Object[] params) {
             try {
                 String baseURL = apis.BASE_API + apis.PHONEBOOKCITY ;
-                Log.i(this.getClass().getSimpleName(), "doInBackgroundtesting:  "+baseURL);
+
 
                 String jsonString = Utilities.readJson(getActivity(), "GET", baseURL);
-                Log.e(this.getClass().getSimpleName(),jsonString);
+                Log.i("PhonebookFrag_city", "From "+baseURL+" "+jsonString);
                 JSONObject reader = new JSONObject(jsonString);
 
                 JSONArray data = reader.getJSONArray("server response");
@@ -343,7 +346,7 @@ public class phonebook_frag extends Fragment {
 
                     JSONObject obj = data.getJSONObject(i);
                     String city = obj.getString("phonebook_city");
-                    Log.i(this.getClass().getSimpleName(),city);
+                    //Log.i(this.getClass().getSimpleName(),city);
                     citylist.add(city);
                 }
             }catch (Exception e)
@@ -359,7 +362,7 @@ public class phonebook_frag extends Fragment {
             super.onPostExecute(o);
             as=new ArrayAdapter<String>(getContext(),android.R.layout.simple_dropdown_item_1line, citylist);
             as.setDropDownViewResource(R.layout.registerspinner);
-            Log.i("", "doInBackgroundtesting: post ");
+            //Log.i("", "doInBackgroundtesting: post ");
             cityactv.setAdapter(as);
         }
     }
