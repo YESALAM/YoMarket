@@ -12,6 +12,7 @@ import android.os.Bundle;
 import android.provider.MediaStore.Audio.Radio;
 import android.support.annotation.IdRes;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.NotificationCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
@@ -330,7 +331,9 @@ RecyclerView rv;
             if(size>0){
                 int index = size-1;
                 //Log.e("notification","inside the if");
-                SharedPreferences sharedPreferences = getActivity().getPreferences(Context.MODE_PRIVATE);
+                FragmentActivity activity = getActivity();
+                if(activity==null) return;
+                SharedPreferences sharedPreferences = activity.getPreferences(Context.MODE_PRIVATE);
                 String id = sharedPreferences.getString("nid","0");
                 String postid = list.get(index).getPost_id();
                 int sid = Integer.parseInt(id);
