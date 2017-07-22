@@ -19,7 +19,7 @@
         android:textSize="22sp"
         android:textStyle="bold" />
 
-    <TextView
+   <!-- <TextView
         android:id="@+id/textView36"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -27,7 +27,7 @@
         android:drawableLeft="@android:drawable/ic_menu_mylocation"
         android:text="Yo market Purani Galla Mandi, Mangalwara Bazar Pipariya, District: Hoshangabad(M.P)"
         android:textColor="@android:color/background_dark"
-        android:textSize="20sp" />
+        android:textSize="20sp" />-->
 
     <TextView
         android:id="@+id/email"
@@ -74,7 +74,7 @@
         android:textColor="@android:color/background_dark"
         android:textSize="20sp" />
 
-    <TextView
+   <!-- <TextView
         android:id="@+id/textView38"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -91,5 +91,5 @@
         android:layout_weight="0.06"
         android:text="Monday - Saturday : 10 AM to 6 PM"
         android:textColor="@android:color/background_dark"
-        android:textSize="20sp" />
+        android:textSize="20sp" />-->
 </LinearLayout>
