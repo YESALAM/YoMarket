@@ -51,7 +51,7 @@ LinearLayout ll;
     RecyclerView rv;
     String productlist[]={"Fruit","Vegetables","fruits and vegetables","transport"};
     String Professionlist[]={"Wholeseller","Farmer","Retailer","Exporter","Importer","Commision Agent","Transporter"};
-    ArrayList<HomeListGetSet> list =new ArrayList();
+    static ArrayList<HomeListGetSet> list =new ArrayList();
     public Post_Frag() {
         // Required empty public constructor
     }
@@ -108,10 +108,12 @@ LinearLayout ll;
             }
         }, 3);*/
 
-        if (Utilities.isInternetOn(getActivity()))
-        new data().execute();
-        else
-            Toast.makeText(getActivity(),"No Internet Commection!!!",Toast.LENGTH_LONG).show();
+       if(list.isEmpty()){
+           if (Utilities.isInternetOn(getActivity()))
+               new data().execute();
+           else
+               Toast.makeText(getActivity(),"No Internet Commection!!!",Toast.LENGTH_LONG).show();
+       }
 
         return v;
     }
@@ -119,10 +121,12 @@ LinearLayout ll;
     @Override
     public void onResume() {
         super.onResume();
-        if (Utilities.isInternetOn(getActivity()))
-        new data().execute();
-        else
-            Toast.makeText(getActivity(),"No Internet Commection!!!",Toast.LENGTH_LONG).show();
+        if(list.isEmpty()){
+            if (Utilities.isInternetOn(getActivity()))
+                new data().execute();
+            else
+                Toast.makeText(getActivity(),"No Internet Commection!!!",Toast.LENGTH_LONG).show();
+        }
 
     }
 
@@ -149,6 +153,7 @@ LinearLayout ll;
     public void refresh(){
         LinearLayoutManager layoutManager = (LinearLayoutManager) rv.getLayoutManager();
         layoutManager.scrollToPositionWithOffset(0, 0);
+        new data().execute();
     }
 
 
@@ -290,7 +295,7 @@ LinearLayout ll;
     class data extends AsyncTask
     {
 
-        ArrayList<HomeListGetSet> list =new ArrayList();
+        ArrayList<HomeListGetSet> local_list =new ArrayList();
         private  final String TAG = Post_Frag.class.getSimpleName();
 
         @Override
@@ -328,7 +333,7 @@ LinearLayout ll;
                     ps.setTime(obj.getString("time"));
 
 
-                    list.add(ps);
+                    local_list.add(ps);
 
                 }
 
@@ -343,7 +348,8 @@ LinearLayout ll;
         @Override
         protected void onPostExecute(Object o) {
             super.onPostExecute(o);
-            adapter=new main_frag_rview((AppCompatActivity) getActivity(),list);
+            list = local_list ;
+            adapter=new main_frag_rview((AppCompatActivity) getActivity(),local_list);
             RecyclerView.LayoutManager mLayoutManager = new WrapLinearLayoutManager(getContext());
             //rv.setHasFixedSize(true);
             rv.setLayoutManager(mLayoutManager);
