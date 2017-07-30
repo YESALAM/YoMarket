@@ -53,153 +53,134 @@
            </LinearLayout>&ndash;&gt;
 
        </LinearLayout>-->
-
-        <LinearLayout
+        <TableLayout
+            android:padding="5dp"
+            android:stretchColumns="1"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_margin="1dp"
-            android:orientation="horizontal">
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:orientation="vertical">
-
+            android:layout_height="wrap_content">
+            <TableRow>
                 <TextView
                     android:id="@+id/textView8"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="1dp"
-                    android:layout_weight="1"
                     android:text="Posted By"
                     android:textColor="@android:color/background_dark"
                     android:textSize="18sp" />
-
-                <TextView
-                    android:id="@+id/textView13"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="1dp"
-                    android:layout_weight="1"
-                    android:text="City"
-                    android:textColor="@android:color/background_dark"
-                    android:textSize="18sp" />
-
-                <TextView
-                    android:id="@+id/desc"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="1dp"
-                    android:layout_weight="1"
-                    android:text="Description"
-                    android:textColor="@android:color/background_dark"
-                    android:textSize="18sp" />
-
-                <TextView
-                    android:id="@+id/price"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="1dp"
-                    android:layout_weight="1"
-                    android:text="Price"
-                    android:textColor="@android:color/background_dark"
-                    android:textSize="18sp" />
-                <TextView
-                    android:id="@+id/Mobileno"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="1dp"
-                    android:layout_weight="1"
-                    android:text="Mobile no"
-                    android:textColor="@android:color/background_dark"
-                    android:textSize="18sp" />
-                <TextView
-                    android:id="@+id/profession"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="1dp"
-                    android:layout_weight="1"
-                    android:text="Profession"
-                    android:textColor="@android:color/background_dark"
-                    android:textSize="18sp" />
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_weight="1.37"
-                android:orientation="vertical">
-
                 <TextView
                     android:id="@+id/posts_posted_by"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="1dp"
-                    android:layout_weight=".5"
                     android:text="TextView"
                     android:textAlignment="viewEnd"
                     android:textColor="@android:color/background_dark"
                     android:textSize="18sp" />
-
+            </TableRow>
+            <TableRow>
+                <TextView
+                    android:id="@+id/textView13"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="1dp"
+                    android:text="City"
+                    android:textColor="@android:color/background_dark"
+                    android:textSize="18sp" />
                 <TextView
                     android:id="@+id/posts_city_home"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="1dp"
-                    android:layout_weight=".5"
                     android:text="TextView"
                     android:textAlignment="viewEnd"
                     android:textColor="@android:color/background_dark"
                     android:textSize="18sp" />
-
+            </TableRow>
+            <TableRow>
                 <TextView
-                    android:id="@+id/posts_product_home"
+                    android:id="@+id/desc"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="1dp"
-                    android:layout_weight=".5"
+                    android:text="Description                "
+                    android:textColor="@android:color/background_dark"
+                    android:textSize="18sp" />
+                <TextView
+                    android:id="@+id/posts_product_home"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="1dp"
                     android:text="TextView"
                     android:textAlignment="viewEnd"
                     android:textColor="@android:color/background_dark"
                     android:textSize="18sp" />
-
+            </TableRow>
+            <TableRow>
+                <TextView
+                    android:id="@+id/price"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="1dp"
+                    android:text="Price"
+                    android:textColor="@android:color/background_dark"
+                    android:textSize="18sp" />
                 <TextView
                     android:id="@+id/posts_price_home"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="1dp"
-                    android:layout_weight=".5"
                     android:text="TextView"
                     android:textAlignment="viewEnd"
                     android:textColor="@android:color/background_dark"
                     android:textSize="18sp" />
+            </TableRow>
+            <TableRow>
 
+                <TextView
+                    android:id="@+id/Mobileno"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="1dp"
+                    android:text="Mobile no"
+                    android:textColor="@android:color/background_dark"
+                    android:textSize="18sp" />
                 <TextView
                     android:id="@+id/posts_mobileno_home"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="1dp"
-                    android:layout_weight=".5"
                     android:text="TextView"
                     android:textAlignment="viewEnd"
                     android:textColor="@android:color/background_dark"
                     android:textSize="18sp" />
-
+            </TableRow>
+            <TableRow>
+                <TextView
+                    android:id="@+id/profession"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="1dp"
+                    android:text="Profession"
+                    android:textColor="@android:color/background_dark"
+                    android:textSize="18sp" />
                 <TextView
                     android:id="@+id/posts_profession_home"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="1dp"
-                    android:layout_weight=".5"
                     android:text="TextView"
                     android:textAlignment="viewEnd"
                     android:textColor="@android:color/background_dark"
                     android:textSize="18sp" />
-            </LinearLayout>
+            </TableRow>
+            <TableRow>
 
-        </LinearLayout>
+            </TableRow>
+
+        </TableLayout>
+
+
 
         <RelativeLayout
             android:layout_width="match_parent"
