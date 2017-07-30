@@ -403,7 +403,7 @@ public class Posts_activity extends AppCompatActivity {
                         comment = "<p>" + repalced + "</p>";
                     }
                     replyId = replyId.substring(1);
-                    baseURL = apis.BASE_API + apis.COMMENT_API + "?name=" + Utilities.replaceSpaceInString(name) +
+                    baseURL = apis.BASE_API + apis.REPLY_COMMENT + "?name=" + Utilities.replaceSpaceInString(name) +
                             "&id=" + id +
                             "&phone=" + Utilities.replaceSpaceInString(phone) + "&date=" +
                             Utilities.replaceSpaceInString(date) + "&time=" + Utilities.replaceSpaceInString(time) +

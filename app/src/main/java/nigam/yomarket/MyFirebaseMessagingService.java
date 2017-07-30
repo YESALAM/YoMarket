@@ -11,8 +11,10 @@ import android.content.Context;
 import android.content.Intent;
 import android.media.RingtoneManager;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.NotificationCompat;
+import android.text.Html;
 import android.util.Log;
 
 import com.google.firebase.messaging.FirebaseMessagingService;
@@ -44,6 +46,12 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
     //It is same as we did in earlier posts
     private void sendNotification(Map<String,String> data) {
         String body = data.get("comment");
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            body = String.valueOf((Html.fromHtml(body, Html.FROM_HTML_MODE_COMPACT)));
+        } else {
+            body = String.valueOf((Html.fromHtml(body)));
+        }
         String title = data.get("comment_user_name");
 
         HomeListGetSet h = new HomeListGetSet();
