@@ -60,7 +60,7 @@ import nigam.yomarket.utils.apis;
 import static nigam.yomarket.utils.Utilities.replaceSpaceInString;
 
 public class Posts_activity extends AppCompatActivity {
-    TextView quantity,postedby,city,product,price,post_id,profession,Discription,commenthere,totalcomments;
+    TextView quantity, postedby, city, product, price, post_id, profession, Discription, totalcomments;
     Button comment;
     LinearLayout comments;
     HomeListGetSet data;
@@ -70,6 +70,8 @@ public class Posts_activity extends AppCompatActivity {
     RecyclerView rv;
     ImageView imagemain,image1,image2,image3,image4;
     CardView images ;
+
+    EditText commenthere;
 
 
     @Override
@@ -102,7 +104,7 @@ public class Posts_activity extends AppCompatActivity {
         Discription= (TextView) findViewById(R.id.posts_Discription);
         postedby= (TextView) findViewById(R.id.post_posted_by);*/
 
-        commenthere= (TextView) findViewById(R.id.posts_comment);
+        commenthere = (EditText) findViewById(R.id.posts_comment);
 
         comment= (Button) findViewById(R.id.post_comment_button);
 
@@ -364,6 +366,8 @@ public class Posts_activity extends AppCompatActivity {
 
 
     }
+
+    String reply_name = null;
     class commenttask extends AsyncTask
     {
         String jsonString,response;
@@ -390,9 +394,34 @@ public class Posts_activity extends AppCompatActivity {
         @Override
         protected Object doInBackground(Object[] params) {
             try {
-                String baseURL = apis.BASE_API+apis.COMMENT_API+"?name="+Utilities.replaceSpaceInString(name)+"&id="+id+
-                        "&phone="+Utilities.replaceSpaceInString(phone)+"&date="+Utilities.replaceSpaceInString(date)+"&time="+Utilities.replaceSpaceInString(time)+"&city="+Utilities.replaceSpaceInString(city)+"&profession="+Utilities.replaceSpaceInString(profession)
-                        +"&comment="+comment+"&post_id="+postid;
+                String baseURL;
+                if (comment.startsWith("@")) {
+                    String arr[] = comment.split("_");
+                    String replyId = arr[0];
+                    if (reply_name != null) {
+                        String repalced = comment.replaceFirst(replyId + "_", "<b><i>@" + reply_name + " </b></i> ");
+                        comment = "<p>" + repalced + "</p>";
+                    }
+                    replyId = replyId.substring(1);
+                    baseURL = apis.BASE_API + apis.COMMENT_API + "?name=" + Utilities.replaceSpaceInString(name) +
+                            "&id=" + id +
+                            "&phone=" + Utilities.replaceSpaceInString(phone) + "&date=" +
+                            Utilities.replaceSpaceInString(date) + "&time=" + Utilities.replaceSpaceInString(time) +
+                            "&city=" + Utilities.replaceSpaceInString(city) + "&profession=" +
+                            Utilities.replaceSpaceInString(profession)
+                            + "&comment=" + comment + "&post_id=" + postid + "&reply_id=" + replyId;
+                } else {
+                    baseURL = apis.BASE_API + apis.COMMENT_API + "?name=" + Utilities.replaceSpaceInString(name) +
+                            "&id=" + id +
+                            "&phone=" + Utilities.replaceSpaceInString(phone) + "&date=" +
+                            Utilities.replaceSpaceInString(date) + "&time=" + Utilities.replaceSpaceInString(time) +
+                            "&city=" + Utilities.replaceSpaceInString(city) + "&profession=" +
+                            Utilities.replaceSpaceInString(profession)
+                            + "&comment=" + comment + "&post_id=" + postid;
+                }
+
+
+
                 Log.i("doInBackground:response",baseURL);
                 jsonString = Utilities.readJson(getBaseContext(), "GET", baseURL);
                 Log.e(this.getClass().getSimpleName(),jsonString);
@@ -461,6 +490,7 @@ public class Posts_activity extends AppCompatActivity {
                     gc.setComments(obj.getString("comment"));
                     gc.setDate_time(obj.getString("comment_date")+" "+obj.getString("comment_time"));
                     gc.setName(obj.getString("comment_user_name"));
+                    gc.setUser_id(obj.getString("comment_register_id"));
 
                     arraycomment.add(gc);
                     Log.i("doInBackground:response",obj.getString("comment")+"  "+obj.getString("comment_date")+" "+obj.getString("comment_time"));
@@ -479,7 +509,7 @@ public class Posts_activity extends AppCompatActivity {
         protected void onPostExecute(Object o) {
             super.onPostExecute(o);
             Collections.reverse(arraycomment);
-            adapter=new commentsAdapter((AppCompatActivity) Posts_activity.this,arraycomment);
+            adapter = new commentsAdapter(Posts_activity.this, arraycomment);
             RecyclerView.LayoutManager mLayoutManager = new WrapLinearLayoutManager(getApplicationContext());
             rv.setHasFixedSize(true);
             rv.setLayoutManager(mLayoutManager);
@@ -490,6 +520,14 @@ public class Posts_activity extends AppCompatActivity {
             totalcomments.setText("Total Comments: "+arraycomment.size());
 
         }
+    }
+
+    public void setReply_name(getcomments gc) {
+        reply_name = gc.getName();
+        commenthere.setText("@" + gc.getUser_id() + "_ ");
+        commenthere.requestFocus();
+
+        commenthere.setSelection(commenthere.getText().length());
     }
 
     private void showImages(int count,ArrayList<String> list){

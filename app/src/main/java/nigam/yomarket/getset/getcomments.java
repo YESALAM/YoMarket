@@ -5,7 +5,7 @@ package nigam.yomarket.getset;
  */
 
 public class getcomments {
-    private String name,comments,date_time;
+    private String name, comments, date_time, user_id;
 
     public String getName() {
         return name;
@@ -29,5 +29,13 @@ public class getcomments {
 
     public void setDate_time(String date_time) {
         this.date_time = date_time;
+    }
+
+    public String getUser_id() {
+        return user_id;
+    }
+
+    public void setUser_id(String user_id) {
+        this.user_id = user_id;
     }
 }

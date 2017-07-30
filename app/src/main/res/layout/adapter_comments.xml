@@ -14,6 +14,7 @@
         android:background="@android:drawable/dialog_holo_light_frame">
 
         <LinearLayout
+            android:id="@+id/comment_view"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_margin="1dp"
