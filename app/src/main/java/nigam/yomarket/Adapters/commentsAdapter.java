@@ -56,12 +56,12 @@ public class commentsAdapter extends RecyclerView.Adapter<commentsAdapter.ViewHo
         //holder.comment.setText(hl.getComments());
         holder.date_time.setText(hl.getDate_time());
         holder.name.setText(hl.getName());
-        holder.ll.setOnClickListener(new OnClickListener() {
+        /*holder.ll.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
                 activity.setReply_name(hl);
             }
-        });
+        });*/
 
 
     }
