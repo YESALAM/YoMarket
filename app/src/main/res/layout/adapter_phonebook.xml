@@ -69,7 +69,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Profrssion"
+                    android:text="Profession"
                     android:textColor="@android:color/background_dark"
                     android:textSize="18sp" />
 
