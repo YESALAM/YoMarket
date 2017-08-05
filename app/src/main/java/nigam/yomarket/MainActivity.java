@@ -59,11 +59,13 @@ public class MainActivity extends AppCompatActivity
 
         SharedPreferences sharedPreferences = getPreferences(Context.MODE_PRIVATE);
         boolean firstrun = sharedPreferences.getBoolean("firstrun",true);
+
         if(firstrun){
             SharedPreferences.Editor editor = sharedPreferences.edit();
             editor.putBoolean("firstrun",false);
             editor.commit();
         }
+
 
 
 
@@ -146,7 +148,17 @@ public class MainActivity extends AppCompatActivity
         });
 
 
-
+        Intent intent = getIntent();
+        boolean refreshRequired = intent.getBooleanExtra("refresh",false);
+        if(refreshRequired){
+            mViewPager.post(new Runnable() {
+                @Override
+                public void run() {
+                    Post_Frag post_frag = (Post_Frag) getSupportFragmentManager().findFragmentByTag("android:switcher:"+R.id.container+":"+0);
+                    post_frag.refresh();
+                }
+            });
+        }
 
     }
 
@@ -177,7 +189,10 @@ public class MainActivity extends AppCompatActivity
             startActivity(new Intent(MainActivity.this,Login_Activity.class));
         } else if (id == R.id.post) {
             if(Statics.isLogin)
+            {
                 startActivity(new Intent(MainActivity.this,post_Activity.class));
+                this.finish();
+            }
             else
                 Snackbar.make(findViewById(R.id.relativelay_for_frags),"Login First To Post",Snackbar.LENGTH_LONG).show();
 

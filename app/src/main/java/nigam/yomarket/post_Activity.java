@@ -421,9 +421,13 @@ public class post_Activity extends AppCompatActivity {
                 if(resp[0].toString().equalsIgnoreCase("post sucessfull"))
                 {
                     Toast.makeText(getApplicationContext(),"Posted!!!",Toast.LENGTH_LONG).show();
-                    post_Activity.this.onBackPressed();
+                    //post_Activity.this.onBackPressed();
 
                     pg.dismiss();
+                    Intent intent = new Intent(post_Activity.this,MainActivity.class);
+                    intent.putExtra("refresh",true);
+                    startActivity(intent);
+                    post_Activity.this.finish();
 
                 }
                 else
