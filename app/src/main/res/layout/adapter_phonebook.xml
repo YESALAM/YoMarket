@@ -106,6 +106,7 @@
                     android:layout_height="wrap_content"
                     android:layout_margin="1dp"
                     android:layout_weight=".5"
+                    android:autoLink="phone"
                     android:text="TextView"
                     android:textColor="@android:color/background_dark"
                     android:textSize="18sp" />
