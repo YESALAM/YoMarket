@@ -311,7 +311,10 @@ ImageView imageregister;
                 }
 
 
-                if(resp[0].toString().equalsIgnoreCase("Registered sucessfully"))
+                if(resp[0].toString().equalsIgnoreCase("name_exist")){
+                    pg.dismiss();
+                    Toast.makeText(getApplicationContext(),"email/number already registered.",Toast.LENGTH_LONG).show();
+                }else if(resp[0].toString().equalsIgnoreCase("Registered sucessfully"))
                 {
                     Toast.makeText(getApplicationContext(),"Registered!!!",Toast.LENGTH_LONG).show();
                     Statics.isLogin=true;
@@ -417,8 +420,11 @@ ImageView imageregister;
         @Override
         protected void onPostExecute(Object o) {
             super.onPostExecute(o);
-            if(response.toString().equalsIgnoreCase("Registered sucessfully"))
-            {
+            Log.e("Register",response.toString());
+            if(response.toString().equalsIgnoreCase("name_exist")){
+                pg.dismiss();
+                Toast.makeText(getApplicationContext(),"email/number already registered.",Toast.LENGTH_LONG).show();
+            }else if(response.toString().equalsIgnoreCase("Registered sucessfully")){
                 pg.dismiss();
                 Toast.makeText(getApplicationContext(),"Registered!!!",Toast.LENGTH_LONG).show();
                 Statics.isLogin=true;
@@ -427,8 +433,7 @@ ImageView imageregister;
 
                 startActivity(new Intent(Register_Activity.this,MainActivity.class));
                 Register_Activity.this.finish();
-            }
-            else
+            }else
                 {
                 Toast.makeText(getApplicationContext(),"Error submitting data",Toast.LENGTH_LONG).show();
             }
