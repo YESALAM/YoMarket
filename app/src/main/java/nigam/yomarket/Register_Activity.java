@@ -11,6 +11,7 @@ import android.os.AsyncTask;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.v7.app.AlertDialog;
+import android.support.v7.app.AlertDialog.Builder;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Editable;
@@ -18,6 +19,7 @@ import android.text.TextWatcher;
 import android.util.Base64;
 import android.util.Log;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
@@ -31,6 +33,7 @@ import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
+import com.android.volley.Request.Method;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
@@ -47,6 +50,7 @@ import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Random;
 
 import nigam.yomarket.getset.countrypojo;
 import nigam.yomarket.getset.statepojo;
@@ -225,60 +229,221 @@ ImageView imageregister;
         register.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                validate();
+            }
+        });
+    }
 
+    boolean otp_verified = false ;
+    private void validate(){
+        String name,phone,email,password,firmname,profession,product,country,state,city;
+        name=Register_Activity.this.name.getText().toString();
+        phone=mobile.getText().toString();
+        email=Register_Activity.this.email.getText().toString();
+        password=Register_Activity.this.password.getText().toString();
+        firmname=firm.getText().toString();
+        product=Register_Activity.this.product.getSelectedItem().toString();
+        profession=Register_Activity.this.type.getSelectedItem().toString();
+        country=Register_Activity.this.country.getText().toString();
+        state=Register_Activity.this.state.getText().toString();
+        city=Register_Activity.this.city.getText().toString();
 
-                String name,phone,email,password,firmname,profession,product,country,state,city;
-                name=Register_Activity.this.name.getText().toString();
-                phone=mobile.getText().toString();
-                email=Register_Activity.this.email.getText().toString();
-                password=Register_Activity.this.password.getText().toString();
-                firmname=firm.getText().toString();
-                product=Register_Activity.this.product.getSelectedItem().toString();
-                profession=Register_Activity.this.type.getSelectedItem().toString();
-                country=Register_Activity.this.country.getText().toString();
-                state=Register_Activity.this.state.getText().toString();
-                city=Register_Activity.this.city.getText().toString();
-
-                Log.i(TAG, "onClick: cityu"+city+"  name"+name);
+        Log.i(TAG, "onClick: cityu"+city+"  name"+name);
 
 /*                if (name.equals("")||state.equals("")||city.equals("")||phone.equals("")||profession.equals("")||
                         country.equals("")||email.equals("")
                         || password.equals("")|| firmname.equals("")|| product.equals(""))*/
-                if (name.equals("")||state.equals("")||city.equals("")||phone.equals("")||profession.equals("")||
-                        country.equals("")||email.equals("")
-                        || password.equals("")|| firmname.equals("")|| product.equals(""))
-                {
-                    Log.i(TAG, "onClick: cityu"+city+"  name"+name);
-                    Toast.makeText(getApplicationContext(),"All Fields are Mandatory",Toast.LENGTH_LONG).show();
-                }
-                else if (profession.equalsIgnoreCase("Select Profession"))
-                {
-                    Toast.makeText(getApplicationContext(),"Select Profession",Toast.LENGTH_LONG).show();
+        if (name.equals("")||state.equals("")||city.equals("")||phone.equals("")||profession.equals("")||
+                country.equals("")||email.equals("")
+                || password.equals("")|| firmname.equals("")|| product.equals(""))
+        {
+            Log.i(TAG, "onClick: cityu"+city+"  name"+name);
+            Toast.makeText(getApplicationContext(),"All Fields are Mandatory",Toast.LENGTH_LONG).show();
+        }
+        else if (profession.equalsIgnoreCase("Select Profession"))
+        {
+            Toast.makeText(getApplicationContext(),"Select Profession",Toast.LENGTH_LONG).show();
 
-                }
-                else if (product.equalsIgnoreCase("Select Product"))
-                {
-                    Toast.makeText(getApplicationContext(),"Select City",Toast.LENGTH_LONG).show();
+        }
+        else if (product.equalsIgnoreCase("Select Product"))
+        {
+            Toast.makeText(getApplicationContext(),"Select City",Toast.LENGTH_LONG).show();
 
-                }
-                if (image==null)
-                {
-                    Toast.makeText(getApplicationContext(),"Please Upload Image First",Toast.LENGTH_LONG).show();
+        }
+        if (image==null)
+        {
+            Toast.makeText(getApplicationContext(),"Please Upload Image First",Toast.LENGTH_LONG).show();
 
-                }
-                else
-                {
-                    if (Utilities.isInternetOn(getBaseContext()))
+        }
+        else
+        {
+
+            if (Utilities.isInternetOn(getBaseContext())){
+                if(otp_verified){
                     submit(name,email,password,phone,firmname,profession,product,country,state,city);
-                    else
-                        Toast.makeText(getBaseContext(),"No Internet Commection!!!",Toast.LENGTH_LONG).show();
-
-                    // new submit(name,email,password,phone,firmname,profession,product,country,state,city).execute();
-
+                }else{
+                    verifyMobile(phone);
                 }
             }
-        });
+            else
+                Toast.makeText(getBaseContext(),"No Internet Commection!!!",Toast.LENGTH_LONG).show();
+
+            // new submit(name,email,password,phone,firmname,profession,product,country,state,city).execute();
+
+        }
     }
+
+
+
+
+    private boolean verifyMobile(String phone){
+        //number=918982384594&text=test%20message
+        Random random = new Random();
+        int otp =  100000 + random.nextInt(900000);
+        final String otpcode = String.valueOf(otp);
+
+        String append = "number=91"+phone+"&text="+"Your OTP for YOMarkets is "+otpcode ;
+
+        String url = apis.OTP_API+append ;
+        sendOtp(url,otpcode,phone);
+        //showAlertOtp(otpcode,phone);
+        return false;
+    }
+
+    private void showAlertOtp(final String otpcode, final String phone){
+        AlertDialog.Builder alert = new AlertDialog.Builder(this);
+
+
+        final EditText edittext = new EditText(this);
+        alert.setMessage("Please enter the OTP received.");
+        alert.setTitle("OTP verification");
+
+        alert.setView(edittext);
+        alert.setPositiveButton("submit", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+            }
+        });
+        alert.setNegativeButton("resend", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+            }
+        });
+
+        final AlertDialog dialog = alert.create();
+
+
+        dialog.show();
+
+        /*dialog.setOnShowListener(new DialogInterface.OnShowListener() {
+
+            @Override
+            public void onShow(final DialogInterface dialog) {*/
+
+
+                dialog.getButton(AlertDialog.BUTTON_POSITIVE).setOnClickListener(new View.OnClickListener() {
+
+                    @Override
+                    public void onClick(View view) {
+
+                        String otp = edittext.getText().toString();
+                        if(otp.equalsIgnoreCase(otpcode)){
+                            dialog.dismiss();
+                            otp_verified = true;
+                            validate();
+
+                        }else{
+                            dialog.setMessage("OTP is wrong!Please provide correct OTP");
+                        }
+
+
+                        //Dismiss once everything is OK.
+                        //dialog.dismiss();
+                    }
+                });
+
+
+               dialog.getButton(AlertDialog.BUTTON_NEGATIVE).setOnClickListener(new OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        AlertDialog dialog1 = new AlertDialog.Builder(Register_Activity.this)
+                                .setTitle("Are you sure?")
+                                .setMessage("Please wait for 5 minute to OTP to arrive before resending.")
+                                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        verifyMobile(phone);
+                                    }
+                                })
+
+                                .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+
+                                    }
+                                })
+
+                                .create();
+
+                        dialog1.show();
+                    }
+                });
+            //}
+       /* });*/
+
+        //alert.show();
+
+    }
+
+    private void sendOtp(String url, final String otpcode, final String phone){
+        final ProgressDialog progressDialog = new ProgressDialog(this);
+        progressDialog.setMessage("sending OTP");
+        progressDialog.show();
+
+        RequestQueue requestQueue = Volley.newRequestQueue(this);
+        StringRequest request = new StringRequest(Method.GET,url,new Response.Listener<String>(){
+            @Override
+            public void onResponse(String response) {
+                Log.e("OTP",response);
+                try {
+                    progressDialog.cancel();
+                    JSONObject object = new JSONObject(response);
+                    String status_st = object.getString("ErrorCode");
+                    int error_code = Integer.parseInt(status_st);
+                    int code = Integer.valueOf(error_code);
+                    switch (code){
+                        case 0:
+                            Toast.makeText(Register_Activity.this, "OTP SENDed", Toast.LENGTH_SHORT).show();
+                            showAlertOtp(otpcode,phone);
+                            break;
+
+                    }
+
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+
+
+
+
+            }
+        },new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                progressDialog.cancel();
+                Toast.makeText(Register_Activity.this, "OTP could not be sended", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        requestQueue.add(request);
+
+    }
+
+
     public void submit(String... args)
     {
         RequestQueue requestQueue = Volley.newRequestQueue(this);
