@@ -69,7 +69,7 @@
         android:layout_marginTop="10dp"
         android:layout_weight="1"
         android:drawableLeft="@android:drawable/ic_menu_call"
-        android:text="  8109348743"
+        android:text="  7987141621"
         android:autoLink="phone"
         android:textColor="@android:color/background_dark"
         android:textSize="20sp" />

@@ -90,6 +90,8 @@ public abstract class Utilities {
 					URL url = new URL(getURL);
 					mConnection = (HttpURLConnection) url.openConnection();
 //					mConnection.setSSLSocketFactory(sc.getSocketFactory());
+					//mConnection.setRequestProperty("Accept","application/json,text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8");
+					//mConnection.setRequestProperty("User-Agent","Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Ubuntu Chromium/59.0.3071.109 Chrome/59.0.3071.109 Safari/537.36");
 					mConnection.setReadTimeout(30000 /* milliseconds */);
 					mConnection.setConnectTimeout(30000 /* milliseconds */);
 					mConnection.setRequestMethod(RequestMethod);

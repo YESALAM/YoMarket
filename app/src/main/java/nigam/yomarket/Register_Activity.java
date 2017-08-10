@@ -9,12 +9,15 @@ import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Environment;
+import android.os.Handler;
+import android.os.Looper;
 import android.provider.MediaStore;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AlertDialog.Builder;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Editable;
+import android.text.InputType;
 import android.text.TextWatcher;
 import android.util.Base64;
 import android.util.Log;
@@ -40,17 +43,23 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
+import com.facebook.stetho.okhttp3.StethoInterceptor;
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.OkHttpClient;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.IOException;
 import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
+import java.util.concurrent.TimeUnit;
 
 import nigam.yomarket.getset.countrypojo;
 import nigam.yomarket.getset.statepojo;
@@ -59,8 +68,10 @@ import nigam.yomarket.utils.Utilities;
 import nigam.yomarket.utils.apis;
 
 import static android.graphics.BitmapFactory.decodeFile;
+import static nigam.yomarket.utils.Statics.phone;
 
-public class Register_Activity extends AppCompatActivity {
+
+public class Register_Activity extends AppCompatActivity implements Callback {
 EditText name,email,password,mobile,firm;
     Spinner type,product;
     AutoCompleteTextView country,city,state;
@@ -232,6 +243,7 @@ ImageView imageregister;
                 validate();
             }
         });
+        //call();
     }
 
     boolean otp_verified = false ;
@@ -315,6 +327,7 @@ ImageView imageregister;
 
 
         final EditText edittext = new EditText(this);
+        edittext.setRawInputType(InputType.TYPE_CLASS_PHONE);
         alert.setMessage("Please enter the OTP received.");
         alert.setTitle("OTP verification");
 
@@ -334,7 +347,7 @@ ImageView imageregister;
 
         final AlertDialog dialog = alert.create();
 
-
+        dialog.setCanceledOnTouchOutside(false);
         dialog.show();
 
         /*dialog.setOnShowListener(new DialogInterface.OnShowListener() {
@@ -397,13 +410,20 @@ ImageView imageregister;
 
     }
 
+    ProgressDialog progressDialog;
+    String mopcode;
+    String mphone;
     private void sendOtp(String url, final String otpcode, final String phone){
-        final ProgressDialog progressDialog = new ProgressDialog(this);
+        progressDialog = new ProgressDialog(this);
         progressDialog.setMessage("sending OTP");
+        progressDialog.setCancelable(false);
         progressDialog.show();
 
-        RequestQueue requestQueue = Volley.newRequestQueue(this);
-        StringRequest request = new StringRequest(Method.GET,url,new Response.Listener<String>(){
+        mopcode = otpcode;
+        mphone = phone;
+
+       /* RequestQueue requestQueue = Volley.newRequestQueue(this);
+        final StringRequest request = new StringRequest(Method.GET,url,new Response.Listener<String>(){
             @Override
             public void onResponse(String response) {
                 Log.e("OTP",response);
@@ -439,9 +459,115 @@ ImageView imageregister;
             }
         });
 
-        requestQueue.add(request);
+        requestQueue.add(request);*/
+
+
+        OkHttpClient okHttpClient = new OkHttpClient.Builder()
+                .addNetworkInterceptor(new StethoInterceptor())
+                .readTimeout(20000, TimeUnit.MILLISECONDS)
+                .build();
+
+        okHttpClient.newCall(
+                new okhttp3.Request.Builder().url(url).build()
+        ).enqueue(this);
+
+
+
+
+       //new otpsubmit(url,otpcode).execute();
 
     }
+
+    @Override
+    public void onFailure(Call call, IOException e) {
+        progressDialog.cancel();
+        Toast.makeText(Register_Activity.this, "OTP could not be sended", Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onResponse(Call call, final okhttp3.Response response) throws IOException {
+        new Handler(Looper.getMainLooper()).post(new Runnable() {
+            @Override
+            public void run() {
+                Log.e("OTP",response.toString());
+                try {
+                    progressDialog.cancel();
+                    JSONObject object = new JSONObject(response.body().string());
+                    String status_st = object.getString("ErrorCode");
+                    int error_code = Integer.parseInt(status_st);
+                    int code = Integer.valueOf(error_code);
+                    switch (code){
+                        case 0:
+                            Toast.makeText(Register_Activity.this, "OTP SENDed", Toast.LENGTH_SHORT).show();
+                            showAlertOtp(mopcode,mphone);
+                            break;
+
+                    }
+
+
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+
+            }
+        });
+
+
+
+    class otpsubmit extends AsyncTask {
+        String result;
+        String url;
+        String otpcode;
+
+        ProgressDialog progressDialog;
+
+        public otpsubmit(String url, String otpcode) {
+            this.url = url;
+            this.otpcode = otpcode;
+        }
+
+        @Override
+        protected Object doInBackground(Object[] params) {
+            try {
+                result = Utilities.readJson(Register_Activity.this, "GET", url);
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            return null;
+        }
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            progressDialog = new ProgressDialog(Register_Activity.this);
+            progressDialog.setMessage("sending OTP");
+            progressDialog.show();
+        }
+
+        @Override
+        protected void onPostExecute(Object o) {
+            super.onPostExecute(o);
+            progressDialog.cancel();
+            JSONObject object = null;
+            try {
+                object = new JSONObject(result);
+                String status_st = object.getString("ErrorCode");
+                int error_code = Integer.parseInt(status_st);
+                int code = Integer.valueOf(error_code);
+                switch (code) {
+                    case 0:
+                        Toast.makeText(Register_Activity.this, "OTP SENDed", Toast.LENGTH_SHORT).show();
+                        showAlertOtp(otpcode, phone);
+                        break;
+
+                }
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
+        }
+    }}
 
 
     public void submit(String... args)
