@@ -29,58 +29,142 @@
                 android:layout_marginRight="10dp"
                 android:layout_marginTop="11dp" />
 
+            <TableLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:stretchColumns="1"
+                android:padding="5dp"
+                >
+                <TableRow>
+                    <TextView
+                        android:id="@+id/textView8"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="1dp"
+                        android:text="Name"
+
+                        android:textColor="@android:color/background_dark"
+                        android:textSize="18sp" />
+                    <TextView
+                        android:id="@+id/phonebook_name"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="1dp"
+                        android:text="TextView"
+                        android:textColor="@android:color/background_dark"
+                        android:textSize="18sp"
+                        android:textAlignment="viewEnd"
+                        android:layout_gravity="end"
+
+                        />
+                </TableRow>
+
+                <TableRow>
+                    <TextView
+                        android:id="@+id/phonebook_Contact_ID"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="1dp"
+
+                        android:text="Contact"
+                        android:textColor="@android:color/background_dark"
+                        android:textSize="18sp" />
+
+                    <TextView
+                        android:id="@+id/phonebook_contact"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="1dp"
+                        android:textAlignment="viewEnd"
+                        android:layout_gravity="end"
+                        android:autoLink="phone"
+                        android:text="TextView"
+                        android:textColor="@android:color/background_dark"
+                        android:textSize="18sp" />
+                </TableRow>
+
+                <TableRow>
+                    <TextView
+                        android:id="@+id/textView26"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+
+                        android:text="City"
+                        android:textColor="@android:color/background_dark"
+                        android:textSize="18sp" />
+                    <TextView
+                        android:id="@+id/phonebook_city"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:textAlignment="viewEnd"
+                        android:layout_gravity="end"
+                        android:text="TextView"
+                        android:textColor="@android:color/background_dark"
+                        android:textSize="18sp" />
+                </TableRow>
+
+                <TableRow>
+                    <TextView
+                        android:id="@+id/textView28"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+
+                        android:text="Profession"
+                        android:textColor="@android:color/background_dark"
+                        android:textSize="18sp" />
+                    <TextView
+                        android:id="@+id/phonebook_profession"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:text="TextView"
+                        android:textColor="@android:color/background_dark"
+                        android:textSize="18sp"
+                        android:textAlignment="viewEnd"
+                        android:layout_gravity="end"
+                        />
+
+                </TableRow>
+                <TableRow>
+                    <TextView
+                        android:id="@+id/textView29"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Firm Name"
+                        android:textColor="@android:color/background_dark"
+                        android:textSize="18sp" />
+                    <TextView
+                        android:id="@+id/phonebook_firm"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:text="TextView"
+                        android:textColor="@android:color/background_dark"
+                        android:textSize="18sp"
+                        android:textAlignment="viewEnd"
+                        android:layout_gravity="end"                        />
+                </TableRow>
+
+            </TableLayout>
+
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:orientation="vertical">
 
-                <TextView
-                    android:id="@+id/textView8"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="1dp"
-                    android:layout_weight="1"
-                    android:text="Name"
-                    android:textColor="@android:color/background_dark"
-                    android:textSize="18sp" />
 
-                <TextView
-                    android:id="@+id/phonebook_Contact_ID"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="1dp"
-                    android:layout_weight="1"
-                    android:text="Contact"
-                    android:textColor="@android:color/background_dark"
-                    android:textSize="18sp" />
 
-                <TextView
-                    android:id="@+id/textView26"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="City"
-                    android:textColor="@android:color/background_dark"
-                    android:textSize="18sp" />
 
-                <TextView
-                    android:id="@+id/textView28"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="Profession"
-                    android:textColor="@android:color/background_dark"
-                    android:textSize="18sp" />
 
-                <TextView
-                    android:id="@+id/textView29"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="Firm Name"
-                    android:textColor="@android:color/background_dark"
-                    android:textSize="18sp" />
+
+
+
+
+
 
             </LinearLayout>
 
@@ -90,53 +174,15 @@
                 android:layout_weight="1"
                 android:orientation="vertical">
 
-                <TextView
-                    android:id="@+id/phonebook_name"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="1dp"
-                    android:layout_weight=".5"
-                    android:text="TextView"
-                    android:textColor="@android:color/background_dark"
-                    android:textSize="18sp" />
 
-                <TextView
-                    android:id="@+id/phonebook_contact"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="1dp"
-                    android:layout_weight=".5"
-                    android:autoLink="phone"
-                    android:text="TextView"
-                    android:textColor="@android:color/background_dark"
-                    android:textSize="18sp" />
 
-                <TextView
-                    android:id="@+id/phonebook_city"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight=".5"
-                    android:text="TextView"
-                    android:textColor="@android:color/background_dark"
-                    android:textSize="18sp" />
 
-                <TextView
-                    android:id="@+id/phonebook_profession"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight=".5"
-                    android:text="TextView"
-                    android:textColor="@android:color/background_dark"
-                    android:textSize="18sp" />
 
-                <TextView
-                    android:id="@+id/phonebook_firm"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight=".5"
-                    android:text="TextView"
-                    android:textColor="@android:color/background_dark"
-                    android:textSize="18sp" />
+
+
+
+
+
 
             </LinearLayout>
 
