@@ -110,6 +110,20 @@
                 android:textColor="@android:color/background_dark"
                 android:onClick="register"
                 android:textSize="20sp" />
+            <TextView
+                android:id="@+id/forgot_password"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="20dp"
+                android:layout_weight="1"
+                android:text="Forgot Password??"
+                android:textAlignment="center"
+                android:textColor="@android:color/background_dark"
+                android:onClick="forgotPassword"
+                android:textSize="20sp"
+                android:clickable="true"
+                />
         </LinearLayout>
 
     </LinearLayout>

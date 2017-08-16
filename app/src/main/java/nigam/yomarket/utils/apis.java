@@ -22,7 +22,7 @@ public class apis {
     public static String API = "AIzaSyAJP9EH1TnS5pYo-xEpQPEvBpbLXed8ets" ;
     public static String PLACE_API = "https://maps.googleapis.com/maps/api/place/autocomplete/json?types=(cities)&sensor=false&key="+apis.API+"&input=";
     public static String OTP_API = "http://sms.simption.com/api/mt/SendSMS?apikey=ylMbQ6qaRkG9bgmODeeGOw&senderid=YOMRKT&channel=TRANS&DCS=0&flashsms=0&";
-
+    public static String FORGOT_PASSWORD = "forgotPassword.php?userid=" ;
 
     public static String posts_API = "posts.php";
     public static String PHONEBOOK_API = "phonebook_get.php";
