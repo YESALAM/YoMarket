@@ -223,6 +223,12 @@ public class MainActivity extends AppCompatActivity
             startActivity(new Intent(MainActivity.this,MainActivity.class));
             MainActivity.this.finish();
 
+        } else if(id == R.id.share){
+            Intent localIntent1 = new Intent();
+            localIntent1.setAction("android.intent.action.SEND");
+            localIntent1.putExtra("android.intent.extra.TEXT", "YoMarket is a commodity market platform .\n Don't forget to share with your mates.. \nJust click on the link given below:\n\nhttps://play.google.com/store/apps/details?id=nigam.yomarket\n Don't forget to share with your mates..");
+            localIntent1.setType("text/plain");
+            startActivity(Intent.createChooser(localIntent1, "Share via:"));
         }
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
 
