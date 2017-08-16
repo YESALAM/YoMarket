@@ -207,9 +207,9 @@ public class post_Activity extends AppCompatActivity {
         disc=Discription.getText().toString();
 
         //if (citya.equalsIgnoreCase("") || producta.equalsIgnoreCase("") || professiona.equalsIgnoreCase("") || pricea.equalsIgnoreCase("")  || disc.equalsIgnoreCase("") )
-        if (citya.equalsIgnoreCase("") || producta.equalsIgnoreCase("") || professiona.equalsIgnoreCase("") )
+        if (disc.equalsIgnoreCase("") && pricea.equalsIgnoreCase("") && image1.equalsIgnoreCase("null") && image2.equalsIgnoreCase("null") && image3.equalsIgnoreCase("null") && image4.equalsIgnoreCase("null"))
         {
-            Toast.makeText(getApplicationContext(),"All Fielda are Mandatory",Toast.LENGTH_LONG).show();
+            Toast.makeText(getApplicationContext(),"Fields are blank",Toast.LENGTH_LONG).show();
             return;
         }
         else
