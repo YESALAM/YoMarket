@@ -69,10 +69,11 @@
                     android:textSize="18sp" />
                 <TextView
                     android:id="@+id/posts_posted_by"
-                    android:layout_width="match_parent"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
                     android:layout_height="wrap_content"
                     android:layout_margin="1dp"
-                    android:text="TextView"
+                    android:text="Tex whereh there is tView"
                     android:textAlignment="viewEnd"
                     android:textColor="@android:color/background_dark"
                     android:textSize="18sp" />
@@ -88,7 +89,8 @@
                     android:textSize="18sp" />
                 <TextView
                     android:id="@+id/posts_city_home"
-                    android:layout_width="match_parent"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
                     android:layout_height="wrap_content"
                     android:layout_margin="1dp"
                     android:text="TextView"
@@ -127,7 +129,8 @@
                     android:textSize="18sp" />
                 <TextView
                     android:id="@+id/posts_price_home"
-                    android:layout_width="match_parent"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
                     android:layout_height="wrap_content"
                     android:layout_margin="1dp"
                     android:text="TextView"
@@ -147,7 +150,8 @@
                     android:textSize="18sp" />
                 <TextView
                     android:id="@+id/posts_mobileno_home"
-                    android:layout_width="match_parent"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
                     android:layout_height="wrap_content"
                     android:layout_margin="1dp"
                     android:text="TextView"
@@ -166,7 +170,8 @@
                     android:textSize="18sp" />
                 <TextView
                     android:id="@+id/posts_profession_home"
-                    android:layout_width="match_parent"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
                     android:layout_height="wrap_content"
                     android:layout_margin="1dp"
                     android:text="TextView"
