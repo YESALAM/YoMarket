@@ -2,8 +2,12 @@ package nigam.yomarket;
 
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
@@ -14,12 +18,16 @@ import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.text.InputType;
 import android.util.Log;
+import android.view.ContextThemeWrapper;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -27,12 +35,10 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.google.firebase.iid.FirebaseInstanceId;
 import org.json.JSONArray;
-import org.json.JSONException;
 import org.json.JSONObject;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 import nigam.yomarket.Adapters.main_tab_adapter;
-import nigam.yomarket.imagehelper.ImageLoader;
 import nigam.yomarket.utils.Statics;
 import nigam.yomarket.utils.Utilities;
 import nigam.yomarket.utils.apis;
@@ -67,7 +73,7 @@ public class MainActivity extends AppCompatActivity
         }
 
 
-
+        new GetVersion().execute();
 
 
 
@@ -329,6 +335,83 @@ public class MainActivity extends AppCompatActivity
                 e.printStackTrace();
             }
             return null;
+        }
+    }
+
+    class GetVersion extends AsyncTask {
+
+        int versionPlaystore = 0;
+
+
+        public GetVersion() {
+            super();
+        }
+
+        @Override
+        protected Object doInBackground(Object... params) {
+            try {
+                Log.i("pul ", Statics.Username + "  " + Statics.password);
+
+                String baseURL = apis.BASE_API + apis.VERSION ;
+                String jsonString = Utilities.readJson(getApplicationContext(), "POST", baseURL);
+                JSONObject reader = new JSONObject(jsonString);
+
+                Log.i(TAG, "doInBackground: " + reader.toString());
+
+                versionPlaystore = reader.getInt("version");
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Object o) {
+            super.onPostExecute(o);
+
+            int currentVersion = 0;
+            try {
+                PackageInfo pInfo = getApplicationContext().getPackageManager().getPackageInfo(getPackageName(), 0);
+                String version = pInfo.versionName;
+                int verCode = pInfo.versionCode;
+                if(verCode<versionPlaystore){
+                    AlertDialog.Builder alert = new AlertDialog.Builder(new ContextThemeWrapper(MainActivity.this, R.style.myDialog));
+
+                    alert.setMessage("App update is available! Please update your app.");
+                    alert.setTitle("New Update available");
+                    alert.setPositiveButton("update", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+
+                           /* String url = "https://play.google.com/store/apps/details?id=nigam.yomarket";
+                            Intent i = new Intent(Intent.ACTION_VIEW);
+                            i.setData(Uri.parse(url));
+                            startActivity(i);*/
+
+                            final String appPackageName = getPackageName(); // getPackageName() from Context or Activity object
+                            try {
+                                startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=" + appPackageName)));
+                            } catch (android.content.ActivityNotFoundException anfe) {
+                                startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/details?id=" + appPackageName)));
+                            }
+                        }
+                    });
+                    alert.setNegativeButton("cancel", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+
+                        }
+                    });
+
+                    alert.show();
+                }
+
+            } catch (PackageManager.NameNotFoundException e) {
+                e.printStackTrace();
+            }
+
+
+
         }
     }
 }
