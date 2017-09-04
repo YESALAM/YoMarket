@@ -14,6 +14,8 @@ import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Environment;
+import android.os.Handler;
+import android.os.Looper;
 import android.provider.MediaStore;
 import android.support.annotation.Nullable;
 import android.support.design.widget.Snackbar;
@@ -46,6 +48,11 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.MultipartBody;
+import okhttp3.OkHttpClient;
+import okhttp3.RequestBody;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -73,7 +80,7 @@ import nigam.yomarket.utils.apis;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class post_Activity extends AppCompatActivity {
+public class post_Activity extends AppCompatActivity implements Callback {
 
     String TAG = "post_Activity" ;
 
@@ -392,6 +399,54 @@ public class post_Activity extends AppCompatActivity {
                 return super.onOptionsItemSelected(item);
         }
     }
+
+  /*  private void postData() {
+        pg.show();
+        final String producta, professiona, citya, quantitya, pricea, disc;
+        final String[] resp = new String[1];
+
+        Log.i("onResponse: ", "uploading");
+        producta = product.getSelectedItem().toString();
+        professiona = profession.getSelectedItem().toString();
+        citya = city.getText().toString();
+        quantitya = "";//Quantity.getText().toString();
+        pricea = price.getText().toString();
+        disc = Discription.getText().toString();
+
+        String url = apis.BASE_API + apis.POST_API1;
+
+
+        RequestBody requestBody = new MultipartBody.Builder()
+                .setType(MultipartBody.FORM)
+                .addFormDataPart("product", producta)
+                .addFormDataPart("profession", professiona)
+                .addFormDataPart("city", citya)
+                .addFormDataPart("quantity", quantitya)
+                .addFormDataPart("price", pricea)
+                .addFormDataPart("discription", disc)
+                .addFormDataPart("post_id", Statics.id)
+                .addFormDataPart("image1", image1)
+                .addFormDataPart("image2", image2)
+                .addFormDataPart("image3", image3)
+                .addFormDataPart("image4", image4)
+                .addFormDataPart("name", Statics.name)
+                .addFormDataPart("date", getdate())
+                .addFormDataPart("time", gettime())
+                .build();
+
+
+        okhttp3.Request request = new okhttp3.Request.Builder()
+                .url(url)
+                .method("POST", RequestBody.create(null, new byte[0]))
+                .post(requestBody)
+                .build();
+
+        OkHttpClient client = new OkHttpClient();
+
+        client.newCall(request).enqueue(this);
+
+    }*/
+
     private void postata()
     {
         pg.show();
@@ -413,30 +468,35 @@ public class post_Activity extends AppCompatActivity {
                 try {
                     JSONObject head = new JSONObject(response);
                     resp[0] =head.getString("server response");
+
+
+                    if(resp[0].toString().equalsIgnoreCase("post sucessfull"))
+                    {
+                        Toast.makeText(getApplicationContext(),"Posted!!!",Toast.LENGTH_LONG).show();
+                        //post_Activity.this.onBackPressed();
+
+                        pg.dismiss();
+                        Intent intent = new Intent(post_Activity.this,MainActivity.class);
+                        intent.putExtra("refresh",true);
+                        startActivity(intent);
+                        post_Activity.this.finish();
+
+                    }
+                    else
+                    {
+                        Toast.makeText(getApplicationContext(),"Error submitting data",Toast.LENGTH_LONG).show();
+                        pg.dismiss();
+
+                    }
+
                 } catch (Exception e) {
+                    pg.dismiss();
+                    Toast.makeText(getApplicationContext(),"Error submitting data",Toast.LENGTH_LONG).show();
                     e.printStackTrace();
                 }
 
 
-                if(resp[0].toString().equalsIgnoreCase("post sucessfull"))
-                {
-                    Toast.makeText(getApplicationContext(),"Posted!!!",Toast.LENGTH_LONG).show();
-                    //post_Activity.this.onBackPressed();
 
-                    pg.dismiss();
-                    Intent intent = new Intent(post_Activity.this,MainActivity.class);
-                    intent.putExtra("refresh",true);
-                    startActivity(intent);
-                    post_Activity.this.finish();
-
-                }
-                else
-                {
-                    Toast.makeText(getApplicationContext(),"Error submitting data",Toast.LENGTH_LONG).show();
-                    pg.dismiss();
-
-                }
-                pg.dismiss();
 
 
             }
@@ -492,6 +552,53 @@ public class post_Activity extends AppCompatActivity {
         String formattedDate = dateFormat.format(new Date());
         Log.i( "gettime: ",formattedDate);
         return formattedDate;
+    }
+
+    @Override
+    public void onFailure(Call call, IOException e) {
+        new Handler(Looper.getMainLooper()).post(new Runnable() {
+            @Override
+            public void run() {
+                pg.dismiss();
+                Toast.makeText(getApplicationContext(), "Error submitting data", Toast.LENGTH_LONG).show();
+            }
+
+        });
+    }
+
+    @Override
+    public void onResponse(Call call, final okhttp3.Response response) throws IOException {
+        new Handler(Looper.getMainLooper()).post(new Runnable() {
+            @Override
+            public void run() {
+                pg.dismiss();
+                String respo = response.body().toString();
+                String res = null;
+                try {
+                    JSONObject head = new JSONObject(respo);
+                    res = head.getString("server response");
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    Toast.makeText(getApplicationContext(), "Error submitting data", Toast.LENGTH_LONG).show();
+                    return;
+                }
+
+
+                if (res.toString().equalsIgnoreCase("post sucessfull")) {
+                    Toast.makeText(getApplicationContext(), "Posted!!!", Toast.LENGTH_LONG).show();
+                    //post_Activity.this.onBackPressed();
+
+
+                    Intent intent = new Intent(post_Activity.this, MainActivity.class);
+                    intent.putExtra("refresh", true);
+                    startActivity(intent);
+                    post_Activity.this.finish();
+
+                } else {
+                    Toast.makeText(getApplicationContext(), "Error submitting data", Toast.LENGTH_LONG).show();
+                }
+            }
+        });
     }
 
     class googlecity extends AsyncTask
