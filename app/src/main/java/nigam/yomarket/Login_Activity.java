@@ -68,7 +68,11 @@ EditText email,password;
 
                     @Override
                     public void run() {
-                        csprogress.dismiss();
+                        try {
+                            csprogress.dismiss();
+                        }catch (IllegalArgumentException ae){
+                            ae.printStackTrace();
+                        }
 //whatever you want just you have to launch overhere.
 
                         dologin();
