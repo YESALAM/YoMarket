@@ -464,7 +464,7 @@ public class post_Activity extends AppCompatActivity implements Callback {
         StringRequest req = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-                Log.i( "onResponse: ",response.toString());
+                Log.i( "onResponse: ", response);
                 try {
                     JSONObject head = new JSONObject(response);
                     resp[0] =head.getString("server response");
