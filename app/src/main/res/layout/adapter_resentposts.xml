@@ -156,6 +156,7 @@
                     android:layout_margin="1dp"
                     android:text="TextView"
                     android:textAlignment="viewEnd"
+                    android:autoLink="phone"
                     android:textColor="@android:color/background_dark"
                     android:textSize="18sp" />
             </TableRow>
