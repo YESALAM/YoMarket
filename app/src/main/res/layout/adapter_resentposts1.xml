@@ -40,7 +40,7 @@
                     android:layout_weight="1"
                     android:text="Posted By"
                     android:textColor="@android:color/background_dark"
-                    android:textSize="18sp" />
+                     />
 
                 <TextView
                     android:id="@+id/textView13"
@@ -50,7 +50,7 @@
                     android:layout_weight="1"
                     android:text="City"
                     android:textColor="@android:color/background_dark"
-                    android:textSize="18sp" />
+                     />
 
                 <TextView
                     android:id="@+id/textView4"
@@ -60,7 +60,7 @@
                     android:layout_weight="1"
                     android:text="Product"
                     android:textColor="@android:color/background_dark"
-                    android:textSize="18sp" />
+                    />
 
                 <TextView
                     android:id="@+id/Price"
@@ -70,7 +70,7 @@
                     android:layout_weight="1"
                     android:text="Price"
                     android:textColor="@android:color/background_dark"
-                    android:textSize="18sp" />
+                     />
 
             </LinearLayout>
 
@@ -88,7 +88,7 @@
                     android:layout_weight=".5"
                     android:text="TextView"
                     android:textColor="@android:color/background_dark"
-                    android:textSize="18sp" />
+                     />
 
                 <TextView
                     android:id="@+id/posts_city_home"
@@ -98,7 +98,7 @@
                     android:layout_weight=".5"
                     android:text="TextView"
                     android:textColor="@android:color/background_dark"
-                    android:textSize="18sp" />
+                    />
 
                 <TextView
                     android:id="@+id/posts_product_home"
@@ -108,7 +108,7 @@
                     android:layout_weight=".5"
                     android:text="TextView"
                     android:textColor="@android:color/background_dark"
-                    android:textSize="18sp" />
+                     />
 
                 <TextView
                     android:id="@+id/posts_price_home"
@@ -118,7 +118,7 @@
                     android:layout_weight=".5"
                     android:text="TextView"
                     android:textColor="@android:color/background_dark"
-                    android:textSize="18sp" />
+                     />
             </LinearLayout>
 
         </LinearLayout>
