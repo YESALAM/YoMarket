@@ -2,30 +2,21 @@ package nigam.yomarket;
 
 
 import android.app.Dialog;
-import android.content.DialogInterface;
-import android.content.Intent;
+import android.content.Context;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.provider.MediaStore;
 import android.support.annotation.IdRes;
 import android.support.design.widget.TextInputLayout;
 import android.support.v4.app.Fragment;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.DefaultItemAnimator;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
@@ -36,15 +27,12 @@ import android.widget.Toast;
 
 import nigam.yomarket.Adapters.WrapLinearLayoutManager;
 import org.json.JSONArray;
-import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 
-import nigam.yomarket.Adapters.main_frag_rview;
 import nigam.yomarket.Adapters.phonebook_adapter;
-import nigam.yomarket.getset.HomeListGetSet;
 import nigam.yomarket.getset.phonebook;
 import nigam.yomarket.utils.Statics;
 import nigam.yomarket.utils.Utilities;
@@ -453,7 +441,9 @@ public class phonebook_frag extends Fragment {
         @Override
         protected void onPostExecute(Object o) {
             super.onPostExecute(o);
-            ArrayAdapter<String> adapter = new ArrayAdapter(getActivity(), R.layout.registerspinner1, citylist);
+            Context context = getContext();
+            if (context != null) {
+                ArrayAdapter adapter = new ArrayAdapter(context, R.layout.registerspinner1, citylist);
             //Getting the instance of AutoCompleteTextView
             /*cityactv.setOnItemClickListener(new OnItemClickListener() {
                 @Override
@@ -468,7 +458,8 @@ public class phonebook_frag extends Fragment {
             // Log.e(TAG, "pul: setShopAdapter: list:"+shopNameList.toString() );
 
             cityactv.setAdapter(adapter);
-            adapter.notifyDataSetChanged();
+                adapter.notifyDataSetChanged();
+            }
         }
     }
 
