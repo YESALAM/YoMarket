@@ -99,7 +99,11 @@ public class MainActivity extends AppCompatActivity
 
                 @Override
                 public void run() {
-                    csprogress.dismiss();
+                    try {
+                        csprogress.dismiss();
+                    }catch (IllegalArgumentException ae){
+                        ae.printStackTrace();
+                    }
 //whatever you want just you have to launch overhere.
                     Log.i( " PUL: run: ","Logged In");
                     if(Utilities.isInternetOn(getBaseContext()))
