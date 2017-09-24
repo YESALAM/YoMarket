@@ -72,6 +72,8 @@ public class main_frag_rview extends RecyclerView.Adapter<main_frag_rview.ViewHo
             holder.price.setVisibility(View.GONE);
             holder.price_tt.setVisibility(View.GONE);
         } else {
+            holder.price.setVisibility(View.VISIBLE);
+            holder.price_tt.setVisibility(View.VISIBLE);
             holder.price.setText(hl.getPost_price());
         }
 
@@ -81,6 +83,8 @@ public class main_frag_rview extends RecyclerView.Adapter<main_frag_rview.ViewHo
             holder.description.setVisibility(View.GONE);
             holder.desc_tt.setVisibility(View.GONE);
         } else {
+            holder.description.setVisibility(View.VISIBLE);
+            holder.desc_tt.setVisibility(View.VISIBLE);
             holder.description.setText(hl.getPost_description());
         }
 
