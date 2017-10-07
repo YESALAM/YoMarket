@@ -441,16 +441,20 @@ public class Posts_activity extends AppCompatActivity {
         @Override
         protected void onPostExecute(Object o) {
             super.onPostExecute(o);
-            if (response.toString().equalsIgnoreCase("comment sucessfull")) {
-                Toast.makeText(getApplicationContext(),"comment sucessfull!!!",Toast.LENGTH_LONG).show();
-                commenthere.setText("");
-                if (Utilities.isInternetOn(getBaseContext()))
-                new getcomment().execute();
-                else
-                    Toast.makeText(getBaseContext(),"No Internet Commection!!!",Toast.LENGTH_LONG).show();
-            } else if (response.equalsIgnoreCase("already exists")) {
-                //Toast.makeText(getApplicationContext(),"Server Error",Toast.LENGTH_LONG).show();
-            } else {
+            if(response != null){
+                if (response.toString().equalsIgnoreCase("comment sucessfull")) {
+                    Toast.makeText(getApplicationContext(),"comment sucessfull!!!",Toast.LENGTH_LONG).show();
+                    commenthere.setText("");
+                    if (Utilities.isInternetOn(getBaseContext()))
+                        new getcomment().execute();
+                    else
+                        Toast.makeText(getBaseContext(),"No Internet Commection!!!",Toast.LENGTH_LONG).show();
+                } else if (response.equalsIgnoreCase("already exists")) {
+                    //Toast.makeText(getApplicationContext(),"Server Error",Toast.LENGTH_LONG).show();
+                } else {
+                    Toast.makeText(getApplicationContext(),"Server Error",Toast.LENGTH_LONG).show();
+                }
+            }else {
                 Toast.makeText(getApplicationContext(),"Server Error",Toast.LENGTH_LONG).show();
             }
         }
