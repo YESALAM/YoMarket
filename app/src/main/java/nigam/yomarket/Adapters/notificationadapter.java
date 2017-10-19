@@ -65,6 +65,10 @@ public class notificationadapter extends RecyclerView.Adapter<notificationadapte
                 }
                 holder.notify.setText(notif);
                 holder.text.setText(h.getCommentby()+" Commented");
+               /* if(!h.read){
+                    holder.noti_layout.setBackgroundColor(activity.getResources().getColor(android.R.color.darker_gray));
+                }*/
+
 
             }
 
@@ -119,12 +123,13 @@ public class notificationadapter extends RecyclerView.Adapter<notificationadapte
 
         TextView notify,text;
         LinearLayout card;
+        LinearLayout noti_layout;
         public ViewHolder(final View rView) {
             super(rView);
             card = (LinearLayout) rView.findViewById(R.id.notification_card);
             notify = (TextView) rView.findViewById(R.id.notification);
             text= (TextView) rView.findViewById(R.id.textView15);
-
+            noti_layout = (LinearLayout) rView.findViewById(R.id.noti_layout);
         }
     }
 

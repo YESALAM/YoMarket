@@ -14,6 +14,7 @@ public class HomeListGetSet  implements Serializable{
     private String s_no,post_product,post_city,post_profession,post_quantity,post_price,post_description,post_image_1,post_image_2,
         post_image_3,post_image_4,post_id,posted_by_id,posted_by_name,posted_by_phone,mobile_no,comment,commentby,date,time;
 
+
     public String getComment(){
         return comment;
     }

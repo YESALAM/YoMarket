@@ -480,8 +480,15 @@ ImageView imageregister;
 
     @Override
     public void onFailure(Call call, IOException e) {
-        progressDialog.cancel();
-        Toast.makeText(Register_Activity.this, "OTP could not be sended", Toast.LENGTH_SHORT).show();
+        new Handler(Looper.myLooper()).post(new Runnable() {
+            @Override
+            public void run() {
+                progressDialog.cancel();
+                Toast.makeText(Register_Activity.this, "OTP could not be sended", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+
     }
 
     @Override

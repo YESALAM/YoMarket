@@ -27,10 +27,10 @@ public class main_tab_adapter extends FragmentPagerAdapter {
             case 0:
                 Post_Frag tab1 = new Post_Frag();
                 return tab1;
-            case 1:
+            case 2:
                 notification_frag tab2 = new notification_frag();
                 return tab2;
-            case 2:
+            case 1:
                 phonebook_frag tab3 = new phonebook_frag();
                 return tab3;
             case 3:
@@ -51,9 +51,9 @@ public class main_tab_adapter extends FragmentPagerAdapter {
         switch(position) {
             case 0:
                 return "Home";
-            case 1:
-                return "notification";
             case 2:
+                return "notification";
+            case 1:
                 return "Phonebook";
             case 3:
                 return "MyPosts";

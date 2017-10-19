@@ -46,7 +46,7 @@ import nigam.yomarket.utils.apis;
  * A simple {@link Fragment} subclass.
  */
 public class notification_frag extends Fragment {
-RecyclerView rv;
+    RecyclerView rv;
 
 
     public notification_frag() {
@@ -62,13 +62,22 @@ RecyclerView rv;
         View v= inflater.inflate(R.layout.fragment_notification_frag, container, false);
         RadioGroup group = (RadioGroup) v.findViewById(R.id.radioGroup_notification);
         final RadioButton post = (RadioButton) v.findViewById(R.id.post_radio);
-        RadioButton comment = (RadioButton) v.findViewById(R.id.comment_radio);
+        /*RadioButton comment = (RadioButton) v.findViewById(R.id.comment_radio);*/
 
 
 
 
 
         rv= (RecyclerView) v.findViewById(R.id.notification_recycler);
+        ArrayList<HomeListGetSet> list =new ArrayList();
+        notificationadapter notificationadapter = new notificationadapter((AppCompatActivity)getActivity(),list);
+        RecyclerView.LayoutManager mLayoutManager = new WrapLinearLayoutManager(getContext());
+        rv.setHasFixedSize(true);
+        rv.setLayoutManager(mLayoutManager);
+        //rv.addItemDecoration(new DividerItemDecoration(getActivity()));
+        rv.setItemAnimator(new DefaultItemAnimator());
+        rv.setAdapter(notificationadapter);
+
 
         SharedPreferences sharedPreferences = getActivity().getPreferences(Context.MODE_PRIVATE);
         boolean firstrun = sharedPreferences.getBoolean("firstrun",true);
@@ -91,16 +100,18 @@ RecyclerView rv;
                     new notify().execute();
                 }else {
                     //comment update
-                    new comment_notify().execute();
+                    new post_notify().execute();
                 }
             }
         });
+
+        group.check(R.id.post_radio);
 
         return v;
     }
 
 
-    class comment_notify extends AsyncTask
+    class notify extends AsyncTask
     {
         notificationadapter adapter;
         String jsonString,
@@ -159,7 +170,7 @@ RecyclerView rv;
 
         @Override
         protected void onPostExecute(Object o) {
-            super.onPostExecute(o);
+            //super.onPostExecute(o);
 
            // Log.i("doInBackground:response","aaaaaaaaaaaa list size"+list.size());
 
@@ -171,6 +182,9 @@ RecyclerView rv;
             //rv.addItemDecoration(new DividerItemDecoration(getActivity()));
             rv.setItemAnimator(new DefaultItemAnimator());
             rv.setAdapter(adapter);
+            rv.setVisibility(View.GONE);
+            rv.setVisibility(View.VISIBLE);
+            adapter.notifyDataSetChanged();
 
             Log.e("NotifiFrag_comment",list.size()+"");
             int size = list.size();
@@ -258,7 +272,7 @@ RecyclerView rv;
 
 
 
-    class notify extends AsyncTask
+    class post_notify extends AsyncTask
     {
         notificationadapter adapter;
 
@@ -384,6 +398,7 @@ RecyclerView rv;
     @Override
     public void onResume() {
         super.onResume();
+
 
         if (Utilities.isInternetOn(getActivity()))
             new notify().execute();
