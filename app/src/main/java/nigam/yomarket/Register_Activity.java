@@ -12,6 +12,7 @@ import android.os.Environment;
 import android.os.Handler;
 import android.os.Looper;
 import android.provider.MediaStore;
+import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AlertDialog.Builder;
 import android.support.v7.app.AppCompatActivity;
@@ -23,6 +24,7 @@ import android.util.Base64;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.View.OnFocusChangeListener;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
@@ -82,7 +84,14 @@ EditText name,email,password,mobile,firm;
     Bitmap image;
     String Professionlist[] = {"Select Profession","Wholeseller", "Farmer", "Retailer", "Exporter", "Importer", "Commision Agent", "Transporter"};
     String productlist[] = {"Select Product","Fruit", "Vegetables","Transport","fruits and vegetables"};
-ImageView imageregister;
+    ImageView imageregister;
+
+    TextInputLayout country_til,state_til,city_til;
+    boolean country_selected = false ;
+    boolean state_selected = false ;
+    boolean city_selected = false ;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -107,6 +116,10 @@ ImageView imageregister;
         upload= (TextView) findViewById(R.id.registeruploadimage);
         login= (TextView) findViewById(R.id.registerlogin);
         register= (Button) findViewById(R.id.registerbtn);
+        country_til = (TextInputLayout) findViewById(R.id.city_til);
+        state_til = (TextInputLayout) findViewById(R.id.state_til);
+        city_til = (TextInputLayout) findViewById(R.id.city_til);
+
 
         if (Utilities.isInternetOn(getBaseContext()))
         new country().execute();
@@ -126,6 +139,7 @@ ImageView imageregister;
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 countrypojo selected = (countrypojo) adapterView.getAdapter().getItem(i);
+                country_selected = true ;
                 if (Utilities.isInternetOn(getBaseContext()))
                 new state(selected.getId()).execute(selected);
                 else
@@ -137,6 +151,7 @@ ImageView imageregister;
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 statepojo selected = (statepojo) adapterView.getAdapter().getItem(i);
+                state_selected = true ;
                 if (Utilities.isInternetOn(getBaseContext()))
                 new city(selected.getStateid()).execute(selected);
                 else
@@ -159,6 +174,48 @@ ImageView imageregister;
             @Override
             public void afterTextChanged(Editable s) {
 
+            }
+        });
+
+        country.setOnFocusChangeListener(new OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (hasFocus){
+                    country_selected = false ;
+                }else{
+                    if (!country_selected){
+                        country.setText("");
+                        Toast.makeText(Register_Activity.this, "Please select country form list", Toast.LENGTH_SHORT).show();
+                    }
+                }
+            }
+        });
+
+        state.setOnFocusChangeListener(new OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (hasFocus){
+                    state_selected = false ;
+                }else{
+                    if (!state_selected){
+                        state.setText("");
+                        Toast.makeText(Register_Activity.this, "Please select state form list", Toast.LENGTH_SHORT).show();
+                    }
+                }
+            }
+        });
+
+        city.setOnFocusChangeListener(new OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (hasFocus){
+                    city_selected = false ;
+                }else{
+                    if (!city_selected){
+                        city.setText("");
+                        Toast.makeText(Register_Activity.this, "Please select city form list", Toast.LENGTH_SHORT).show();
+                    }
+                }
             }
         });
 
@@ -279,10 +336,9 @@ ImageView imageregister;
         }
         else if (product.equalsIgnoreCase("Select Product"))
         {
-            Toast.makeText(getApplicationContext(),"Select City",Toast.LENGTH_LONG).show();
+            Toast.makeText(getApplicationContext(),"Select Product",Toast.LENGTH_LONG).show();
 
-        }
-        if (image==null)
+        }else if (image==null)
         {
             Toast.makeText(getApplicationContext(),"Please Upload Image First",Toast.LENGTH_LONG).show();
 

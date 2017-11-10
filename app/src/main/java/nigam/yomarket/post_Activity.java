@@ -30,6 +30,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.View.OnFocusChangeListener;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
@@ -94,6 +95,7 @@ public class post_Activity extends AppCompatActivity implements Callback {
     String image1,image2,image3,image4;
     ProgressDialog pg;
     ArrayAdapter<String> cityAdapter, professionadapter,productadapter;
+    boolean city_selected = false;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -178,6 +180,20 @@ public class post_Activity extends AppCompatActivity implements Callback {
             }
         });
 
+        city.setOnFocusChangeListener(new OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (hasFocus){
+                    city_selected = false ;
+                }else{
+                    if (!city_selected){
+                        city.setText("");
+                        Toast.makeText(post_Activity.this, "Please select city form list", Toast.LENGTH_SHORT).show();
+                    }
+                }
+            }
+        });
+
 
 
         productadapter = new ArrayAdapter<String>
@@ -201,6 +217,7 @@ public class post_Activity extends AppCompatActivity implements Callback {
         });
 
 
+
     }
     private void validate()
     {
@@ -214,9 +231,12 @@ public class post_Activity extends AppCompatActivity implements Callback {
         disc=Discription.getText().toString();
 
         //if (citya.equalsIgnoreCase("") || producta.equalsIgnoreCase("") || professiona.equalsIgnoreCase("") || pricea.equalsIgnoreCase("")  || disc.equalsIgnoreCase("") )
-        if (disc.equalsIgnoreCase("") && pricea.equalsIgnoreCase("") && image1.equalsIgnoreCase("null") && image2.equalsIgnoreCase("null") && image3.equalsIgnoreCase("null") && image4.equalsIgnoreCase("null"))
+        if ( disc.equalsIgnoreCase("") && pricea.equalsIgnoreCase("") && image1.equalsIgnoreCase("null") && image2.equalsIgnoreCase("null") && image3.equalsIgnoreCase("null") && image4.equalsIgnoreCase("null"))
         {
             Toast.makeText(getApplicationContext(),"Fields are blank",Toast.LENGTH_LONG).show();
+            return;
+        }else if (citya.equalsIgnoreCase("")){
+            Toast.makeText(getApplicationContext(),"Select city",Toast.LENGTH_LONG).show();
             return;
         }
         else
@@ -224,11 +244,13 @@ public class post_Activity extends AppCompatActivity implements Callback {
                 Toast.makeText(this, "Please select an Image", Toast.LENGTH_SHORT).show();
                 return;
             }*/
+        {
             if (Utilities.isInternetOn(getBaseContext()))
-            postata();
+                postata();
             else
                 Toast.makeText(getBaseContext(),"No Internet Commection!!!",Toast.LENGTH_LONG).show();
-                return;
+            return;
+        }
 
         //new postdata().execute();
     }
