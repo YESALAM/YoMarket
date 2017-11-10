@@ -12,6 +12,7 @@ import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AlertDialog;
@@ -24,6 +25,7 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.ContextThemeWrapper;
 import android.view.View;
+import android.view.View.OnFocusChangeListener;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -72,7 +74,7 @@ public class Posts_activity extends AppCompatActivity {
     CardView images ;
 
     EditText commenthere;
-
+    AppBarLayout appBarLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -91,6 +93,7 @@ public class Posts_activity extends AppCompatActivity {
         image3= (ImageView) findViewById(R.id.image3);
         image4= (ImageView) findViewById(R.id.image4);
         images = (CardView) findViewById(R.id.images_cardview);
+        appBarLayout = (AppBarLayout) findViewById(R.id.app_bar) ;
 
         data = (HomeListGetSet)getIntent().getExtras().getSerializable("DATA");
         rv= (RecyclerView) findViewById(R.id.recent_comments);
@@ -143,6 +146,14 @@ public class Posts_activity extends AppCompatActivity {
             }
         });
 
+        commenthere.setOnFocusChangeListener(new OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if(hasFocus){
+                    appBarLayout.setExpanded(false,true);
+                }
+            }
+        });
 
 
 
